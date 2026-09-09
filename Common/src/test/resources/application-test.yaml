@@ -1,0 +1,6 @@
+teststore:
+  root-dir: ./src/main/resources/tests
+
+logging:
+  level:
+    ru.sovcombank.rbs: DEBUG

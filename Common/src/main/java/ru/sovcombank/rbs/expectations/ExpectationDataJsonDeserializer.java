@@ -15,6 +15,7 @@ import java.io.IOException;
 public class ExpectationDataJsonDeserializer extends JsonDeserializer<ExpectationData> {
     @Override
     public ExpectationData deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        String basePack = getClass().getPackageName();
         ObjectCodec codec = p.getCodec();
 
         ObjectNode node = codec.readTree(p);
@@ -24,7 +25,7 @@ public class ExpectationDataJsonDeserializer extends JsonDeserializer<Expectatio
         log.debug("ExpectationData: {}", className);
         try {
             // Загружаем класс по имени
-            Class<?> clazz = Class.forName(className);
+            Class<?> clazz = Class.forName(basePack +"." + className);
 
             // Проверяем, что класс является наследником ExpectationData
             if (!ExpectationData.class.isAssignableFrom(clazz)) {

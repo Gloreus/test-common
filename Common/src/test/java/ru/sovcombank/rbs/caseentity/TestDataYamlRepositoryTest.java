@@ -4,9 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import ru.sovcombank.rbs.TestCommonApp;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,14 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 @SpringBootTest(classes = {TestCommonApp.class})
+@ActiveProfiles("test")
 @Slf4j
 class TestDataYamlRepositoryTest {
     @Autowired
     private TestDataYamlRepository repository;
 
     @Test
-    void testLoadProfile() throws FileNotFoundException {
-        assertThrowsExactly(FileNotFoundException.class,
+    void testLoadProfile() throws IOException {
+        assertThrowsExactly(NoSuchFileException.class,
                 () -> repository.loadProfile("1233333"));
         TestProfile profile = repository.loadProfile("123");
         log.info("Profile: {}", profile);
@@ -29,7 +32,7 @@ class TestDataYamlRepositoryTest {
     }
 
     @Test
-    void testLoadCases() throws FileNotFoundException {
+    void testLoadCases() throws IOException {
         TestProfile profile = repository.loadProfile("123");
         List<TestCase> caseList = repository.loadCases(profile);
         log.info("Найдено тест-кейсов: {}", caseList.size());

@@ -7,10 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FileNotFoundException;
 
+import static org.mockito.Mockito.*;
+
 @Slf4j
 @SpringBootTest
 @Disabled
 class CheckTestServiceTest {
+    private final TestStoreProperties testStoreProperties = new TestStoreProperties();
     /*
     @Autowired
     private TestDataYamlRepository repository;
@@ -32,5 +35,20 @@ class CheckTestServiceTest {
     @Test
     void testGetRunnerNames() {
         //  log.info(service.getRunnerNames().toString());
+    }
+
+    @Test
+    public void getCasesPathTest() {
+
+    }
+
+    @Test
+    public void getProfilesPathTest() {
+
+    }
+
+    @Test
+    public void getRootPathTest() {
+
     }
 }

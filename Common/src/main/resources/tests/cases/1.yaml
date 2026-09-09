@@ -16,4 +16,4 @@ expectations:
     validationType: TO_BE_EQUAL
     expected: "Test string content"
     expected2: ""
-    expectClass: "ru.sqbt.plsqltests.expectations.OutputExpectationData"
+    expectClass: "OutputExpectationData"

@@ -6,51 +6,30 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
+import ru.sovcombank.rbs.TestStoreProperties;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Component
 public class TestDataYamlRepository implements TestDataRepository {
+    private final TestStoreProperties testStoreProperties;
 
-    @Value("${plsqltests.repopath}")
-    private static String REPO_PATH = "tests";
-    @Value("${plsqltests.profilespath}")
-    private static String PROFILES_PATH = "profiles";
-    @Value("${plsqltests.casespath}")
-    private static String CASES_PATH = "cases";
-
-    private final String profilesPath = FilenameUtils.concat(REPO_PATH, PROFILES_PATH);
-    private final String casesPath = FilenameUtils.concat(REPO_PATH, CASES_PATH);
     @Autowired
     @Qualifier("YmlMapper")
     private ObjectMapper yamlMapper;
 
-    @Override
-    public TestProfile loadProfile(@NonNull String profileName) throws FileNotFoundException {
-
-        String fname = getFileName(profileName);
-        fname = FilenameUtils.concat(profilesPath, fname);
-        log.debug("Profile file name: {}", fname);
-
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fname);
-        if (null == inputStream) {
-            throw new FileNotFoundException("Test profile file not found: " + fname);
-        }
-        try {
-            return yamlMapper.readValue(inputStream, TestProfile.class);
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
-        }
+    public TestDataYamlRepository(TestStoreProperties testStoreProperties) {
+        this.testStoreProperties = testStoreProperties;
+        log.debug(this.testStoreProperties.toString());
     }
-
     public static String getFileName(String profileName) {
         int n = profileName.lastIndexOf(".");
         if (-1 == n) {
@@ -63,11 +42,35 @@ public class TestDataYamlRepository implements TestDataRepository {
         }
     }
 
-    public TestCase loadCase(@NonNull TestCaseReference reference) throws FileNotFoundException {
+    @Override
+    public TestProfile loadProfile(@NonNull String profileName) throws IOException {
+
+        String fname = getFileName(profileName);
+        Path p = testStoreProperties.getProfilesFullPath().resolve(fname);
+        log.debug("Profile file name: {}", p);
+
+        InputStream inputStream = Files.newInputStream(p, StandardOpenOption.READ);
+        if (null == inputStream) {
+            throw new FileNotFoundException("Test profile file not found: " + fname);
+        }
+        try {
+            return yamlMapper.readValue(inputStream, TestProfile.class);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+    public TestCase loadCase(@NonNull TestCaseReference reference) throws IOException {
         String fname = getFileName(reference.getFilePath());
-        fname = FilenameUtils.concat(casesPath, fname);
-        log.debug("Load test case from: {}", fname);
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fname);
+
+        Path p = testStoreProperties.getCasesFullPath().resolve(fname);
+        log.debug("Case file name: {}", p);
+
+        InputStream inputStream = Files.newInputStream(p, StandardOpenOption.READ);
+
         if (null == inputStream) {
             throw new FileNotFoundException("Test case file not found: " + fname);
         }
@@ -89,6 +92,8 @@ public class TestDataYamlRepository implements TestDataRepository {
                 log.debug(testCase.toString());
                 testCases.add(testCase);
             } catch (FileNotFoundException e) {
+                log.warn(e.getMessage());
+            } catch (IOException e) {
                 log.warn(e.getMessage());
             }
         }
