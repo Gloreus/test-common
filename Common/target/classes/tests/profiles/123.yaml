@@ -1,0 +1,6 @@
+profileName: "11"
+description: "Описание"
+references:
+  - filePath: "1.yaml"
+  - filePath: "2.yaml"
+  - filePath: "func1.yaml"

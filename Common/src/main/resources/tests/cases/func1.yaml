@@ -1,0 +1,19 @@
+testCaseData:
+  description: "Вызов скалярной функции"
+  blockType: FUNCTION
+  returningType: VARCHAR2
+  blockSql: "gc.get_filial"
+  params:
+    - name: "potdelid"
+      paramType: VARCHAR2
+      paramMode: IN
+      value: "10948139229"
+
+expectations:
+  - validationType: TO_BE_EQUAL
+    params:
+      - name: "Returning"
+        paramType: VARCHAR2
+        paramMode: OUT
+        value: "508605"
+    expectClass: "ru.sqbt.plsqltests.expectations.ParamsExpectationData"

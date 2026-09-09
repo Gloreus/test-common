@@ -1,0 +1,4 @@
+testCaseData:
+  description: "Второй тест"
+  blockSql: "select 2 from dual"
+

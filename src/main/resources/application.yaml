@@ -1,0 +1,20 @@
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    org.atmosphere: warn
+
+vaadin:
+  launch-browser: true
+  allowed-packages: com.vaadin,org.vaadin,com.flowingcode,ru.sqbt.plaqltests
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+teststore:
+  root-path: "TestStore"
+  cases-path: "cases"
+  profiles-path: "profiles"

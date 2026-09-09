@@ -1,5 +1,9 @@
 package ru.sqbt.plaqltests.examplefeature.ui;
 
+import com.vaadin.flow.component.combobox.ComboBox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.sqbt.plaqltests.TestStoreProperties;
 import ru.sqbt.plaqltests.base.ui.ViewTitle;
 import ru.sqbt.plaqltests.examplefeature.Task;
 import ru.sqbt.plaqltests.examplefeature.TaskService;
@@ -16,9 +20,15 @@ import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringPageRequest;
@@ -28,63 +38,54 @@ import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringPageRe
 @Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Task List")
 class TaskListView extends VerticalLayout {
 
+    private final TestStoreProperties testStoreProperties;
+
     private final TaskService taskService;
 
-    final TextField description;
-    final DatePicker dueDate;
-    final Button createBtn;
-    final Grid<Task> taskGrid;
+    final ComboBox<Path> profilesComboBox;
 
-    TaskListView(TaskService taskService) {
+    final Button createBtn;
+
+    TaskListView(TestStoreProperties testStoreProperties, TaskService taskService) {
+        this.testStoreProperties = testStoreProperties;
         this.taskService = taskService;
 
-        description = new TextField();
-        description.setPlaceholder("What do you want to do?");
-        description.setAriaLabel("Task description");
-        description.setMaxLength(Task.DESCRIPTION_MAX_LENGTH);
-        description.setMinWidth("15em");
+        profilesComboBox = new ComboBox<>("Профиль");
+        profilesComboBox.setPlaceholder("Профиль тестирования");
+        profilesComboBox.setMinWidth("8em");
+        profilesComboBox.setWidthFull();
 
-        dueDate = new DatePicker();
-        dueDate.setPlaceholder("Due date");
-        dueDate.setAriaLabel("Due date");
+        Path profilesPath = testStoreProperties.getProfilesPath();
 
-        createBtn = new Button("Create", event -> createTask());
+        try {
+            profilesComboBox.setItems(findYamlFiles(profilesPath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        createBtn = new Button("Create");
         createBtn.addThemeVariants(ButtonVariant.PRIMARY);
 
         var toolbar = new HorizontalLayout();
-        toolbar.add(new ViewTitle("Task List"), description, dueDate, createBtn);
-        toolbar.setFlexGrow(1, description, dueDate);
+        toolbar.add(new ViewTitle("Task List"), profilesComboBox, createBtn);
+        toolbar.setFlexGrow(1, profilesComboBox);
         toolbar.setWrap(true);
         toolbar.setWidthFull();
 
-        var dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(getLocale())
-                .withZone(ZoneId.systemDefault());
-        var dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(getLocale());
-
-        taskGrid = new Grid<>();
-        taskGrid.setItems(query -> taskService.list(toSpringPageRequest(query)).stream());
-        taskGrid.addColumn(Task::getDescription).setHeader("Description");
-        taskGrid.addColumn(task -> Optional.ofNullable(task.getDueDate()).map(dateFormatter::format).orElse("Never"))
-                .setHeader("Due Date");
-        taskGrid.addColumn(task -> dateTimeFormatter.format(task.getCreationDate())).setHeader("Creation Date");
-        taskGrid.setEmptyStateText("You have no tasks to complete");
-        taskGrid.setSizeFull();
-
         setSizeFull();
-        add(toolbar, taskGrid);
+        add(toolbar);
     }
 
-    private void createTask() {
-        if (description.getValue().isBlank()) {
-            description.setInvalid(true);
-            description.setErrorMessage("Description is required");
-            return;
+    public List<Path> findYamlFiles(Path dir) throws IOException {
+        List<Path> result = new ArrayList<>();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{yaml,YAML}")) {
+            for (Path entry : stream) {
+                if (Files.isRegularFile(entry)) {
+                    result.add(entry);
+                }
+            }
         }
-        taskService.createTask(description.getValue(), dueDate.getValue());
-        taskGrid.getDataProvider().refreshAll();
-        description.clear();
-        dueDate.clear();
-        Notification.show("Task added", 3000, Notification.Position.BOTTOM_END)
-                .addThemeVariants(NotificationVariant.SUCCESS);
+        return result;
     }
+
 }
