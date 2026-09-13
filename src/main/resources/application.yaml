@@ -4,7 +4,7 @@ server:
 logging:
   level:
     org.atmosphere: warn
-    ru.sqbt.plaqltests.manager: debug
+    ru.sqbt.plsqltests.manager: debug
 
 vaadin:
   launch-browser: true

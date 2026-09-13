@@ -2,6 +2,8 @@ package ru.sqbt.plsqltests.manager.ui;
 
 import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.listbox.ListBox;
+import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +24,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.sovcombank.rbs.TestStoreProperties;
+import ru.sovcombank.rbs.caseentity.TestCaseReference;
 import ru.sovcombank.rbs.caseentity.TestDataRepository;
+import ru.sovcombank.rbs.caseentity.TestProfile;
 import ru.sqbt.plsqltests.base.ui.ViewTitle;
 
 
@@ -37,6 +41,7 @@ class TaskListView extends VerticalLayout {
     private TestDataRepository repository;
 
     final ComboBox<Path> profilesComboBox;
+    final MultiSelectListBox<String> casesListBox;
     final TextArea logTtextArea;
     final Button createBtn;
 
@@ -46,8 +51,12 @@ class TaskListView extends VerticalLayout {
         profilesComboBox = new ComboBox<>("Профиль");
         profilesComboBox.setPlaceholder("Профиль тестирования");
         profilesComboBox.setMinWidth("8em");
-        profilesComboBox.setWidthFull();
         profilesComboBox.setAllowCustomValue(false);
+
+        casesListBox = new MultiSelectListBox<>();
+        casesListBox.setMinWidth("8em");
+        casesListBox.setWidthFull();
+
 
 
         Path profilesPath = testStoreProperties.getProfilesFullPath() ;
@@ -62,13 +71,15 @@ class TaskListView extends VerticalLayout {
         createBtn.addThemeVariants(ButtonVariant.PRIMARY);
 
         var toolbar = new HorizontalLayout();
-        toolbar.add(new ViewTitle("Task List"), profilesComboBox, createBtn);
-        toolbar.setFlexGrow(1, profilesComboBox);
+        add(new ViewTitle("Просмотр и запуск тестов"));
+        toolbar.add(profilesComboBox, casesListBox);
+
         toolbar.setWrap(true);
         toolbar.setWidthFull();
-
+        toolbar.setFlexGrow(1, profilesComboBox);
         setSizeFull();
         add(toolbar);
+        add(casesListBox);
         VerticalLayout mainForm = new VerticalLayout();
         mainForm.setSizeFull();
         mainForm.add();
@@ -97,6 +108,14 @@ class TaskListView extends VerticalLayout {
             writeInfo("Профиль не выбран");
         } else {
             writeInfo(selected.toString());
+            try {
+                TestProfile profile = repository.loadProfile(selected.getFileName().toString());
+                writeInfo("Загружен: " + profile.getProfileName());
+                casesListBox.setItems(profile.getReferences().stream().map(TestCaseReference::getFilePath).toList());
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
