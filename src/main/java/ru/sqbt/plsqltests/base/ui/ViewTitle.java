@@ -1,4 +1,4 @@
-package ru.sqbt.plaqltests.base.ui;
+package ru.sqbt.plsqltests.base.ui;
 
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.applayout.DrawerToggle;

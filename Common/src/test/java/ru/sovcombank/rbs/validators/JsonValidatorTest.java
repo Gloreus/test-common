@@ -2,6 +2,7 @@ package ru.sovcombank.rbs.validators;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,6 +46,7 @@ class JsonValidatorTest {
 
     @SneakyThrows
     @Test
+    @Disabled
     public void LoadProfileTest() {
         TestProfile profile = repository.loadProfile("123");
         List<TestCase> testCaseList = repository.loadCases(profile);

@@ -1,4 +1,4 @@
-package ru.sqbt.plaqltests.examplefeature;
+package ru.sqbt.plsqltests.manager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

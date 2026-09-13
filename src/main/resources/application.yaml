@@ -4,6 +4,7 @@ server:
 logging:
   level:
     org.atmosphere: warn
+    ru.sqbt.plaqltests.manager: debug
 
 vaadin:
   launch-browser: true
@@ -15,6 +16,6 @@ spring:
       ddl-auto: update
 
 teststore:
-  root-path: "TestStore"
-  cases-path: "cases"
-  profiles-path: "profiles"
+  root-dir: "TestStore"
+  cases-dir: "cases"
+  profiles-dir: "profiles"

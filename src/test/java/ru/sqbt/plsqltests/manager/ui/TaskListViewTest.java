@@ -1,4 +1,4 @@
-package ru.sqbt.plaqltests.examplefeature.ui;
+package ru.sqbt.plsqltests.manager.ui;
 
 import com.vaadin.browserless.SpringBrowserlessTest;
 import com.vaadin.flow.component.notification.Notification;

@@ -1,21 +1,14 @@
-package ru.sqbt.plaqltests.examplefeature.ui;
+package ru.sqbt.plsqltests.manager.ui;
 
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.combobox.ComboBox;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import ru.sqbt.plaqltests.TestStoreProperties;
-import ru.sqbt.plaqltests.base.ui.ViewTitle;
-import ru.sqbt.plaqltests.examplefeature.Task;
-import ru.sqbt.plaqltests.examplefeature.TaskService;
+import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.data.value.ValueChangeMode;
+import lombok.extern.slf4j.Slf4j;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -24,38 +17,40 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringPageRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.sovcombank.rbs.TestStoreProperties;
+import ru.sovcombank.rbs.caseentity.TestDataRepository;
+import ru.sqbt.plsqltests.base.ui.ViewTitle;
 
+
+@Slf4j
 @Route(value = "")
 @PageTitle("Task List")
 @Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Task List")
 class TaskListView extends VerticalLayout {
 
     private final TestStoreProperties testStoreProperties;
-
-    private final TaskService taskService;
+    @Autowired
+    private TestDataRepository repository;
 
     final ComboBox<Path> profilesComboBox;
-
+    final TextArea logTtextArea;
     final Button createBtn;
 
-    TaskListView(TestStoreProperties testStoreProperties, TaskService taskService) {
+    TaskListView(TestStoreProperties testStoreProperties) {
         this.testStoreProperties = testStoreProperties;
-        this.taskService = taskService;
 
         profilesComboBox = new ComboBox<>("Профиль");
         profilesComboBox.setPlaceholder("Профиль тестирования");
         profilesComboBox.setMinWidth("8em");
         profilesComboBox.setWidthFull();
+        profilesComboBox.setAllowCustomValue(false);
 
-        Path profilesPath = testStoreProperties.getProfilesPath();
+
+        Path profilesPath = testStoreProperties.getProfilesFullPath() ;
 
         try {
             profilesComboBox.setItems(findYamlFiles(profilesPath));
@@ -74,6 +69,41 @@ class TaskListView extends VerticalLayout {
 
         setSizeFull();
         add(toolbar);
+        VerticalLayout mainForm = new VerticalLayout();
+        mainForm.setSizeFull();
+        mainForm.add();
+        add(mainForm);
+        logTtextArea = new TextArea();
+        initInfoPanel();
+        add(logTtextArea);
+        setFlexGrow(1, logTtextArea);
+        profilesComboBox.addValueChangeListener(this::onProfileSelected);
+    }
+
+    private void initInfoPanel() {
+        logTtextArea.setValue("Это лог работы");
+        logTtextArea.setWidthFull();
+        logTtextArea.setHeight("12em");
+        logTtextArea.setMaxHeight("12em");
+        logTtextArea.setMaxRows(10);
+        logTtextArea.setMinHeight("8em");
+        logTtextArea.setReadOnly(true);
+        logTtextArea.setValueChangeMode(ValueChangeMode.LAZY);
+    }
+
+    private void onProfileSelected(HasValue.ValueChangeEvent<Path> event) {
+        Path selected = event.getValue();
+        if (selected == null) {
+            writeInfo("Профиль не выбран");
+        } else {
+            writeInfo(selected.toString());
+        }
+    }
+
+    private void writeInfo(String s) {
+        logTtextArea.setValue(logTtextArea.getValue() + "\n" + s);
+        log.debug(s);
+        logTtextArea.scrollToEnd();
     }
 
     public List<Path> findYamlFiles(Path dir) throws IOException {

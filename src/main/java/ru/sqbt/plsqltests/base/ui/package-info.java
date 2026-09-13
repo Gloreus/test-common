@@ -1,4 +1,4 @@
 @NullMarked
-package ru.sqbt.plaqltests.base.ui;
+package ru.sqbt.plsqltests.base.ui;
 
 import org.jspecify.annotations.NullMarked;

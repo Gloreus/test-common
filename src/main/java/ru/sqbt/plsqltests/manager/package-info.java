@@ -1,5 +1,5 @@
 @NullMarked
-package ru.sqbt.plaqltests.examplefeature;
+package ru.sqbt.plsqltests.manager;
 // TODO Remove this package once you have added real features
 
 import org.jspecify.annotations.NullMarked;
