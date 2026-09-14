@@ -16,4 +16,4 @@ expectations:
         paramType: VARCHAR2
         paramMode: OUT
         value: "508605"
-    expectClass: "ru.sqbt.plsqltests.expectations.ParamsExpectationData"
+    expectClass: "ParamsExpectationData"

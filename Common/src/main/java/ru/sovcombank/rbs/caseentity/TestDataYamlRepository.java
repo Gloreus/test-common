@@ -44,7 +44,6 @@ public class TestDataYamlRepository implements TestDataRepository {
 
     @Override
     public TestProfile loadProfile(@NonNull String profileName) throws IOException {
-
         String fname = getFileName(profileName);
         Path p = testStoreProperties.getProfilesFullPath().resolve(fname);
         log.debug("Profile file name: {}", p);
@@ -60,8 +59,6 @@ public class TestDataYamlRepository implements TestDataRepository {
             throw new RuntimeException(e);
         }
     }
-
-
 
     public TestCase loadCase(@NonNull TestCaseReference reference) throws IOException {
         String fname = getFileName(reference.getFilePath());
@@ -100,5 +97,4 @@ public class TestDataYamlRepository implements TestDataRepository {
         log.info("Успешно загружено: " + Integer.toString(testCases.size()));
         return testCases;
     }
-
 }

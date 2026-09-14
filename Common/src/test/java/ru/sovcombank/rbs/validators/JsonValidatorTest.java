@@ -1,10 +1,12 @@
 package ru.sovcombank.rbs.validators;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.sovcombank.rbs.TestCommonApp;
 import ru.sovcombank.rbs.caseentity.TestCase;
@@ -32,6 +34,9 @@ class JsonValidatorTest {
     private final ParamsExpectationData expectationData = new ParamsExpectationData();
     private final TestResultData resultData = new TestResultData();
 
+    @Autowired
+    @Qualifier("YmlMapper")
+    private ObjectMapper ymlMapper;
 
     @Test
     public void getType() {

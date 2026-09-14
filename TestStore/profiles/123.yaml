@@ -1,5 +1,5 @@
 profileName: "11"
-description: "Описание"
+description: "Описание для набора тестов"
 references:
-  #  - filePath: "func1.yaml"
+  - filePath: "func1.yaml"
   - filePath: "1.yaml"
