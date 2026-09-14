@@ -1,0 +1,17 @@
+testCaseData:
+  description: "Блок кода с инициализацией бинд-переменной простым отрицательным значением"
+  blockType: BLOCK
+  blockSql: "begin :n := -2; end;"
+  params:
+    - name: "N"
+      paramType: NUMBER
+      paramMode: IN_OUT
+      value: "0"
+expectations:
+  - validationType: TO_BE_EQUAL
+    params:
+      - name: "N"
+        paramType: NUMBER
+        paramMode: IN_OUT
+        value: "-2"
+    expectClass: "ParamsExpectationData"

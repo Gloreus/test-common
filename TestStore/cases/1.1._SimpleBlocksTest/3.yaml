@@ -1,0 +1,21 @@
+testCaseData:
+  description: "Блок кода с инициализацией бинд-переменной значением другой бинд-переменной, к которой применена математическая операция"
+  blockType: BLOCK
+  blockSql: "begin :b := :a * 2; end;"
+  params:
+    - name: "A"
+      paramType: NUMBER
+      paramMode: IN
+      value: "2"
+    - name: "B"
+      paramType: NUMBER
+      paramMode: OUT
+      value: "0"
+expectations:
+  - validationType: TO_BE_EQUAL
+    params:
+      - name: "B"
+        paramType: NUMBER
+        paramMode: OUT
+        value: "4"
+    expectClass: "ParamsExpectationData"

@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.sovcombank.rbs.TestStoreProperties;
+import ru.sovcombank.rbs.caseentity.TestCase;
 import ru.sovcombank.rbs.caseentity.TestCaseReference;
 import ru.sovcombank.rbs.caseentity.TestDataRepository;
 import ru.sovcombank.rbs.caseentity.TestProfile;
@@ -32,8 +33,8 @@ import ru.sqbt.plsqltests.base.ui.ViewTitle;
 
 @Slf4j
 @Route(value = "")
-@PageTitle("Task List")
-@Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Task List")
+@PageTitle("Test List")
+@Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Test List")
 class TaskListView extends VerticalLayout {
 
     private final TestStoreProperties testStoreProperties;
@@ -111,12 +112,19 @@ class TaskListView extends VerticalLayout {
             try {
                 TestProfile profile = repository.loadProfile(selected.getFileName().toString());
                 writeInfo("Загружен: " + profile.getProfileName());
-                casesListBox.setItems(profile.getReferences().stream().map(TestCaseReference::getFilePath).toList());
+
+                casesListBox.setItems(loadCases(profile));
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private List<String> loadCases(TestProfile profile) {
+        return repository.loadCases(profile).stream()
+                .map(testCase -> testCase.getTestCaseData().getDescription())
+                .toList();
     }
 
     private void writeInfo(String s) {
