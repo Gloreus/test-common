@@ -7,7 +7,6 @@ import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridMultiSelectionModel;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
@@ -82,8 +81,8 @@ class TaskListView extends VerticalLayout {
             throw new RuntimeException(e);
         }
 
-        createBtn = new Button("Create");
-        createBtn.addThemeVariants(ButtonVariant.PRIMARY);
+        createBtn = new Button("Выполнить выбранные");
+        createBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
         var toolbar = new HorizontalLayout();
         add(new ViewTitle("Просмотр и запуск тестов"));
@@ -97,8 +96,9 @@ class TaskListView extends VerticalLayout {
 
         VerticalLayout mainForm = new VerticalLayout();
         mainForm.setSizeFull();
-        createCaseGrid();
+        initCaseGrid();
         mainForm.add(caseGrig);
+        mainForm.add(createBtn);
         add(mainForm);
         logTtextArea = new TextArea();
         initInfoPanel();
@@ -118,11 +118,13 @@ class TaskListView extends VerticalLayout {
         logTtextArea.setValueChangeMode(ValueChangeMode.LAZY);
     }
 
-    private void createCaseGrid() {
+    private void initCaseGrid() {
         caseGrig.setSelectionMode(Grid.SelectionMode.MULTI);
+
         caseGrig.addColumn(testCase -> testCase.getTestCaseData().getDescription())
                 .setKey("testcase")
-                .setHeader("Набор тестов").setWidth("16em");
+                .setFlexGrow(1)
+                .setHeader("Набор тестов");
     }
 
     @Override
@@ -136,15 +138,17 @@ class TaskListView extends VerticalLayout {
                 TestCaseDetailsFormLayout::setTestCase);
     }
 
-    private static class TestCaseDetailsFormLayout extends FormLayout {
+    private static class TestCaseDetailsFormLayout extends VerticalLayout {
         private final TextArea jsonTextArea = new TextArea();
         private final ObjectMapper mapper;
 
         public TestCaseDetailsFormLayout(@NonNull ObjectMapper mapper) {
             this.mapper = mapper;
+            setWrap(true);
             jsonTextArea.setReadOnly(true);
             jsonTextArea.setWidthFull();
             add(jsonTextArea);
+            setWidthFull();
         }
 
         public void setTestCase(TestCase testCase)  {
