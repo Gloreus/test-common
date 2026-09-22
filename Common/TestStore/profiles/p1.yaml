@@ -1,0 +1,5 @@
+profileName: Профиль тестов номер 1
+description: Для проверки загрузки кейсов
+references:
+  - filePath: 1.txt
+  - filePath: 2.txt

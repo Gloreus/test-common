@@ -1,0 +1,18 @@
+testCaseData:
+  description: "Простой блок кода"
+  blockType: BLOCK
+  blockSql: "begin select 1 into :a from dual; end;"
+  params:
+    - name: "a"
+      paramType: VARCHAR2
+      paramMode: IN_OUT
+      value: "0"
+
+expectations:
+  - validationType: TO_BE_EQUAL
+    params:
+      - name: "a"
+        paramType: VARCHAR2
+        paramMode: IN_OUT
+        value: "1"
+    expectClass: "ParamsExpectationData"

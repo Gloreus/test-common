@@ -22,10 +22,10 @@ public class ExpectationDataJsonDeserializer extends JsonDeserializer<Expectatio
 
         // Получаем полное имя класса из поля @class
         String className = node.get("expectClass").asText();
-        log.debug("ExpectationData: {}", className);
+        log.debug("ExpectationData class: {}", className);
         try {
             // Загружаем класс по имени
-            Class<?> clazz = Class.forName(basePack +"." + className);
+            Class<?> clazz = Class.forName(basePack + "." + className);
 
             // Проверяем, что класс является наследником ExpectationData
             if (!ExpectationData.class.isAssignableFrom(clazz)) {

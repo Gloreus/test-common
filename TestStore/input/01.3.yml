@@ -1,0 +1,638 @@
+Test:
+  chapter: '01.3'
+  jira_issue: ''
+  name: '01.3'
+  caption: ''
+  comment: autogenerate
+  cases:
+    - id: 1
+      caption: Без объявления переменных, пустые вложенные блоки кода
+      code: |
+        BEGIN
+          BEGIN
+            NULL;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 2
+      caption: В родительском блоке кода объявлена переменная, она доступна для использования внутри дочернего блока кода.
+      code: |
+        DECLARE
+          n NUMBER;
+        BEGIN
+          n := 1;
+          BEGIN
+            :out := n;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      comment: ''
+    - id: 3
+      caption: Без объявления переменных. Бинд-переменная получает значение в родительском блоке кода и изменяется в дочернем
+      code: |
+        BEGIN
+          :n := 1;
+          BEGIN
+            :n := :n + 1;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 4
+      caption: Без объявления переменных. Дочерний блок кода закомментирован многострочным комментарием, не исполняется.
+      code: |
+        BEGIN
+          :n := 1;
+          /*
+          BEGIN
+            :n := :n + 1;
+          END;
+          */
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      comment: ''
+    - id: 5
+      caption: Без объявления переменных. Дочерний блок кода закомментирован однострочными комментариями, не исполняется.
+      code: |
+        BEGIN
+          :n := 1;
+          -- BEGIN
+          --   :n := :n + 1;
+          -- END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      comment: ''
+    - id: 6
+      caption: Без объявления переменных. У дочернего блока кода есть блок с перехватом ошибок (часть из блока исключений не выполняется, значение переменной присваивается корректно)
+      code: |
+        BEGIN
+          :n := 1;
+          BEGIN
+            :n := :n + 1;
+          EXCEPTION
+            WHEN OTHERS THEN
+              :n := 3;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 7
+      caption: Без объявления переменных. У дочернего блока кода есть блок с перехватом ошибок, в теле блока кода выполняется операция с ошибкой (деление на 0), инициализация происходит из обработчика исключения
+      code: |
+        BEGIN
+          :n := 1;
+          BEGIN
+            :n := :n + 1 / 0;
+          EXCEPTION
+            WHEN OTHERS THEN
+              :n := 2;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 8
+      caption: Без объявления переменных. У дочернего блока кода есть блок с перехватом ошибок, в теле дочернего блока кода выполняется операция с ошибкой (деление на 0), инициализация происходит из обработчика исключения дочернего блока. У родительского блока также есть обработчик исключения, который не задействуется.
+      code: |
+        BEGIN
+          :n := 1;
+          BEGIN
+            :n := :n + 1 / 0;
+          EXCEPTION
+            WHEN OTHERS THEN
+              :n := 2;
+          END;
+        EXCEPTION
+          WHEN OTHERS THEN
+            :n := 3;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 9
+      caption: Без объявления переменных. У дочернего блока кода НЕТ блока с перехватом ошибок, в теле дочернего блока кода выполняется операция с ошибкой (деление на 0), инициализация происходит из обработчика исключения родительского блока.
+      code: |
+        BEGIN
+          :n := 1;
+          BEGIN
+            :n := :n + 1 / 0;
+          END;
+        EXCEPTION
+          WHEN OTHERS THEN
+            :n := 2;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 10
+      caption: Без объявления переменных. У дочернего блока кода НЕТ блока с перехватом ошибок, в теле дочернего блока кода выполняется операция с ошибкой (деление на 0).
+      code: |
+        BEGIN
+          :n := 1;
+          BEGIN
+            :n := :n + 1 / 0;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "error",
+          "error": {
+            "standardException": "ZERO_DIVIDE"
+          }
+        }
+      result: |-
+        {
+          "resultType": "error",
+          "error": {
+            "standardException": "ZERO_DIVIDE"
+          }
+        }
+      comment: ''
+    - id: 11
+      caption: Переменная родительского блока кода видна в дочернем блоке кода
+      code: |
+        DECLARE
+          v NUMBER := 1;
+        BEGIN
+          BEGIN
+            :n := v;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      comment: ''
+    - id: 12
+      caption: Переопределение переменной в дочернем блоке кода, которая определена в родительском блоке кода
+      code: |
+        DECLARE
+          v NUMBER := 1;
+        BEGIN
+          DECLARE
+            v NUMBER := 2;
+          BEGIN
+            :n := v;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 13
+      caption: Тройной уровень вложенности блоков кода
+      code: |
+        DECLARE
+          v NUMBER := 1;
+        BEGIN
+          BEGIN
+            BEGIN
+              :n := v + 1;
+            END;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 14
+      caption: Переопределение переменной в каждом дочернем блоке кода, которая определена в родительском блоке кода
+      code: |
+        DECLARE
+          v NUMBER := 1;
+        BEGIN
+          DECLARE
+            v NUMBER := 3;
+          BEGIN
+            :n := v;
+          END;
+          DECLARE
+            v NUMBER := 2;
+          BEGIN
+            :n := v;
+          END;
+        END;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''

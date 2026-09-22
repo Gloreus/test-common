@@ -1,0 +1,5137 @@
+Test:
+  chapter: '01.04'
+  jira_issue: ''
+  name: BULK COLLECT
+  caption: Тестирование BULK COLLECT
+  comment: ''
+  cases:
+  - id: 1
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    code: |
+      declare
+        type t_rowid is table of tc_testing.sample_types.type_rowid % type;
+        l_data t_rowid;
+      begin
+        select type_rowid bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: Проверка bulk collect для всех полей таблицы sample_types
+    comment: ''
+  - id: 2
+    code: |
+      declare
+        type t_varchar2 is table of tc_testing.sample_types.type_varchar2 % type;
+        l_data t_varchar2;
+      begin
+        select type_varchar2 bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: |
+      Проверка bulk collect для типа varchar2
+    comment: ''
+  - id: 3
+    code: |
+      declare
+        type t_nvarchar2 is table of tc_testing.sample_types.type_nvarchar2 % type;
+        l_data t_nvarchar2;
+      begin
+        select type_nvarchar2 bulk collect into l_data
+        from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: Проверка bulk collect для типа t_nvarchar2
+    comment: ''
+  - id: 4
+    caption: Проверка bulk collect для типа number
+    code: |
+      declare
+        type t_number is table of tc_testing.sample_types.type_number % type;
+        l_data t_number;
+      begin
+        select type_number bulk collect into l_data
+        from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 5
+    caption: Проверка bulk collect для типа float
+    code: |
+      declare
+        type t_float is table of tc_testing.sample_types.type_float % type;
+        l_data t_float;
+      begin
+        select type_float bulk collect into l_data
+        from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 6
+    caption: Проверка bulk collect для типа date
+    code: |
+      declare
+        type t_date is table of tc_testing.sample_types.type_date % type;
+        l_data t_date;
+      begin
+        select type_date bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 7
+    caption: Проверка bulk collect для типа binary_float
+    code: |
+      declare
+        type t_binary_float is table of tc_testing.sample_types.type_binary_float % type;
+        l_data t_binary_float;
+      begin
+        select type_binary_float bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 8
+    caption: Проверка bulk collect для типа binary_double
+    code: |
+      declare
+        type t_binary_double is table of tc_testing.sample_types.type_binary_double % type;
+        l_data t_binary_double;
+      begin
+        select type_binary_double bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 9
+    caption: Проверка bulk collect для типа timestamp
+    code: |
+      declare
+        type t_timestamp is table of tc_testing.sample_types.type_timestamp % type;
+        l_data t_timestamp;
+      begin
+        select type_timestamp bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 10
+    caption: Проверка bulk collect для типа timestamp with time zone
+    code: |
+      declare
+        type t_timestamp_tz is table of tc_testing.sample_types.type_timestamp_with_time_zone % type;
+        l_data t_timestamp_tz;
+      begin
+        select type_timestamp_with_time_zone bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 11
+    caption: Проверка bulk collect для типа timestamp with local time zone
+    code: |
+      declare
+        type t_timestamp_ltz is table of tc_testing.sample_types.type_timestamp_with_local_time_zone % type;
+        l_data t_timestamp_ltz;
+      begin
+        select type_timestamp_with_local_time_zone bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 12
+    caption: Проверка bulk collect для типа interval year to month
+    code: |
+      declare
+        type t_interval_ym is table of tc_testing.sample_types.type_interval_year_to_month % type;
+        l_data t_interval_ym;
+      begin
+        select type_interval_year_to_month bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 13
+    caption: Проверка bulk collect для типа interval day to second
+    code: |
+      declare
+        type t_interval_ds is table of tc_testing.sample_types.type_interval_day_to_second % type;
+        l_data t_interval_ds;
+      begin
+        select type_interval_day_to_second bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 14
+    caption: Проверка bulk collect для типа raw
+    code: |
+      declare
+        type t_raw is table of tc_testing.sample_types.type_raw % type;
+        l_data t_raw;
+      begin
+        select type_raw bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 15
+    caption: Проверка bulk collect для типа rowid
+    code: |
+      declare
+        type t_rowid is table of tc_testing.sample_types.type_rowid % type;
+        l_data t_rowid;
+      begin
+        select type_rowid bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 16
+    caption: Проверка bulk collect для типа urowid
+    code: |
+      declare
+        type t_urowid is table of tc_testing.sample_types.type_urowid % type;
+        l_data t_urowid;
+      begin
+        select type_urowid bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 17
+    caption: Проверка bulk collect для типа char
+    code: |
+      declare
+        type t_char is table of tc_testing.sample_types.type_char % type;
+        l_data t_char;
+      begin
+        select type_char bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 18
+    caption: Проверка bulk collect для типа nchar
+    code: |
+      declare
+        type t_nchar is table of tc_testing.sample_types.type_nchar % type;
+        l_data t_nchar;
+      begin
+        select type_nchar bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 19
+    caption: Проверка bulk collect для типа clob
+    code: |
+      declare
+        type t_clob is table of tc_testing.sample_types.type_clob % type;
+        l_data t_clob;
+      begin
+        select type_clob bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 20
+    caption: Проверка bulk collect для типа nclob
+    code: |
+      declare
+        type t_nclob is table of tc_testing.sample_types.type_nclob % type;
+        l_data t_nclob;
+      begin
+        select type_nclob bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 21
+    caption: Проверка bulk collect для типа bfile
+    code: |
+      declare
+        type t_bfile is table of tc_testing.sample_types.type_bfile % type;
+        l_data t_bfile;
+      begin
+        select type_bfile bulk collect into l_data from tc_testing.sample_types;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 22
+    caption: Проверка bulk collect  при выводе порядка колонок - порядок не нарушен
+    code: |-
+      declare
+                type t_tab is table of tc_testing.sample_types%rowtype;
+                l_data t_tab;
+            begin
+                select *
+                bulk collect into l_data
+                from tc_testing.sample_types
+                where rownum <= 1;
+                :res := l_data.count;
+            end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 23
+    caption: Проверка bulk collect  при выводе порядка колонок - порядок нарушен -сначала
+      nvarchar2 затем id
+    code: |2-
+       declare
+                type t_tab is table of tc_testing.sample_types%rowtype;
+                l_data t_tab;
+            begin
+                select
+                    type_nvarchar2,
+                    id,
+                    type_varchar2,
+                    type_number,
+                    type_float,
+                    type_date,
+                    type_binary_float,
+                    type_binary_double,
+                    type_timestamp,
+                    type_timestamp_with_time_zone,
+                    type_timestamp_with_local_time_zone,
+                    type_interval_year_to_month,
+                    type_interval_day_to_second,
+                    type_raw,
+                    type_rowid,
+                    type_urowid,
+                    type_char,
+                    type_nchar,
+                    type_clob,
+                    type_nclob,
+                    type_blob,
+                    type_bfile,
+                    type_short_char,
+                    type_short_nchar,
+                    type_tiny_char,
+                    type_tiny_nchar,
+                    type_null_varchar2,
+                    type_null_nvarchar2,
+                    type_char18,
+                    type_nchar18
+                bulk collect into l_data
+                from tc_testing.sample_types
+                where rownum <= 1;
+                if l_data.count > 0 then
+                    :res := 0;
+                end if;
+            end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 24
+    code: |+
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       l_count number;
+      begin
+       select * bulk collect into l_data from tc_testing.sample_types;
+       select count(*) into l_count from tc_testing.sample_types;
+       if l_data.count = l_count then
+       :res := 1;
+       else
+       :res := 0;
+       end if;
+      end;
+
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    caption: Cравнение количества записей, полученных через bulk collect, с результатом
+      select count(*)
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 25
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+      begin
+       select * bulk collect into l_data from tc_testing.sample_types where id = 1;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки подмножества строк с where по id использованием  bulk
+      collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 26
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+      begin
+       select * bulk collect into l_data from tc_testing.sample_types where type_number > 100;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки подмножества строк с where c полем type_number использованием  bulk
+      collect
+    comment: ''
+  - id: 27
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: |
+      Проверка выборки null-значений в коллекцию varchar2 с использованием bulk collect
+    code: |
+      declare
+       type t_tab is table of varchar2(4000);
+       l_data t_tab;
+      begin
+       select type_varchar2 bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 28
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of number;
+       l_data t_tab;
+      begin
+       select type_number bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки null в коллекцию number с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 29
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of date;
+       l_data t_tab;
+      begin
+       select type_date bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      Проверка выборки null в коллекцию date с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 30
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of raw(2000);
+       l_data t_tab;
+      begin
+       select type_raw bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      Проверка выборки null в коллекцию raw с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 31
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of rowid;
+       l_data t_tab;
+      begin
+       select rowid bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      тест выборки null в коллекцию rowid с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 32
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of clob;
+       l_data t_tab;
+      begin
+       select type_clob bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      тест выборки null в коллекцию clob с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 33
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of blob;
+       l_data t_tab;
+      begin
+       select type_blob bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      тест выборки null в коллекцию blob с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 34
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of bfile;
+       l_data t_tab;
+      begin
+       select type_bfile bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: тест выборки null в коллекцию bfile с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 35
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of timestamp;
+       l_data t_tab;
+      begin
+       select type_timestamp bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      тест выборки null в коллекцию timestamp
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 36
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of binary_float;
+       l_data t_tab;
+      begin
+       select type_binary_float bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: тест выборки null в коллекцию binary_float с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 37
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of binary_double;
+       l_data t_tab;
+      begin
+       select type_binary_double bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: тест выборки null в коллекцию binary_double с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 38
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of urowid;
+       l_data t_tab;
+      begin
+       select type_urowid bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: тест выборки null в коллекцию urowid с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 39
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of nchar(1000);
+       l_data t_tab;
+      begin
+       select type_nchar bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: тест выборки null в коллекцию nchar с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 40
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of nclob;
+       l_data t_tab;
+      begin
+       select type_nclob bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: тест выборки null в коллекцию nclob с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 41
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of char(2000);
+       l_data t_tab;
+      begin
+       select type_char bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки null в коллекцию char с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 42
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of nvarchar2(2000);
+       l_data t_tab;
+      begin
+       select type_nvarchar2 bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки null в коллекцию nvarchar2
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 43
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of float;
+       l_data t_tab;
+      begin
+       select type_float bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    caption: |
+      Проверка выборки null в коллекцию float с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 44
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 10
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of varchar2(4000);
+       l_data t_tab;
+      begin
+       select type_varchar2 bulk collect into l_data from tc_testing.sample_types where type_varchar2 is null;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки строк с  null значений в поле varchar2 в коллекцию с
+      использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 45
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 21
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of varchar2(4000);
+       l_data t_tab;
+      begin
+       select type_varchar2 bulk collect into l_data from tc_testing.sample_types where type_varchar2 is not null;
+       :res := l_data.count;
+      end;
+    caption: Проверка выборки строк с  null значений в поле varchar2 в коллекцию с
+      использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 46
+    caption: ' Проверка bulk collect с пустым результатом'
+    code: |2-
+       declare
+        type t_number is table of tc_testing.sample_types.type_number % type;
+        l_data t_number;
+      begin
+        select type_number bulk collect into l_data from tc_testing.sample_types
+        where 1 = 0;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 47
+    caption: Проверка bulk collect с ограничением количества записей
+    code: |-
+      declare
+        type t_number is table of tc_testing.sample_types.type_number % type;
+        l_data t_number;
+      begin
+        select type_number bulk collect into l_data from tc_testing.sample_types
+        where rownum <= 5;
+        :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 5
+          }
+        ]
+      }
+    comment: ''
+  - id: 48
+    code: |-
+      declare
+          type t_tab is table of tc_testing.sample_types%rowtype;
+          l_data t_tab;
+          l_count number;
+      begin
+
+          select *
+          bulk collect into l_data
+          from tc_testing.sample_types;
+
+          select count(*)
+          into l_count
+          from tc_testing.sample_types;
+
+          if l_data.count = l_count then
+              :res := 1;
+          else
+              :res := 0;
+          end if;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    caption: Проверка выборки всех строк из таблицы и сравнение с выборкой  bulk collect  -
+      успех
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 49
+    code: |-
+      declare
+          type t_tab is table of tc_testing.sample_types%rowtype;
+          l_data t_tab;
+          l_count number;
+      begin
+
+          select *
+          bulk collect into l_data
+          from tc_testing.sample_types;
+
+          select count(*)-1
+          into l_count
+          from tc_testing.sample_types;
+
+          if l_data.count = l_count then
+              :res := 1;
+          else
+              :res := 0;
+          end if;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    caption: Проверка выборки всех строк из таблицы и сравнение с выборкой  bulk collect  -
+      разное количество строк в выборки таблицы и  bulk collect
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 50
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 13
+          }
+        ]
+      }
+    code: |
+      declare
+       type t_tab is table of number;
+       l_data t_tab;
+       l_null_count number := 0;
+      begin
+       select type_number bulk collect into l_data from tc_testing.sample_types;
+       for i in 1..l_data.count loop
+       if l_data(i) is null then
+       l_null_count := l_null_count + 1;
+       end if;
+       end loop;
+       :res := l_null_count;
+      end;
+    caption: |
+      Проверка обработки mixed null/not null в коллекции с использованием bulk collect
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 51
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: Проверка bulk collect в fetch с явным курсором с использованием bulk
+      collect
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c is select * from tc_testing.sample_types;
+      begin
+       open c;
+       fetch c bulk collect into l_data;
+       close c;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 52
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 5
+          }
+        ]
+      }
+    caption: |
+      Проверка bulk collect в fetch с limit с использованием bulk collect
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c is select * from tc_testing.sample_types;
+       l_limit constant number := 5;
+      begin
+       open c;
+       loop
+       fetch c bulk collect into l_data limit l_limit;
+       exit when l_data.count = 0;
+       end loop;
+       close c;
+       :res := l_limit;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 53
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: Проверка bulk collect в fetch с неявным курсором
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+      begin
+       for cur in (select * from tc_testing.sample_types) loop
+         null;
+       end loop;
+       select count(*) into :res from tc_testing.sample_types;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 54
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: |
+      Проверка execute immediate с bulk collect
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       l_sql varchar2(4000);
+      begin
+       l_sql := 'select * from tc_testing.sample_types';
+       execute immediate l_sql bulk collect into l_data;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 55
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    caption: |
+      Проверка курсор с параметром и bulk collect
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c(p_id number) is select * from tc_testing.sample_types where id = p_id;
+      begin
+       open c(1);
+       fetch c bulk collect into l_data;
+       close c;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 56
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -6550,
+          "message": "line 7, column 36:\nPLS-00457: expressions have to be of SQL types"
+        }
+      }
+    caption: |
+      Проверка  bulk collect в анонимном блоке execute immediate
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       l_sql varchar2(4000);
+      begin
+       l_sql := 'begin select * bulk collect into :1 from tc_testing.sample_types; end;';
+       execute immediate l_sql using out l_data;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 57
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    caption: |
+      Проверка bulk collect с динамическим where с использованием execute immediate
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       l_sql varchar2(4000);
+      begin
+       l_sql := 'select * from tc_testing.sample_types where id = :1';
+       execute immediate l_sql bulk collect into l_data using 1;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 58
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    caption: |
+      Проверка execute immediate с bulk collect при выполнении запроса с несуществующей таблице
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       l_sql varchar2(4000);
+      begin
+       l_sql := 'select * from non_existent_table';
+       execute immediate l_sql bulk collect into l_data;
+       :res := 0;
+      exception
+       when others then
+       :res := 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 59
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 5
+          }
+        ]
+      }
+    caption: |
+      Проверка извлечения данных с использованием динамического SQL и параметров в EXECUTE IMMEDIATE с BULK COLLECT
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       l_sql varchar2(4000);
+      begin
+       l_sql := 'select * from tc_testing.sample_types where id between :1 and :2';
+       execute immediate l_sql bulk collect into l_data using 1, 5;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 60
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    caption: |
+      Проверка извлечения данных с использованием курсора и BULK COLLECT INTO с FETCH BULK COLLECT
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c is select * from tc_testing.sample_types;
+      begin
+       open c;
+       fetch c bulk collect into l_data;
+       :res := c%rowcount;
+       close c;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    comment: ''
+  - id: 61
+    caption: Проверка bulk collect limit с частичной выборкой с использованием cursor
+    code: |-
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c is select * from tc_testing.sample_types;
+       l_total number := 0;
+      begin
+       open c;
+       loop
+       fetch c bulk collect into l_data limit 3;
+       l_total := l_total + l_data.count;
+       exit when l_data.count = 0;
+       end loop;
+       close c;
+       :res := l_total;
+      end;
+    input: |2-
+
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 62
+    caption: Проверка курсор с bulk collect и exception
+    code: |-
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c is select * from tc_testing.sample_types where 1=0;
+      begin
+       open c;
+       fetch c bulk collect into l_data;
+       close c;
+       :res := l_data.count;
+      exception
+       when others then
+       :res := -1;
+      end;
+    input: |2
+
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 63
+    caption: Проверка bulk collect limit с выходом по условию
+    code: |-
+      declare
+       type t_tab is table of tc_testing.sample_types%rowtype;
+       l_data t_tab;
+       cursor c is select * from tc_testing.sample_types order by id;
+       l_counter number := 0;
+      begin
+       open c;
+       loop
+       fetch c bulk collect into l_data limit 2;
+       exit when l_data.count = 0 or l_counter >= 4;
+       l_counter := l_counter + 1;
+       end loop;
+       close c;
+       :res := l_counter;
+      end;
+    input: |2
+
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 64
+    caption: |
+      Проверка bulk collect в вложенную таблицу table of number
+    code: |
+      declare
+       type t_tab is table of number;
+       l_data t_tab;
+      begin
+       select id bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 65
+    caption: |
+      Проверка bulk collect в вложенную таблицу table of для date
+    code: |
+      declare
+       type t_tab is table of date;
+       l_data t_tab;
+      begin
+       select type_date bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 66
+    caption: Проверка bulk collect в вложенную таблицу с пустым результатом
+    code: |-
+      declare
+       type t_tab is table of number;
+       l_data t_tab;
+      begin
+       select id bulk collect into l_data from tc_testing.sample_types where 1=0;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 67
+    caption: Проверка bulk collect в вложенную таблицу с interval
+    code: |-
+      declare
+       type t_tab is table of interval day to second;
+       l_data t_tab;
+      begin
+       select type_interval_day_to_second bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1873,
+          "message": "the leading precision of the interval is too small"
+        }
+      }
+    comment: ''
+  - id: 68
+    caption: Проверка bulk collect в вложенную таблицу для rowid
+    code: |-
+      declare
+       type t_tab is table of rowid;
+       l_data t_tab;
+      begin
+       select rowid bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 69
+    caption: Проверка bulk collect в вложенную таблицу для bfile
+    code: |-
+      declare
+       type t_tab is table of bfile;
+       l_data t_tab;
+      begin
+       select type_bfile bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 70
+    caption: Проверка bulk collect в вложенную таблицу для nvarchar2
+    code: |-
+      declare
+       type t_tab is table of nvarchar2(2000);
+       l_data t_tab;
+      begin
+       select type_nvarchar2 bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 71
+    caption: Проверка bulk collect в вложенную таблицу для varchar2
+    code: |-
+      declare
+          type t_tab is table of varchar2(4000);
+          l_data t_tab;
+      begin
+          select type_varchar2
+          bulk collect into l_data
+          from tc_testing.sample_types
+          where rownum <= 100; -- ограничение для теста
+
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 72
+    code: |-
+      declare
+          type t_tab is table of float;
+          l_data t_tab;
+      begin
+          select type_float
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    caption: Проверка bulk collect в вложенную таблицу для float
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 73
+    caption: Проверка bulk collect в вложенную таблицу для binary_float
+    code: |-
+      declare
+          type t_tab is table of binary_float;
+          l_data t_tab;
+      begin
+          select type_binary_float
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 74
+    caption: Проверка bulk collect в вложенную таблицу для BINARY_DOUBLE
+    code: |-
+      declare
+          type t_tab is table of BINARY_DOUBLE;
+          l_data t_tab;
+      begin
+          select type_binary_double
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 75
+    caption: Проверка bulk collect в вложенную таблицу для timestamp
+    code: |-
+      declare
+          type t_tab is table of timestamp;
+          l_data t_tab;
+      begin
+          select type_timestamp
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 76
+    caption: Проверка bulk collect в вложенную таблицу для RAW
+    code: |-
+      declare
+          type t_tab is table of RAW(2000);
+          l_data t_tab;
+      begin
+          select type_raw
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 77
+    caption: Проверка bulk collect в вложенную таблицу для RAW
+    code: |-
+      declare
+          type t_tab is table of rowid;
+          l_data t_tab;
+      begin
+          select type_rowid
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 78
+    code: |-
+      declare
+          type t_tab is table of char(2000);
+          l_data t_tab;
+      begin
+          select type_char
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    caption: Проверка bulk collect в вложенную таблицу для RAW
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 79
+    caption: Проверка bulk collect в вложенную таблицу для nchar
+    code: |-
+      declare
+          type t_tab is table of nchar(1000);
+          l_data t_tab;
+      begin
+          select type_nchar
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 80
+    code: |-
+      declare
+          type t_tab is table of clob;
+          l_data t_tab;
+      begin
+          select type_clob
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    caption: Проверка bulk collect в вложенную таблицу для clob
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 81
+    caption: Проверка bulk collect в вложенную таблицу для nclob
+    code: |-
+      declare
+          type t_tab is table of nclob;
+          l_data t_tab;
+      begin
+          select type_nclob
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 82
+    code: |-
+      declare
+          type t_tab is table of blob;
+          l_data t_tab;
+      begin
+          select type_blob
+          bulk collect into l_data
+          from tc_testing.sample_types;
+          :res := l_data.count;
+      end;
+    caption: Проверка bulk collect в вложенную таблицу для blob
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 83
+    caption: Проверка bulk collect в ассоциативный массив для varchar2
+    code: |
+      declare
+       type t_tab is table of tc_testing.sample_types.type_varchar2%type index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_varchar2 bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 84
+    caption: |
+      Проверка  bulk collect в ассоциативный массив с limit
+    code: |
+      declare
+       type t_tab is table of number index by pls_integer;
+       l_data t_tab;
+       cursor c is select id from tc_testing.sample_types;
+      begin
+       open c;
+       fetch c bulk collect into l_data limit 3;
+       close c;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 85
+    caption: |
+      Прверка bulk collect в ассоциативный массив для raw
+    code: |
+      declare
+       type t_tab is table of raw(2000) index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_raw bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 86
+    caption: |
+      Проверка bulk collect в ассоциативный массив с order by
+    code: |
+      declare
+       type t_tab is table of number index by pls_integer;
+       l_data t_tab;
+      begin
+       select id bulk collect into l_data from tc_testing.sample_types order by id;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 87
+    caption: |
+      Проверка bulk collect в ассоциативный массив для nchar
+    code: |
+      declare
+       type t_tab is table of nchar(1000) index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_nchar bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 88
+    caption: Проверка bulk collect в ассоциативный массив для binary_double
+    code: |-
+      declare
+       type t_tab is table of binary_double index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_binary_double bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 89
+    caption: Проверка bulk collect в ассоциативный массив для nvarchar2
+    code: |-
+      declare
+       type t_tab is table of nvarchar2(4000) index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_nvarchar2 bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 90
+    caption: Проверка bulk collect в ассоциативный массив для number
+    code: |-
+      declare
+       type t_tab is table of number index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_number bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 91
+    caption: Проверка bulk collect в ассоциативный массив для float
+    code: |-
+      declare
+       type t_tab is table of float index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_float bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 92
+    caption: Проверка bulk collect в ассоциативный массив для binary_float
+    code: |-
+      declare
+       type t_tab is table of binary_float index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_binary_float bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 93
+    caption: Проверка bulk collect в ассоциативный массив для timestamp
+    code: |-
+      declare
+       type t_tab is table of timestamp index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_timestamp bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 94
+    caption: Проверка bulk collect в ассоциативный массив для raw
+    code: |-
+      declare
+       type t_tab is table of raw(200) index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_raw bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 95
+    caption: Проверка bulk collect в ассоциативный массив для rowid
+    code: |-
+      declare
+       type t_tab is table of rowid index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_rowid bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: ''
+    result: |-
+      {
+        "resultType": "error",
+        "error": {
+          "errorCode": -1008,
+          "message": "not all variables bound"
+        }
+      }
+    comment: ''
+  - id: 96
+    caption: Проверка bulk collect в ассоциативный массив для urowid
+    code: |-
+      declare
+       type t_tab is table of urowid index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_urowid bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 97
+    caption: Проверка bulk collect в ассоциативный массив для char
+    code: |-
+      declare
+       type t_tab is table of char(2000) index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_char bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 98
+    caption: Проверка bulk collect в ассоциативный массив для nchar
+    code: |-
+      declare
+       type t_tab is table of nchar(1000) index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_nchar bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 99
+    caption: Проверка bulk collect в ассоциативный массив для clob
+    code: |-
+      declare
+       type t_tab is table of clob index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_clob bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 100
+    caption: Проверка bulk collect в ассоциативный массив для nclob
+    code: |-
+      declare
+       type t_tab is table of nclob index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_nclob bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 101
+    caption: Проверка bulk collect в ассоциативный массив для blob
+    code: |-
+      declare
+       type t_tab is table of blob index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_blob bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 102
+    caption: Проверка bulk collect в ассоциативный массив для bfile
+    code: |-
+      declare
+       type t_tab is table of bfile index by pls_integer;
+       l_data t_tab;
+      begin
+       select type_bfile bulk collect into l_data from tc_testing.sample_types;
+       :res := l_data.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 103
+    caption: |
+      Проверка bulk collect в несколько коллекций с группировкой
+    code: |
+      declare
+       type t_counts is table of number;
+       type t_sums is table of number;
+       l_counts t_counts;
+       l_sums t_sums;
+      begin
+       select count(*), sum(id) bulk collect into l_counts, l_sums from tc_testing.sample_types group by type_number;
+       :res := l_counts.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 9
+          }
+        ]
+      }
+    comment: ''
+  - id: 104
+    caption: |
+      Проверка bulk collect в несколько коллекций с подзапросом
+    code: |
+      declare
+       type t_ids is table of number;
+       type t_max_dates is table of date;
+       l_ids t_ids;
+       l_max_dates t_max_dates;
+      begin
+       select id, (select max(type_date) from tc_testing.sample_types) bulk collect into l_ids, l_max_dates from tc_testing.sample_types;
+       :res := l_ids.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 105
+    caption: |2-
+
+      тест bulk collect в несколько коллекций для timestamp полей
+    code: |-
+      declare
+       type t_ids is table of number;
+       type t_timestamps is table of timestamp;
+       l_ids t_ids;
+       l_timestamps t_timestamps;
+      begin
+       select id, type_timestamp bulk collect into l_ids, l_timestamps from tc_testing.sample_types;
+       :res := l_ids.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 106
+    caption: Проверка bulk collect в несколько коллекций для разных типов
+    code: |-
+      declare
+       type t_ids is table of number;
+       type t_names is table of varchar2(4000);
+       l_ids t_ids;
+       l_names t_names;
+      begin
+       select id, type_varchar2 bulk collect into l_ids, l_names from tc_testing.sample_types;
+       :res := l_ids.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 107
+    caption: Проверка bulk collect в несколько коллекций с where условием
+    code: |-
+      declare
+       type t_ids is table of number;
+       type t_numbers is table of number;
+       l_ids t_ids;
+       l_numbers t_numbers;
+      begin
+       select id, type_number bulk collect into l_ids, l_numbers from tc_testing.sample_types where id > 0;
+       :res := l_ids.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''
+  - id: 108
+    caption: Проверка bulk collect в несколько коллекций с разными типами данных
+    code: |-
+      declare
+       type t_ids is table of number;
+       type t_dates is table of date;
+       type t_floats is table of binary_float;
+       l_ids t_ids;
+       l_dates t_dates;
+       l_floats t_floats;
+      begin
+       select id, type_date, type_binary_float bulk collect into l_ids, l_dates, l_floats from tc_testing.sample_types;
+       :res := l_ids.count;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 31
+          }
+        ]
+      }
+    comment: ''

@@ -10,11 +10,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridMultiSelectionModel;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
-import com.vaadin.flow.component.shared.SelectionPreservationMode;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -29,9 +25,9 @@ import org.springframework.context.annotation.Import;
 import ru.sovcombank.rbs.TestStoreProperties;
 import ru.sovcombank.rbs.YamlConfig;
 import ru.sovcombank.rbs.caseentity.TestCase;
-import ru.sovcombank.rbs.caseentity.TestDataRepository;
 import ru.sovcombank.rbs.caseentity.TestDataYamlRepository;
 import ru.sovcombank.rbs.caseentity.TestProfile;
+import ru.sqbt.plsqltests.base.ui.ViewTitle;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -39,36 +35,30 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import ru.sqbt.plsqltests.base.ui.ViewTitle;
 
 @Slf4j
-@Route(value = "oratests")
-@PageTitle("Ora tests")
-@Menu(order = 1, icon = "icons/clipboard-check.svg", title = "Ora Tests")
-@Import(YamlConfig.class)
-class TaskListView extends VerticalLayout {
+@Route(value = "")
+@PageTitle("Профиль")
+@Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Профили тестирования")
+
+class ProfilesView extends VerticalLayout {
 
     private final TestStoreProperties testStoreProperties;
     @Autowired
     private TestDataYamlRepository repository;
 
     @Autowired
-    @Qualifier("YmlMapper") // todo: Сделать сериализацию тест-кейсов в yaml
+    @Qualifier("YmlMapper")
     private ObjectMapper objectMapper;
 
     private final ComboBox<Path> profilesComboBox;
     private final MultiSelectListBox<String> casesListBox;
-    private final Grid<TestCase> caseGrid = new Grid<>(TestCase.class, false);
+    private final CaseGridView caseGrid = new CaseGridView();
     private final TextArea logTextArea;
     private final Button createBtn;
-    private final RadioButtonGroup<String>  radioGroupProfileType = new RadioButtonGroup<>();
 
-    TaskListView(TestStoreProperties testStoreProperties) {
+    ProfilesView(TestStoreProperties testStoreProperties) {
         this.testStoreProperties = testStoreProperties;
-
-        radioGroupProfileType.setItems("Профиль", "ora-Test");
-        radioGroupProfileType.setValue("ora-Test");
-        radioGroupProfileType.addThemeVariants(RadioGroupVariant.AURA_HORIZONTAL);
 
         profilesComboBox = new ComboBox<>();
         profilesComboBox.setPlaceholder("Профиль тестирования");
@@ -84,7 +74,7 @@ class TaskListView extends VerticalLayout {
 
         var toolbar = new VerticalLayout();
         add(new ViewTitle("Просмотр и запуск тестов"));
-        toolbar.add(radioGroupProfileType, profilesComboBox, casesListBox);
+        toolbar.add(profilesComboBox, casesListBox);
 
         toolbar.setWrap(true);
         toolbar.setWidthFull();
@@ -93,7 +83,7 @@ class TaskListView extends VerticalLayout {
 
         VerticalLayout mainForm = new VerticalLayout();
         mainForm.setSizeFull();
-        initCaseGrid();
+
         mainForm.add(caseGrid);
         mainForm.add(createBtn);
         add(mainForm);
@@ -102,7 +92,6 @@ class TaskListView extends VerticalLayout {
         add(logTextArea);
         setFlexGrow(1, logTextArea);
         profilesComboBox.addValueChangeListener(this::onProfileSelected);
-        radioGroupProfileType.addValueChangeListener(this::onProfileTypeSelected);
     }
 
     private void reloadYamls(Path profilesPath) {
@@ -125,59 +114,10 @@ class TaskListView extends VerticalLayout {
         logTextArea.setValueChangeMode(ValueChangeMode.LAZY);
     }
 
-    private void initCaseGrid() {
-        caseGrid.setSelectionMode(Grid.SelectionMode.MULTI);
-
-        caseGrid.addColumn(testCase -> testCase.getTestCaseData().getDescription())
-                .setKey("testcase")
-                .setFlexGrow(1)
-                .setHeader("Набор тестов");
-    }
-
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        caseGrid.setItemDetailsRenderer(createTestCaseDetailsRenderer(objectMapper));
-    }
-
-    private ComponentRenderer<TestCaseDetailsFormLayout, TestCase> createTestCaseDetailsRenderer(ObjectMapper objectMapper) {
-        return new ComponentRenderer<>(() -> new TestCaseDetailsFormLayout(objectMapper),
-                TestCaseDetailsFormLayout::setTestCase);
-    }
-
-    private static class TestCaseDetailsFormLayout extends VerticalLayout {
-        private final TextArea jsonTextArea = new TextArea();
-        private final ObjectMapper mapper;
-
-        public TestCaseDetailsFormLayout(@NonNull ObjectMapper mapper) {
-            this.mapper = mapper;
-            setWrap(true);
-            jsonTextArea.setReadOnly(true);
-            jsonTextArea.setWidthFull();
-            add(jsonTextArea);
-            setWidthFull();
-        }
-
-        public void setTestCase(TestCase testCase)  {
-            try {
-                jsonTextArea.setValue(mapper.writeValueAsString(testCase));
-            } catch (JsonProcessingException e) {
-                log.error(e.getMessage());
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    private void onProfileTypeSelected(HasValue.ValueChangeEvent<String> event) {
-        String p = event.getValue();
-        writeInfo(p);
-        Path profilesPath;
-        if (radioGroupProfileType.getValue() == "Профиль") {
-            profilesPath = testStoreProperties.getProfilesFullPath();
-        } else {
-            profilesPath = Path.of(testStoreProperties.getRootDir(), "ora_tests/02").toAbsolutePath();
-        }
-        reloadYamls(profilesPath);
+        reloadYamls(testStoreProperties.getProfilesFullPath());
     }
 
     private void onProfileSelected(HasValue.ValueChangeEvent<Path> event) {
@@ -187,13 +127,9 @@ class TaskListView extends VerticalLayout {
         } else {
             writeInfo(selected.toString());
             try {
-                if (radioGroupProfileType.getValue() == "Профиль") {
                     TestProfile profile = repository.loadProfile(selected.getFileName().toString());
                     reloadCases(profile);
                     writeInfo("Загружен: " + profile.getProfileName());
-                } else {
-
-                }
 
             } catch (IOException e) {
                 writeInfo(e.getMessage());
@@ -202,10 +138,7 @@ class TaskListView extends VerticalLayout {
     }
 
     private void reloadCases(TestProfile profile) {
-        caseGrid.setItems(repository.loadCases(profile));
-        GridMultiSelectionModel<TestCase> ms = (GridMultiSelectionModel<TestCase>) caseGrid.getSelectionModel();
-        ms.selectAll();
-        caseGrid.getColumnByKey("testcase").setHeader(profile.getDescription());
+        caseGrid.setItems(repository.loadCases(profile), profile.getDescription());
     }
 
     private void writeInfo(String s) {
@@ -225,5 +158,4 @@ class TaskListView extends VerticalLayout {
         }
         return result;
     }
-
 }

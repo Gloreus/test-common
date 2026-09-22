@@ -1,0 +1,7 @@
+profileName: "blocks1"
+description: "1.1. SimpleBlocksTest – Простые блоки кода, без declare"
+references:
+  - filePath: "1.1._SimpleBlocksTest\\1.yaml"
+  - filePath: "1.1._SimpleBlocksTest\\2.yaml"
+  - filePath: "1.1._SimpleBlocksTest\\3.yaml"
+

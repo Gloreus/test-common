@@ -1,0 +1,1231 @@
+Test:
+  chapter: '02.1'
+  jira_issue: ''
+  name: '02.1'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: Проверка передачи пустого параметра с типом Bfile (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "bfile", "value": null}], "outputBinds": [{"name": "in", "type": "bfile", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "bfile", "value": null}], "outputBinds": [{"name": "in", "type": "bfile", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 2
+      caption: Проверка передачи пустого параметра с типом Bfile (с сохранением в переменную)
+      code: |-
+        declare
+          var bfile := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "bfile", "value": null}], "outputBinds": [{"name": "in", "type": "bfile", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "bfile", "value": null}], "outputBinds": [{"name": "in", "type": "bfile", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 3
+      caption: Проверка получения пустого параметра с типом Bfile (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "bfile", "value": null}]}'
+      comment: ''
+    - id: 4
+      caption: Проверка получения пустого параметра с типом Bfile (из переменной)
+      code: |-
+        declare
+          var bfile;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "bfile", "value": null}]}'
+      comment: ''
+    - id: 5
+      caption: Проверка передачи пустого параметра с типом BigDecimal (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 6
+      caption: Проверка передачи пустого параметра с типом BigDecimal (с сохранением в переменную)
+      code: |-
+        declare
+          var number := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 7
+      caption: Проверка получения пустого параметра с типом BigDecimal (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "number", "value": null}]}'
+      comment: ''
+    - id: 8
+      caption: Проверка получения пустого параметра с типом BigDecimal (из переменной)
+      code: |-
+        declare
+          var number;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "number", "value": null}]}'
+      comment: ''
+    - id: 9
+      caption: Проверка передачи заполненного параметра с типом BigDecimal
+      code: |-
+        begin
+          if :in = 25 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": 25}], "outputBinds": [{"name": "in", "type": "number", "value": 25}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": 25}], "outputBinds": [{"name": "in", "type": "number", "value": 25}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 10
+      caption: Проверка получения заполненного параметра с типом BigDecimal
+      code: |-
+        begin
+          :out := 25;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "number", "value": 25}]}'
+      comment: ''
+    - id: 11
+      caption: Проверка передачи пустого параметра с типом BigInteger (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 12
+      caption: Проверка передачи пустого параметра с типом BigInteger (с сохранением в переменную)
+      code: |-
+        declare
+          var integer := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": null}], "outputBinds": [{"name": "in", "type": "number", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 13
+      caption: Проверка получения пустого параметра с типом BigInteger (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "number", "value": null}]}'
+      comment: ''
+    - id: 14
+      caption: Проверка получения пустого параметра с типом BigInteger (из переменной)
+      code: |-
+        declare
+          var integer;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "number", "value": null}]}'
+      comment: ''
+    - id: 15
+      caption: Проверка передачи заполненного параметра с типом BigInteger
+      code: |-
+        begin
+          if :in = 2147483650 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": 2147483650}], "outputBinds": [{"name": "in", "type": "number", "value": 2147483650}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "number", "value": 2147483650}], "outputBinds": [{"name": "in", "type": "number", "value": 2147483650}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 16
+      caption: Проверка получения заполненного параметра с типом BigInteger
+      code: |-
+        begin
+          :out := 2147483650;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "number", "value": 2147483650}]}'
+      comment: ''
+    - id: 17
+      caption: Проверка передачи пустого параметра с типом Blob (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "blob", "value": null}], "outputBinds": [{"name": "in", "type": "blob", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "blob", "value": null}], "outputBinds": [{"name": "in", "type": "blob", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 18
+      caption: Проверка передачи пустого параметра с типом Blob (с сохранением в переменную)
+      code: |-
+        declare
+          var blob := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "blob", "value": null}], "outputBinds": [{"name": "in", "type": "blob", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "blob", "value": null}], "outputBinds": [{"name": "in", "type": "blob", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 19
+      caption: Проверка получения пустого параметра с типом Blob (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "blob", "value": null}]}'
+      comment: ''
+    - id: 20
+      caption: Проверка получения пустого параметра с типом Blob (из переменной)
+      code: |-
+        declare
+          var blob;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "blob", "value": null}]}'
+      comment: ''
+    - id: 21
+      caption: Проверка передачи заполненного параметра с типом Blob
+      code: |-
+        declare
+          blb blob;
+        begin
+          dbms_lob.createTemporary(blb, true);
+          dbms_lob.writeAppend(blb, 5, utl_raw.cast_to_raw('Hello'));
+          if dbms_lob.compare(:in, blb) = 0 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+          dbms_lob.freeTemporary(blb);
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "blob", "value": "Hello"}], "outputBinds": [{"name": "in", "type": "blob", "value": "Hello"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "blob", "value": "Hello"}], "outputBinds": [{"name": "in", "type": "blob", "value": "Hello"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 22
+      caption: Проверка получения заполненного параметра с типом Blob
+      code: |-
+        declare
+          blb blob;
+        begin
+          dbms_lob.createTemporary(blb, true);
+          dbms_lob.writeAppend(blb, 5, utl_raw.cast_to_raw('Hello'));
+          :out := blb;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "blob", "value": "Hello"}]}'
+      comment: ''
+    - id: 23
+      caption: Проверка передачи пустого параметра с типом Boolean (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "boolean", "value": null}], "outputBinds": [{"name": "in", "type": "boolean", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "boolean", "value": null}], "outputBinds": [{"name": "in", "type": "boolean", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 24
+      caption: Проверка передачи пустого параметра с типом Boolean (с сохранением в переменную)
+      code: |-
+        declare
+          var boolean := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "boolean", "value": null}], "outputBinds": [{"name": "in", "type": "boolean", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "boolean", "value": null}], "outputBinds": [{"name": "in", "type": "boolean", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 25
+      caption: Проверка получения пустого параметра с типом Boolean (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "boolean", "value": null}]}'
+      comment: ''
+    - id: 26
+      caption: Проверка получения пустого параметра с типом Boolean (из переменной)
+      code: |-
+        declare
+          var boolean;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "boolean", "value": null}]}'
+      comment: ''
+    - id: 27
+      caption: Проверка передачи заполненного параметра с типом Boolean
+      code: |-
+        begin
+          if :in = true then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "boolean", "value": true}], "outputBinds": [{"name": "in", "type": "boolean", "value": true}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "boolean", "value": true}], "outputBinds": [{"name": "in", "type": "boolean", "value": true}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 28
+      caption: Проверка получения заполненного параметра с типом Boolean
+      code: |-
+        begin
+          :out := true;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "boolean", "value": true}]}'
+      comment: ''
+    - id: 29
+      caption: Проверка передачи пустого параметра с типом Bytes (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "raw", "value": null}], "outputBinds": [{"name": "in", "type": "raw", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "raw", "value": null}], "outputBinds": [{"name": "in", "type": "raw", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 30
+      caption: Проверка передачи пустого параметра с типом Bytes (с сохранением в переменную)
+      code: |-
+        declare
+          var raw(300) := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "raw", "value": null}], "outputBinds": [{"name": "in", "type": "raw", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "raw", "value": null}], "outputBinds": [{"name": "in", "type": "raw", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 31
+      caption: Проверка получения пустого параметра с типом Bytes (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "raw", "value": null}]}'
+      comment: ''
+    - id: 32
+      caption: Проверка получения пустого параметра с типом Bytes (из переменной)
+      code: |-
+        declare
+          var raw(300);
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "raw", "value": null}]}'
+      comment: ''
+    - id: 33
+      caption: Проверка передачи заполненного параметра с типом Bytes
+      code: |-
+        begin
+          if :in = hexToRaw('48656C6C6F') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "raw", "value": "48656C6C6F"}], "outputBinds": [{"name": "in", "type": "raw", "value": "48656C6C6F"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "raw", "value": "48656C6C6F"}], "outputBinds": [{"name": "in", "type": "raw", "value": "48656C6C6F"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 34
+      caption: Проверка получения заполненного параметра с типом Bytes
+      code: |-
+        begin
+          :out := hexToRaw('48656C6C6F');
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "raw", "value": "48656C6C6F"}]}'
+      comment: ''
+    - id: 35
+      caption: Проверка передачи пустого параметра с типом Clob (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "clob", "value": null}], "outputBinds": [{"name": "in", "type": "clob", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "clob", "value": null}], "outputBinds": [{"name": "in", "type": "clob", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 36
+      caption: Проверка передачи пустого параметра с типом Clob (с сохранением в переменную)
+      code: |-
+        declare
+          var clob := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "clob", "value": null}], "outputBinds": [{"name": "in", "type": "clob", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "clob", "value": null}], "outputBinds": [{"name": "in", "type": "clob", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 37
+      caption: Проверка получения пустого параметра с типом Clob (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "clob", "value": null}]}'
+      comment: ''
+    - id: 38
+      caption: Проверка получения пустого параметра с типом Clob (из переменной)
+      code: |-
+        declare
+          var clob;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "clob", "value": null}]}'
+      comment: ''
+    - id: 39
+      caption: Проверка передачи заполненного параметра с типом Clob
+      code: |-
+        declare
+          clb clob;
+        begin
+          dbms_lob.createTemporary(clb, true);
+          dbms_lob.writeAppend(clb, length('Hello'), 'Hello');
+          if dbms_lob.compare(:in, clb) = 0 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+          dbms_lob.freeTemporary(clb);
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "clob", "value": "Hello"}], "outputBinds": [{"name": "in", "type": "clob", "value": "Hello"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "clob", "value": "Hello"}], "outputBinds": [{"name": "in", "type": "clob", "value": "Hello"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 40
+      caption: Проверка получения заполненного параметра с типом Clob
+      code: |-
+        declare
+          clb clob;
+        begin
+          dbms_lob.createTemporary(clb, true);
+          dbms_lob.writeAppend(clb, length('Hello'), 'Hello');
+          :out := clb;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "clob", "value": "Hello"}]}'
+      comment: ''
+    - id: 41
+      caption: Проверка передачи пустого параметра с типом Integer (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "pls_integer", "value": null}], "outputBinds": [{"name": "in", "type": "pls_integer", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "pls_integer", "value": null}], "outputBinds": [{"name": "in", "type": "pls_integer", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 42
+      caption: Проверка передачи пустого параметра с типом Integer (с сохранением в переменную)
+      code: |-
+        declare
+          var pls_integer := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "pls_integer", "value": null}], "outputBinds": [{"name": "in", "type": "pls_integer", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "pls_integer", "value": null}], "outputBinds": [{"name": "in", "type": "pls_integer", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 43
+      caption: Проверка получения пустого параметра с типом Integer (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "pls_integer", "value": null}]}'
+      comment: ''
+    - id: 44
+      caption: Проверка получения пустого параметра с типом Integer (из переменной)
+      code: |-
+        declare
+          var pls_integer;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "pls_integer", "value": null}]}'
+      comment: ''
+    - id: 45
+      caption: Проверка передачи заполненного параметра с типом Integer
+      code: |-
+        begin
+          if :in = 2025 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "pls_integer", "value": 2025}], "outputBinds": [{"name": "in", "type": "pls_integer", "value": 2025}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "pls_integer", "value": 2025}], "outputBinds": [{"name": "in", "type": "pls_integer", "value": 2025}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 46
+      caption: Проверка получения заполненного параметра с типом Integer
+      code: |-
+        begin
+          :out := 2025;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "pls_integer", "value": 2025}]}'
+      comment: ''
+    - id: 47
+      caption: Проверка передачи пустого параметра с типом IntervalDS (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval day to second", "value": null}], "outputBinds": [{"name": "in", "type": "interval day to second", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval day to second", "value": null}], "outputBinds": [{"name": "in", "type": "interval day to second", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 48
+      caption: Проверка передачи пустого параметра с типом IntervalDS (с сохранением в переменную)
+      code: |-
+        declare
+          var interval day to second := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval day to second", "value": null}], "outputBinds": [{"name": "in", "type": "interval day to second", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval day to second", "value": null}], "outputBinds": [{"name": "in", "type": "interval day to second", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 49
+      caption: Проверка получения пустого параметра с типом IntervalDS (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "interval day to second", "value": null}]}'
+      comment: ''
+    - id: 50
+      caption: Проверка получения пустого параметра с типом IntervalDS (из переменной)
+      code: |-
+        declare
+          var interval day to second;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "interval day to second", "value": null}]}'
+      comment: ''
+    - id: 51
+      caption: Проверка передачи заполненного параметра с типом IntervalDS
+      code: |-
+        begin
+          if :in = interval '5 12:30:15' day to second then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval day to second", "value": "5 12:30:15"}], "outputBinds": [{"name": "in", "type": "interval day to second", "value": "5 12:30:15"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval day to second", "value": "5 12:30:15"}], "outputBinds": [{"name": "in", "type": "interval day to second", "value": "5 12:30:15"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 52
+      caption: Проверка получения заполненного параметра с типом IntervalDS
+      code: |-
+        begin
+          :out := interval '5 12:30:15' day to second;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "interval day to second", "value": "5 12:30:15"}]}'
+      comment: ''
+    - id: 53
+      caption: Проверка передачи пустого параметра с типом IntervalYM (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval year to month", "value": null}], "outputBinds": [{"name": "in", "type": "interval year to month", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval year to month", "value": null}], "outputBinds": [{"name": "in", "type": "interval year to month", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 54
+      caption: Проверка передачи пустого параметра с типом IntervalYM (с сохранением в переменную)
+      code: |-
+        declare
+          var interval year to month := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval year to month", "value": null}], "outputBinds": [{"name": "in", "type": "interval year to month", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval year to month", "value": null}], "outputBinds": [{"name": "in", "type": "interval year to month", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 55
+      caption: Проверка получения пустого параметра с типом IntervalYM (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "interval year to month", "value": null}]}'
+      comment: ''
+    - id: 56
+      caption: Проверка получения пустого параметра с типом IntervalYM (из переменной)
+      code: |-
+        declare
+          var interval year to month;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "interval year to month", "value": null}]}'
+      comment: ''
+    - id: 57
+      caption: Проверка передачи заполненного параметра с типом IntervalYM
+      code: |-
+        begin
+          if :in = interval '2-6' year to month then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval year to month", "value": "2-6"}], "outputBinds": [{"name": "in", "type": "interval year to month", "value": "2-6"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "interval year to month", "value": "2-6"}], "outputBinds": [{"name": "in", "type": "interval year to month", "value": "2-6"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 58
+      caption: Проверка получения заполненного параметра с типом IntervalYM
+      code: |-
+        begin
+          :out := interval '2-6' year to month;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "interval year to month", "value": "2-6"}]}'
+      comment: ''
+    - id: 59
+      caption: Проверка передачи пустого параметра с типом LocalDateTime (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "date", "value": null}], "outputBinds": [{"name": "in", "type": "date", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "date", "value": null}], "outputBinds": [{"name": "in", "type": "date", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 60
+      caption: Проверка передачи пустого параметра с типом LocalDateTime (с сохранением в переменную)
+      code: |-
+        declare
+          var date := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "date", "value": null}], "outputBinds": [{"name": "in", "type": "date", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "date", "value": null}], "outputBinds": [{"name": "in", "type": "date", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 61
+      caption: Проверка получения пустого параметра с типом LocalDateTime (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "date", "value": null}]}'
+      comment: ''
+    - id: 62
+      caption: Проверка получения пустого параметра с типом LocalDateTime (из переменной)
+      code: |-
+        declare
+          var date;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "date", "value": null}]}'
+      comment: ''
+    - id: 63
+      caption: Проверка передачи заполненного параметра с типом LocalDateTime
+      code: |-
+        begin
+          if :in = to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "date", "value": "01/01/2025"}], "outputBinds": [{"name": "in", "type": "date", "value": "01/01/2025"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "date", "value": "01/01/2025"}], "outputBinds": [{"name": "in", "type": "date", "value": "01/01/2025"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 64
+      caption: Проверка получения заполненного параметра с типом LocalDateTime
+      code: |-
+        begin
+          :out := to_date('01/01/2025', 'dd/mm/yyyy');
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "date", "value": "01/01/2025"}]}'
+      comment: ''
+    - id: 65
+      caption: Проверка передачи пустого параметра с типом RefCursor (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}], "outputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}], "outputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 66
+      caption: Проверка передачи пустого параметра с типом RefCursor (с сохранением в переменную)
+      code: |-
+        declare
+          var sys_refcursor := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}], "outputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}], "outputBinds": [{"name": "in", "type": "sys_refcursor", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 67
+      caption: Проверка получения пустого параметра с типом RefCursor (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "sys_refcursor", "value": null}]}'
+      comment: ''
+    - id: 68
+      caption: Проверка получения пустого параметра с типом RefCursor (из переменной)
+      code: |-
+        declare
+          var sys_refcursor;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "sys_refcursor", "value": null}]}'
+      comment: ''
+    - id: 69
+      caption: Проверка передачи заполненного параметра с типом RefCursor
+      code: |-
+        declare
+          str varchar2(200);
+        begin
+          fetch :in into str;
+          if str = 'Apple' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "sys_refcursor", "value": "Apple"}], "outputBinds": [{"name": "in", "type": "sys_refcursor", "value": "Apple"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "sys_refcursor", "value": "Apple"}], "outputBinds": [{"name": "in", "type": "sys_refcursor", "value": "Apple"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 70
+      caption: Проверка получения заполненного параметра с типом RefCursor
+      code: |-
+        declare
+          refcursor sys_refcursor;
+        begin
+          open refcursor for
+          Select 'Apple' from dual;
+          :out := refcursor;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "sys_refcursor", "value": "Apple"}]}'
+      comment: ''
+    - id: 71
+      caption: Проверка передачи пустого параметра с типом RowId (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "rowid", "value": null}], "outputBinds": [{"name": "in", "type": "rowid", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "rowid", "value": null}], "outputBinds": [{"name": "in", "type": "rowid", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 72
+      caption: Проверка передачи пустого параметра с типом RowId (с сохранением в переменную)
+      code: |-
+        declare
+          var rowid := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "rowid", "value": null}], "outputBinds": [{"name": "in", "type": "rowid", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "rowid", "value": null}], "outputBinds": [{"name": "in", "type": "rowid", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 73
+      caption: Проверка получения пустого параметра с типом RowId (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "rowid", "value": null}]}'
+      comment: ''
+    - id: 74
+      caption: Проверка получения пустого параметра с типом RowId (из переменной)
+      code: |-
+        declare
+          var rowid;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "rowid", "value": null}]}'
+      comment: ''
+    - id: 75
+      caption: Проверка передачи заполненного параметра с типом RowId
+      code: |-
+        declare
+          str varchar2(200);
+        begin
+          Select name into str from tc_testing.simple_table t where t.rowid = :in;
+          if str = 'Apple' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "rowid", "value": "Apple"}], "outputBinds": [{"name": "in", "type": "rowid", "value": "Apple"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "rowid", "value": "Apple"}], "outputBinds": [{"name": "in", "type": "rowid", "value": "Apple"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 76
+      caption: Проверка получения заполненного параметра с типом RowId
+      code: |-
+        begin
+          Select t.rowid into :out from tc_testing.simple_table t where t.name = 'Apple';
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "rowid", "value": "Apple"}]}'
+      comment: ''
+    - id: 77
+      caption: Проверка передачи пустого параметра с типом String (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "varchar2", "value": null}], "outputBinds": [{"name": "in", "type": "varchar2", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "varchar2", "value": null}], "outputBinds": [{"name": "in", "type": "varchar2", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 78
+      caption: Проверка передачи пустого параметра с типом String (с сохранением в переменную)
+      code: |-
+        declare
+          var varchar2(200) := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "varchar2", "value": null}], "outputBinds": [{"name": "in", "type": "varchar2", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "varchar2", "value": null}], "outputBinds": [{"name": "in", "type": "varchar2", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 79
+      caption: Проверка получения пустого параметра с типом String (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "varchar2", "value": null}]}'
+      comment: ''
+    - id: 80
+      caption: Проверка получения пустого параметра с типом String (из переменной)
+      code: |-
+        declare
+          var varchar2(200);
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "varchar2", "value": null}]}'
+      comment: ''
+    - id: 81
+      caption: Проверка передачи заполненного параметра с типом String
+      code: |-
+        begin
+          if :in = 'Hello' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "varchar2", "value": "Hello"}], "outputBinds": [{"name": "in", "type": "varchar2", "value": "Hello"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "varchar2", "value": "Hello"}], "outputBinds": [{"name": "in", "type": "varchar2", "value": "Hello"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 82
+      caption: Проверка получения заполненного параметра с типом String
+      code: |-
+        begin
+          :out := 'Hello';
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "varchar2", "value": "Hello"}]}'
+      comment: ''
+    - id: 83
+      caption: Проверка передачи пустого параметра с типом Xmltype (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "xmltype", "value": null}], "outputBinds": [{"name": "in", "type": "xmltype", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "xmltype", "value": null}], "outputBinds": [{"name": "in", "type": "xmltype", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 84
+      caption: Проверка передачи пустого параметра с типом Xmltype (с сохранением в переменную)
+      code: |-
+        declare
+          var xmltype := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "xmltype", "value": null}], "outputBinds": [{"name": "in", "type": "xmltype", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "xmltype", "value": null}], "outputBinds": [{"name": "in", "type": "xmltype", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 85
+      caption: Проверка получения пустого параметра с типом Xmltype (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "xmltype", "value": null}]}'
+      comment: ''
+    - id: 86
+      caption: Проверка получения пустого параметра с типом Xmltype (из переменной)
+      code: |-
+        declare
+          var xmltype;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "xmltype", "value": null}]}'
+      comment: ''
+    - id: 87
+      caption: Проверка передачи заполненного параметра с типом Xmltype
+      code: |-
+        declare
+          xml1 xmltype;
+          xml2 xmltype;
+        begin
+          xml1 := :in;
+          xml2 := xmltype('<root><msg>Hello</msg></root>');
+          if xml1.getStringVal = xml2.getStringVal then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "xmltype", "value": "<root><msg>Hello</msg></root>"}], "outputBinds": [{"name": "in", "type": "xmltype", "value": "<root><msg>Hello</msg></root>"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "xmltype", "value": "<root><msg>Hello</msg></root>"}], "outputBinds": [{"name": "in", "type": "xmltype", "value": "<root><msg>Hello</msg></root>"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 88
+      caption: Проверка получения заполненного параметра с типом Xmltype
+      code: |-
+        begin
+          :out := xmltype('<root><msg>Hello</msg></root>');
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "xmltype", "value": "<root><msg>Hello</msg></root>"}]}'
+      comment: ''
+    - id: 89
+      caption: Проверка передачи пустого параметра с типом ZonedDateTime (без сохранения в переменную)
+      code: |-
+        begin
+          if :in is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}], "outputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}], "outputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 90
+      caption: Проверка передачи пустого параметра с типом ZonedDateTime (с сохранением в переменную)
+      code: |-
+        declare
+          var timestamp with time zone := :in;
+        begin
+          if var is null then
+            :res := 'NULL';
+          else
+            :res := 'NOT NULL';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}], "outputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}], "outputBinds": [{"name": "in", "type": "timestamp with time zone", "value": null}, {"name": "res", "type": "varchar2", "value": "NULL"}]}'
+      comment: ''
+    - id: 91
+      caption: Проверка получения пустого параметра с типом ZonedDateTime (из заданного значения)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "timestamp with time zone", "value": null}]}'
+      comment: ''
+    - id: 92
+      caption: Проверка получения пустого параметра с типом ZonedDateTime (из переменной)
+      code: |-
+        declare
+          var timestamp with time zone;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "timestamp with time zone", "value": null}]}'
+      comment: ''
+    - id: 93
+      caption: Проверка передачи заполненного параметра с типом ZonedDateTime
+      code: |-
+        begin
+          if :in = to_timestamp_tz('01/01/2025 12:30:00 +03:00', 'dd/mm/yyyy hh24:mi:ss tzh:tzm') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp with time zone", "value": "01/01/2025 12:30:00 +03:00"}], "outputBinds": [{"name": "in", "type": "timestamp with time zone", "value": "01/01/2025 12:30:00 +03:00"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp with time zone", "value": "01/01/2025 12:30:00 +03:00"}], "outputBinds": [{"name": "in", "type": "timestamp with time zone", "value": "01/01/2025 12:30:00 +03:00"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 94
+      caption: Проверка получения заполненного параметра с типом ZonedDateTime
+      code: |-
+        begin
+          :out := to_timestamp_tz('01/01/2025 12:30:00 +03:00', 'dd/mm/yyyy hh24:mi:ss tzh:tzm');
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "timestamp with time zone", "value": "01/01/2025 12:30:00 +03:00"}]}'
+      comment: ''
+    - id: 95
+      caption: Проверка передачи заполненного параметра для его последующего получения. Тест одновременно со всеми возможными типами параметров.
+      code: |-
+        declare
+          v_bfile bfile := :in_bfile;
+          v_bigdecimal number := :in_bigdecimal;
+          v_biginteger integer := :in_biginteger;
+          v_blob blob := :in_blob;
+          v_boolean boolean := :in_boolean;
+          v_bytes raw(300) := :in_bytes;
+          v_clob clob := :in_clob;
+          v_integer pls_integer := :in_integer;
+          v_intervalds interval day to second := :in_intervalds;
+          v_intervalym interval year to month := :in_intervalym;
+          v_localdatetime date := :in_localdatetime;
+          v_refcursor sys_refcursor := :in_refcursor;
+          v_rowid rowid := :in_rowid;
+          v_string := :in_string;
+          v_xmltype := :in_xmltype;
+          v_zoneddatetime timestamp with time zone := :in_zoneddatetime;
+        begin
+          :out_bfile := v_bfile;
+          :out_bigdecimal := v_bigdecimal;
+          :out_biginteger := v_biginteger;
+          :out_blob := v_blob;
+          :out_boolean := v_boolean;
+          :out_bytes := v_bytes;
+          :out_clob := v_clob;
+          :out_integer := v_integer;
+          :out_intervalds := v_intervalds;
+          :out_intervalym := v_intervalym;
+          :out_localdatetime := v_localdatetime;
+          :out_refcursor := v_refcursor;
+          :out_rowid := v_rowid;
+          :out_string := v_string;
+          :out_xmltype := v_xmltype;
+          :out_zoneddatetime := v_zoneddatetime;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in_bfile", "type": "bfile", "value": null}, {"name": "in_bigdecimal", "type": "number", "value": null}, {"name": "in_biginteger", "type": "integer", "value": null}, {"name": "in_blob", "type": "blob", "value": null}, {"name": "in_boolean", "type": "boolean", "value": null}, {"name": "in_bytes", "type": "raw", "value": null}, {"name": "in_clob", "type": "clob", "value": null}, {"name": "in_integer", "type": "pls_integer", "value": null}, {"name": "in_intervalds", "type": "interval day to second", "value": null}, {"name": "in_intervalym", "type": "interval year to month", "value": null}, {"name": "in_localdatetime", "type": "date", "value": null}, {"name": "in_refcursor", "type": "sys_refcursor", "value": null}, {"name": "in_rowid", "type": "rowid", "value": null}, {"name": "in_string", "type": "varchar2", "value": null}, {"name": "in_xmltype", "type": "xmltype", "value": null}, {"name": "in_zoneddatetime", "type": "timestamp with time zone", "value": null}], "outputBinds": [{"name": "in_bfile", "type": "bfile", "value": null}, {"name": "in_bigdecimal", "type": "number", "value": null}, {"name": "in_biginteger", "type": "integer", "value": null}, {"name": "in_blob", "type": "blob", "value": null}, {"name": "in_boolean", "type": "boolean", "value": null}, {"name": "in_bytes", "type": "raw", "value": null}, {"name": "in_clob", "type": "clob", "value": null}, {"name": "in_integer", "type": "pls_integer", "value": null}, {"name": "in_intervalds", "type": "interval day to second", "value": null}, {"name": "in_intervalym", "type": "interval year to month", "value": null}, {"name": "in_localdatetime", "type": "date", "value": null}, {"name": "in_refcursor", "type": "sys_refcursor", "value": null}, {"name": "in_rowid", "type": "rowid", "value": null}, {"name": "in_string", "type": "varchar2", "value": null}, {"name": "in_xmltype", "type": "xmltype", "value": null}, {"name": "in_zoneddatetime", "type": "timestamp with time zone", "value": null}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in_bfile", "type": "bfile", "value": null}, {"name": "in_bigdecimal", "type": "number", "value": null}, {"name": "in_biginteger", "type": "integer", "value": null}, {"name": "in_blob", "type": "blob", "value": null}, {"name": "in_boolean", "type": "boolean", "value": null}, {"name": "in_bytes", "type": "raw", "value": null}, {"name": "in_clob", "type": "clob", "value": null}, {"name": "in_integer", "type": "pls_integer", "value": null}, {"name": "in_intervalds", "type": "interval day to second", "value": null}, {"name": "in_intervalym", "type": "interval year to month", "value": null}, {"name": "in_localdatetime", "type": "date", "value": null}, {"name": "in_refcursor", "type": "sys_refcursor", "value": null}, {"name": "in_rowid", "type": "rowid", "value": null}, {"name": "in_string", "type": "varchar2", "value": null}, {"name": "in_xmltype", "type": "xmltype", "value": null}, {"name": "in_zoneddatetime", "type": "timestamp with time zone", "value": null}], "outputBinds": [{"name": "out_bfile", "type": "bfile", "value": null}, {"name": "out_bigdecimal", "type": "number", "value": null}, {"name": "out_biginteger", "type": "integer", "value": null}, {"name": "out_blob", "type": "blob", "value": null}, {"name": "out_boolean", "type": "boolean", "value": null}, {"name": "out_bytes", "type": "raw", "value": null}, {"name": "out_clob", "type": "clob", "value": null}, {"name": "out_integer", "type": "pls_integer", "value": null}, {"name": "out_intervalds", "type": "interval day to second", "value": null}, {"name": "out_intervalym", "type": "interval year to month", "value": null}, {"name": "out_localdatetime", "type": "date", "value": null}, {"name": "out_refcursor", "type": "sys_refcursor", "value": null}, {"name": "out_rowid", "type": "rowid", "value": null}, {"name": "out_string", "type": "varchar2", "value": null}, {"name": "out_xmltype", "type": "xmltype", "value": null}, {"name": "out_zoneddatetime", "type": "timestamp with time zone", "value": null}]}'
+      comment: ''
+    - id: 96
+      caption: Проверка параметра даты (timestamp)
+      code: |-
+        begin
+          :out := null;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "timestamp", "value": null}]}'
+      comment: ''
+    - id: 97
+      caption: Проверка параметра даты (timestamp) через переменную
+      code: |-
+        declare
+          var timestamp;
+        begin
+          :out := var;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "timestamp", "value": null}]}'
+      comment: ''
+    - id: 98
+      caption: Проверка значения входящего параметра timestamp
+      code: |-
+        begin
+          if :in = to_timestamp('01/01/2025 12:30:00.000', 'dd/mm/yyyy hh24:mi:ss.ff3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp", "value": "01/01/2025 12:30:00.000"}], "outputBinds": [{"name": "in", "type": "timestamp", "value": "01/01/2025 12:30:00.000"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in", "type": "timestamp", "value": "01/01/2025 12:30:00.000"}], "outputBinds": [{"name": "in", "type": "timestamp", "value": "01/01/2025 12:30:00.000"}, {"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 99
+      caption: Проверка значения исходящего параметра timestamp
+      code: |-
+        begin
+          :out := to_timestamp('01/01/2025 12:30:00.000', 'dd/mm/yyyy hh24:mi:ss.ff3');
+        end;
+      input: '{"resultType": "binds", "inputBinds": [], "outputBinds": []}'
+      result: '{"resultType": "binds", "inputBinds": [], "outputBinds": [{"name": "out", "type": "timestamp", "value": "01/01/2025 12:30:00.000"}]}'
+      comment: ''
+    - id: 100
+      caption: Проверка входящих и исходящих параметров интервалов как разницы двух timestamp
+      code: |-
+        begin
+          :out_intervalds := :in_intervalds;
+          :out_intervalym := :in_intervalym;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "in_intervalds", "type": "interval day to second", "value": "5 12:30:15"}, {"name": "in_intervalym", "type": "interval year to month", "value": "19-3"}], "outputBinds": [{"name": "in_intervalds", "type": "interval day to second", "value": "5 12:30:15"}, {"name": "in_intervalym", "type": "interval year to month", "value": "19-3"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "in_intervalds", "type": "interval day to second", "value": "5 12:30:15"}, {"name": "in_intervalym", "type": "interval year to month", "value": "19-3"}], "outputBinds": [{"name": "out_intervalds", "type": "interval day to second", "value": "5 12:30:15"}, {"name": "out_intervalym", "type": "interval year to month", "value": "19-3"}]}'
+      comment: ''
