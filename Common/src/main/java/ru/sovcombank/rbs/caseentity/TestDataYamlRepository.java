@@ -1,5 +1,6 @@
 package ru.sovcombank.rbs.caseentity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -96,5 +97,10 @@ public class TestDataYamlRepository implements TestDataRepository {
         }
         log.info("Успешно загружено: " + Integer.toString(testCases.size()));
         return testCases;
+    }
+
+    @Override
+    public String writeCaseToString(TestCase testCase) throws JsonProcessingException {
+        return yamlMapper.writeValueAsString(testCase);
     }
 }

@@ -1,5 +1,6 @@
 package ru.sovcombank.rbs.caseentity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.NonNull;
 
 import java.io.FileNotFoundException;
@@ -15,4 +16,6 @@ public interface TestDataRepository {
 
     /// Все кейсы для указанного профиля
     List<TestCase> loadCases(TestProfile profile);
+
+    String writeCaseToString(TestCase testCase) throws JsonProcessingException;
 }

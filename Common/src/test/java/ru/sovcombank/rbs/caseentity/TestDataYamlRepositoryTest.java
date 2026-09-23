@@ -47,4 +47,12 @@ class TestDataYamlRepositoryTest {
         assertThrowsExactly(IllegalArgumentException.class,
                 () -> repository.getFileName("1.txt"));
     }
+
+    @Test
+    void writeCaseTest() throws IOException {
+        TestProfile profile = repository.loadProfile("123");
+        List<TestCase> caseList = repository.loadCases(profile);
+        String s = repository.writeCaseToString(caseList.getFirst());
+        log.debug(s);
+    }
 }
