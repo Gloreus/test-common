@@ -31,11 +31,13 @@ public class TestDataYamlRepository implements TestDataRepository {
         this.testStoreProperties = testStoreProperties;
         log.debug(this.testStoreProperties.toString());
     }
+
     public static String getFileName(String profileName) {
         int n = profileName.lastIndexOf(".");
         if (-1 == n) {
             return profileName + ".yaml";
-        } else if (profileName.substring(n + 1).equalsIgnoreCase("yaml")) {
+        } else if (profileName.substring(n + 1).equalsIgnoreCase("yaml")
+                || profileName.substring(n + 1).equalsIgnoreCase("yml")) {
             return profileName;
         } else {
             log.error("Файл профиля должен быть yaml, а получен {}", profileName);

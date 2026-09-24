@@ -42,24 +42,21 @@ import java.util.List;
 @Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Профили тестирования")
 
 class ProfilesView extends VerticalLayout {
-
+    private final ObjectMapper objectMapper;
     private final TestStoreProperties testStoreProperties;
     @Autowired
     private TestDataYamlRepository repository;
 
-    @Autowired
-    @Qualifier("YmlMapper")
-    private ObjectMapper objectMapper;
-
     private final ComboBox<Path> profilesComboBox;
     private final MultiSelectListBox<String> casesListBox;
-    private final CaseGridView caseGrid = new CaseGridView();
+    private final CaseGridView caseGrid;
     private final TextArea logTextArea;
     private final Button createBtn;
 
-    ProfilesView(TestStoreProperties testStoreProperties) {
+    ProfilesView(TestStoreProperties testStoreProperties,  @NonNull @Qualifier("YmlMapper") ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
         this.testStoreProperties = testStoreProperties;
-
+        caseGrid = new CaseGridView(objectMapper);
         profilesComboBox = new ComboBox<>();
         profilesComboBox.setPlaceholder("Профиль тестирования");
         profilesComboBox.setMinWidth("8em");

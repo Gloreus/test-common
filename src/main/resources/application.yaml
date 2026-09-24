@@ -19,3 +19,4 @@ teststore:
   root-dir: "TestStore"
   cases-dir: "cases"
   profiles-dir: "profiles"
+  ora-tests-dir: "input"

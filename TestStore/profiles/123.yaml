@@ -1,4 +1,4 @@
-profileName: "11"
+profileName: "Profile-123"
 description: "Описание для набора тестов"
 references:
   - filePath: "func1.yaml"

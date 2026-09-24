@@ -1,6 +1,6 @@
 teststore:
   root-dir: ./src/main/resources/tests
-
+  ora-tests-dir: input
 logging:
   level:
     ru.sovcombank.rbs: DEBUG

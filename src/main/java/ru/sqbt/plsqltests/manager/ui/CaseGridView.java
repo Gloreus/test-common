@@ -27,12 +27,11 @@ import java.util.List;
 @Slf4j
 public class CaseGridView extends Composite<VerticalLayout> {
     private final Grid<TestCase> caseGrid = new Grid<>(TestCase.class, false);
-    @Autowired
-    @Qualifier("YmlMapper")
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    public CaseGridView() {
+    public CaseGridView(@Qualifier("YmlMapper") ObjectMapper objectMapper) {
 
+        this.objectMapper = objectMapper;
         caseGrid.setSizeFull();
         caseGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
 
@@ -55,15 +54,7 @@ public class CaseGridView extends Composite<VerticalLayout> {
         caseGrid.setEmptyStateText("Нет ни одного теста");
 
         getContent().add(caseGrid);
-    }
-
-    @PostConstruct
-    public void afterCreate() {
         caseGrid.setItemDetailsRenderer(createTestCaseDetailsRenderer());
-        caseGrid.addItemClickListener(event -> {
-            TestCase item = event.getItem();
-            caseGrid.setDetailsVisible(item, !caseGrid.isDetailsVisible(item));
-        });
     }
 
     public void setItems(List<TestCase> items, String caption) {
