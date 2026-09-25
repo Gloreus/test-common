@@ -1,0 +1,1026 @@
+Test:
+  chapter: '04.4.1'
+  jira_issue: ''
+  name: '04.4.1'
+  caption: ''
+  comment: 'autogenerate'
+  cases:  
+    - id: 201
+      caption: Простая проверка оператора or между двумя определёнными логическими значениями, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := true;
+          bl2 boolean := false;
+        begin
+          if bl1 or bl2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 202
+      caption: Простая проверка оператора or между определённым логическим значением и пустым логическим значением, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := true;
+          bl2 boolean := null;
+        begin
+          if bl1 or bl2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 203
+      caption: Проверка оператора or между двумя определёнными логическими значениями (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := true;
+          bl2 boolean := true;
+          bl3 boolean := true;
+        begin
+          if (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 204
+      caption: Проверка оператора or между двумя определёнными логическими значениями (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := true;
+          bl2 boolean := false;
+          bl3 boolean := true;
+        begin
+          if (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 205
+      caption: Проверка оператора or между определённым логическим значением и пустым логическим значением (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := true;
+          bl2 boolean := null;
+          bl3 boolean := true;
+        begin
+          if (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 206
+      caption: Проверка оператора or между пустым логическим значением и определённым логическим значением (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := null;
+          bl2 boolean := true;
+          bl3 boolean := null;
+        begin
+          if (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 207
+      caption: Проверка оператора or между пустым логическим значением и определённым логическим значением (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := null;
+          bl2 boolean := false;
+          bl3 boolean := null;
+        begin
+          if (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 208
+      caption: Проверка оператора or между двумя пустыми логическими значениями (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := null;
+          bl2 boolean := null;
+          bl3 boolean := null;
+        begin
+          if (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 209
+      caption: Проверка оператора and между двумя определёнными логическими значениями (заключено в скобки), следом оператор or, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := true;
+          bl3 boolean := true;
+        begin
+          if (bl1 and bl2) or bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 210
+      caption: Проверка оператора and между двумя определёнными логическими значениями (заключено в скобки), следом оператор or, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := false;
+          bl3 boolean := true;
+        begin
+          if (bl1 and bl2) or bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 211
+      caption: Проверка оператора and между определённым логическим значением и пустым логическим значением (заключено в скобки), следом оператор or, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := null;
+          bl3 boolean := true;
+        begin
+          if (bl1 and bl2) or bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 212
+      caption: Проверка оператора and между пустым логическим значением и определённым логическим значением (заключено в скобки), следом оператор or, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := null;
+          bl2 boolean := true;
+          bl3 boolean := null;
+        begin
+          if (bl1 and bl2) or bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 213
+      caption: Проверка оператора and между пустым логическим значением и определённым логическим значением (заключено в скобки), следом оператор or, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := null;
+          bl2 boolean := false;
+          bl3 boolean := null;
+        begin
+          if (bl1 and bl2) or bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 214
+      caption: Проверка оператора and между двумя пустыми логическими значениями (заключено в скобки), следом оператор or, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := null;
+          bl2 boolean := null;
+          bl3 boolean := null;
+        begin
+          if (bl1 and bl2) or bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 215
+      caption: Проверка оператора or между двумя определёнными логическими значениями (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := true;
+          bl3 boolean := true;
+        begin
+          if not (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 216
+      caption: Проверка оператора or между двумя определёнными логическими значениями (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := false;
+          bl3 boolean := true;
+        begin
+          if not (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 217
+      caption: Проверка оператора or между определённым логическим значением и пустым логическим значением (заключено в скобки), следом оператор and, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := null;
+          bl3 boolean := true;
+        begin
+          if not (bl1 or bl2) and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 218
+      caption: Проверка оператора and на примере сравнения результатов логических выражений, значения заданы определёнными значениями, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := false;
+          bl2 boolean := true;
+          bl3 boolean := false;
+        begin
+          if bl1 != bl2 and bl3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 219
+      caption: Проверка операторов or, and и not на большом сложном примере с разными приоритетами, скобками, значения заданы определёнными значениями и пустыми значениями, выражения заданы bool-переменными
+      code: |-
+        declare
+          bl1 boolean := true;
+          bl2 boolean := false;
+          bl3 boolean := null;
+          bl4 boolean := true;
+        begin
+          if not ((bl1 and (not bl2 or bl3))
+          or (not ((bl1 or bl3) and (not (bl1 and bl4))))
+          and ((bl3 or bl1) and not (bl2 and not bl4))
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 220
+      caption: Простая проверка оператора or между двумя пустыми значениями. Результат логического оператора передаётся в оператор is null.
+      code: |-
+        begin
+          if (null and null) is null then
+            :res := 'NULL';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''

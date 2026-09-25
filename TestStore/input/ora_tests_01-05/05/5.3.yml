@@ -1,0 +1,876 @@
+Test:
+  chapter: '5.3'
+  jira_issue: ''
+  name: 5.3
+  caption: ''
+  comment: autogenerate
+  cases:
+    - id: 1
+      caption: "Простая форма записи"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..5 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 2
+      caption: "Простая форма записи с левой границей в виде переменной"
+      code: |
+        declare
+          total number := 0;
+          a number := 1;
+        begin
+          for i in a..5 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 3
+      caption: "Простая форма записи с правой границей в виде переменной"
+      code: |
+        declare
+          total number := 0;
+          b number := 5;
+        begin
+          for i in 1..b loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 4
+      caption: "Простая форма записи с обеими границами в виде переменной"
+      code: |
+        declare
+          total number := 0;
+          a number := 1;
+          b number := 5;
+        begin
+          for i in a..b loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 5
+      caption: "Простая форма записи с обеими границами в виде вещественных переменных, которые округляются до целого по правилам математики"
+      code: |
+        declare
+          total number := 0;
+          a number := 1.5;
+          b number := 5.4;
+        begin
+          for i in a..b loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":14}]}'
+      comment: ''
+
+    - id: 6
+      caption: "Простая форма записи, диапазон определён отрицательными числами"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in -5..-1 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":-15}]}'
+      comment: ''
+
+    - id: 7
+      caption: "Простая форма записи, диапазон определён отрицательным и положительным числами"
+      code: |
+        declare
+          total number := 5;
+        begin
+          for i in -5..5 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":5}]}'
+      comment: ''
+
+    - id: 8
+      caption: "Простая форма записи, диапазон определён одинаковыми числами"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..1 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":1}]}'
+      comment: ''
+
+    - id: 9
+      caption: "Простая форма записи, диапазон пустой"
+      code: |
+        declare
+          total number := 7;
+        begin
+          for i in 1..-1 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":7}]}'
+      comment: ''
+
+    - id: 10
+      caption: "Простая форма записи, диапазон изменяется динамически (нет)"
+      code: |
+        declare
+          total number := 0;
+          a number := 5;
+        begin
+          for i in 1..a loop
+            total := total + i;
+            --
+            if a < 101 then
+              a := a + 1;
+            end if;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 11
+      caption: "Простая форма записи, диапазон за границы Integer (pls_integer в Oracle)"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..2147483648 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"error","error":{"errorCode":-1426,"message":"Numeric overflow"}}'
+      comment: ''
+
+    - id: 12
+      caption: "Простая форма записи с пустым телом цикла"
+      code: |
+        begin
+          for i in 1..5 loop
+            null;
+          end loop;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[]}'
+      comment: ''
+
+    - id: 13
+      caption: "Простая форма записи, имя итератора пересекается с именем переменной, итератор и переменная не пересекаются, при вычислении суммы используется итератор"
+      code: |
+        declare
+          total number := 0;
+          i pls_integer := 0;
+        begin
+          for i in 1..10 loop
+            total := total + i;
+          end loop;
+          --
+          :res_i := i;
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res_i","type":"number","value":0},{"name":"res","type":"number","value":55}]}'
+      comment: ''
+
+    - id: 14
+      caption: "Простая форма записи, границы диапазона заданы выражениями"
+      code: |
+        declare
+          total number := 0;
+          a number := 10;
+        begin
+          for i in a - 5 .. a + 5 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":110}]}'
+      comment: ''
+
+    - id: 15
+      caption: "Простая форма записи, границы диапазона заданы выражениями в скобках"
+      code: |
+        declare
+          total number := 0;
+          a number := 10;
+        begin
+          for i in (a - 5)..(a + 5) loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":110}]}'
+      comment: ''
+
+    - id: 16
+      caption: "Простая форма записи с левой границей в виде переменной без значения"
+      code: |
+        declare
+          total number := 0;
+          a number := null;
+        begin
+          for i in a..5 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"error","error":{"errorCode":-6502,"message":"число или значение"}}'
+      comment: ''
+
+    - id: 17
+      caption: "Простая форма записи с правой границей в виде переменной без значения"
+      code: |
+        declare
+          total number := 0;
+          b number := null;
+        begin
+          for i in 1..b loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"error","error":{"errorCode":-6502,"message":"число или значение"}}'
+      comment: ''
+
+    - id: 18
+      caption: "Простая форма записи с обеими границами в виде переменной без значения"
+      code: |
+        declare
+          total number := 0;
+          a number := null;
+          b number := null;
+        begin
+          for i in a..b loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"error","error":{"errorCode":-6502,"message":"число или значение"}}'
+      comment: ''
+
+    - id: 19
+      caption: "Цикл с выходом по exit when"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            total := total + i;
+            --
+            exit when i > 4;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 20
+      caption: "Цикл с выходом в конце по exit (внешнее условие)"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            total := total + i;
+            --
+            if i > 4 then
+              exit;
+            end if;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":15}]}'
+      comment: ''
+
+    - id: 21
+      caption: "Вложенные циклы, работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            for j in 1..10 loop
+              total := total + i * j;
+              --
+              exit when j > 2;
+            end loop;
+            --
+            exit when i > 3;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":60}]}'
+      comment: ''
+
+    - id: 22
+      caption: "Вложенные циклы, работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            for j in 1..10 loop
+              total := total + i * j;
+              --
+              if j > 2 then
+                exit;
+              end if;
+            end loop;
+            --
+            if i > 3 then
+              exit;
+            end if;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":60}]}'
+      comment: ''
+
+    - id: 23
+      caption: "Вложенные циклы (для внешнего цикла задана метка), работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          total number := 0;
+        begin
+          <<outer_loop>>
+          for i in 1..10 loop
+            for j in 1..10 loop
+              total := total + i * j;
+              --
+              exit outer_loop when i = 3 and j = 4;
+            end loop;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":195}]}'
+      comment: ''
+
+    - id: 24
+      caption: "Вложенные циклы (для внешнего цикла задана метка), работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          total number := 0;
+        begin
+          <<outer_loop>>
+          for i in 1..10 loop
+            for j in 1..10 loop
+              total := total + i * j;
+              --
+              if i = 3 and j = 4 then
+                exit outer_loop;
+              end if;
+            end loop;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":195}]}'
+      comment: ''
+
+    - id: 25
+      caption: "Цикл с выходом по exit when, exit when много, должен сработать первый с истиной"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            total := total + i;
+            --
+            exit when i > 7;
+            exit when i > 9;
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":21}]}'
+      comment: ''
+
+    - id: 26
+      caption: "Цикл с выходом по exit when, exit when много, должен сработать первый с истиной"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            total := total + i;
+            --
+            if i > 7 then
+              exit;
+            end if;
+            exit when i > 9;
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":21}]}'
+      comment: ''
+
+    - id: 27
+      caption: "Цикл с выходом по exit when, exit when много, должен сработать первый с истиной, в перечне есть exit с неопределённым значением"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            total := total + i;
+            --
+            exit when i > 7;
+            exit when null;
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":21}]}'
+      comment: ''
+
+    - id: 28
+      caption: "Цикл с пропуском операций по continue"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          for i in 1..6 loop
+            if mod(i, 2) = 0 then
+              continue;
+            end if;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":9}]}'
+      comment: ''
+
+    - id: 29
+      caption: "Цикл с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..6 loop
+            continue when mod(i, 2) = 0;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":9}]}'
+      comment: ''
+
+    - id: 30
+      caption: "Цикл с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..6 loop
+            continue when null;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":21}]}'
+      comment: ''
+
+    - id: 31
+      caption: "Вложенные циклы с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            for j in 1..2 loop
+              continue when j = 2;
+              --
+              total := total + j;
+            end loop;
+            --
+            continue when i > 5;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":25}]}'
+      comment: ''
+
+    - id: 32
+      caption: "Вложенные циклы с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..10 loop
+            for j in 1..2 loop
+              if j = 2 then
+                continue;
+              end if;
+              --
+              total := total + j;
+            end loop;
+            --
+            if i > 5 then
+              continue;
+            end if;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":25}]}'
+      comment: ''
+
+    - id: 33
+      caption: "Вложенные циклы (для внешнего цикла задана метка) с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+        begin
+          <<outer_loop>>
+          for i in 1..10 loop
+            for j in 1..2 loop
+              continue outer_loop when j = 2 and i > 5;
+              --
+              total := total + j;
+            end loop;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":35}]}'
+      comment: ''
+
+    - id: 34
+      caption: "Вложенные циклы (для внешнего цикла задана метка) с пропуском операций по continue"
+      code: |
+        declare
+          total number := 0;
+        begin
+          <<outer_loop>>
+          for i in 1..10 loop
+            for j in 1..2 loop
+              if j = 2 and i > 5 then
+                continue outer_loop;
+              end if;
+              --
+              total := total + j;
+            end loop;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":35}]}'
+      comment: ''
+
+    - id: 35
+      caption: "Цикл с несколькими continue, continue много, должен сработать каждый с истиной"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..8 loop
+            continue when i = 1;
+            continue when i = 3;
+            continue when i = 5;
+            continue when i = 9;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":27}]}'
+      comment: ''
+
+    - id: 36
+      caption: "Цикл с несколькими continue, continue много, должен сработать каждый с истиной"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in 1..8 loop
+            if i = 1 then
+              continue;
+            end if;
+            continue when i = 3;
+            if i = 5 then
+              continue;
+            end if;
+            continue when i = 9;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":27}]}'
+      comment: ''
+
+    - id: 37
+      caption: "Цикл с reverse (обход в обратном порядке)"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in reverse 1..4 loop
+            total := total * 10 + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":4321}]}'
+      comment: ''
+
+    - id: 38
+      caption: "Цикл с reverse (обход в обратном порядке) с обеими границами в виде переменной"
+      code: |
+        declare
+          total number := 0;
+          a number := 1;
+          b number := 4;
+        begin
+          for i in reverse a..b loop
+            total := total * 10 + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":4321}]}'
+      comment: ''
+
+    - id: 39
+      caption: "Цикл с reverse (обход в обратном порядке) с обеими границами в виде вещественных переменных, которые округляются до целого по правилам математики"
+      code: |
+        declare
+          total number := 0;
+          a number := 0.5;
+          b number := 4.4;
+        begin
+          for i in reverse a..b loop
+            total := total * 10 + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":4321}]}'
+      comment: ''
+
+    - id: 40
+      caption: "Цикл с reverse (обход в обратном порядке), диапазон определён отрицательными числами"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in reverse -4..-1 loop
+            total := total * 10 + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":-1234}]}'
+      comment: ''
+
+    - id: 41
+      caption: "Цикл с reverse (обход в обратном порядке), диапазон определён отрицательным и положительным числами"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in reverse -2..2 loop
+            total := total * 10 + i + 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":76543}]}'
+      comment: ''
+
+    - id: 42
+      caption: "Цикл с reverse (обход в обратном порядке), диапазон определён одинаковыми числами"
+      code: |
+        declare
+          total number := 0;
+        begin
+          for i in reverse 1..1 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":1}]}'
+      comment: ''
+
+    - id: 43
+      caption: "Цикл с reverse (обход в обратном порядке), диапазон пустой"
+      code: |
+        declare
+          total number := 7;
+        begin
+          for i in reverse 1..-1 loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":7}]}'
+      comment: ''
+
+    - id: 44
+      caption: "Цикл с reverse (обход в обратном порядке), границы диапазона заданы выражениями"
+      code: |
+        declare
+          total number := 0;
+          a number := 5;
+        begin
+          for i in reverse a - 2 .. a + 2 loop
+            total := total * 10 + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":76543}]}'
+      comment: ''
+
+    - id: 45
+      caption: "Цикл с reverse (обход в обратном порядке), границы диапазона заданы выражениями в скобках"
+      code: |
+        declare
+          total number := 0;
+          a number := 5;
+        begin
+          for i in reverse (a - 2)..(a + 2) loop
+            total := total * 10 + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"binds","inputBinds":[],"outputBinds":[{"name":"res","type":"number","value":76543}]}'
+      comment: ''
+
+    - id: 46
+      caption: "Цикл с reverse (обход в обратном порядке) с обеими границами в виде переменной без значения"
+      code: |
+        declare
+          total number := 0;
+          a number := null;
+          b number := null;
+        begin
+          for i in reverse a..b loop
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: '{"resultType":"error","error":{"errorCode":-6502,"message":"число или значение"}}'
+      comment: ''

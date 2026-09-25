@@ -1,0 +1,1014 @@
+Test:
+  chapter: '5.2'
+  jira_issue: ''
+  name: '5.2'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: 'Простая форма записи с основным условием выхода'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while i < 5 loop
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 2
+      caption: 'Форма бесконечного цикла с выходом по условию exit'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while true loop
+            i := i + 1;
+            --
+            if i >= 5 then
+              exit;
+            end if;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 3
+      caption: 'Форма бесконечного цикла с выходом по условию exit when'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while true loop
+            i := i + 1;
+            --
+            exit when i >= 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 4
+      caption: 'Форма бесконечного цикла с выходом по условию exit when в начале'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while true loop
+            exit when i >= 5;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 5
+      caption: 'Форма бесконечного цикла с выходом по условию exit when в середине'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while true loop
+            i := i + 2;
+            --
+            exit when i > 5;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 8
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 6
+      caption: 'Простая форма записи с вечно ложным условием'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while false loop
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 0
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 7
+      caption: 'Простая форма записи с пустым условием'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while null loop
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 0
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 8
+      caption: 'Вложенные циклы в простой форме записи с основным условием выхода'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          while i < 4 loop
+            j := 1;
+            while j < 3 loop
+              total := total + i * j;
+              --
+              j := j + 1;
+            end loop;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 18
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 9
+      caption: 'Вложенные циклы в простой форме записи с выходом через exit when'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          while i < 14 loop
+            j := 1;
+            while j < 7 loop
+              total := total + i * j;
+              --
+              j := j + 1;
+              --
+              exit when j >= 3;
+            end loop;
+            --
+            i := i + 1;
+            --
+            exit when i >= 4;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 18
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 10
+      caption: 'Вложенные циклы в простой форме записи с выходом через exit'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          while i < 14 loop
+            j := 1;
+            while j < 7 loop
+              total := total + i * j;
+              --
+              j := j + 1;
+              --
+              if j >= 3 then
+                exit;
+              end if;
+            end loop;
+            --
+            i := i + 1;
+            --
+            if i >= 4 then
+              exit;
+            end if;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 18
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 11
+      caption: 'Вложенные циклы в простой форме записи с выходом из внешнего через exit с меткой'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          while i < 6 loop
+            j := 1;
+            while j < 3 loop
+              total := total + i * j;
+              --
+              j := j + 1;
+              --
+              exit outer_loop when i = 4;
+            end loop;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 22
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 12
+      caption: 'Вложенные циклы в простой форме записи с выходом из внешнего через exit с меткой'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          while i < 6 loop
+            j := 1;
+            while j < 3 loop
+              total := total + i * j;
+              --
+              j := j + 1;
+              --
+              if i = 4 then
+                exit outer_loop;
+              end if;
+            end loop;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 22
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 13
+      caption: 'Простая форма записи с основным условием выхода, exit when null не оказывает влияние на алгоритм'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while i < 5 loop
+            i := i + 1;
+            --
+            exit when null;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 14
+      caption: 'Простая форма записи с основным условием выхода, также есть несколько exit when, должны выйти из цикла по первому истина'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while i < 500 loop
+            i := i + 1;
+            --
+            exit when i > 7;
+            exit when i > 9;
+            exit when i > 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 15
+      caption: 'Простая форма записи с основным условием выхода, также есть несколько exit when, должны выйти из цикла по первому истина'
+      code: |
+        declare
+          i number := 0;
+        begin
+          while i < 500 loop
+            i := i + 1;
+            --
+            if i > 7 then
+              exit;
+            end if;
+            exit when i > 9;
+            exit when i > 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 16
+      caption: 'Цикл с пропуском операций по continue'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          while i < 7 loop
+            i := i + 1;
+            --
+            if mod(i, 2) = 0 then
+              continue;
+            end if;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 16
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 17
+      caption: 'Цикл с пропуском операций по continue when'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          while i < 7 loop
+            i := i + 1;
+            --
+            continue when mod(i, 2) = 0;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 16
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 18
+      caption: 'Цикл с пропуском операций по continue when c пустым условием'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          while i < 7 loop
+            i := i + 1;
+            --
+            continue when null;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 28
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 19
+      caption: 'Вложенные циклы в простой форме записи c наличием вложенного continue'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          while i < 14 loop
+            i := i + 1;
+            --
+            continue when i >= 4;
+            --
+            j := 0;
+            while j < 7 loop
+              j := j + 1;
+              --
+              continue when j >= 3;
+              --
+              total := total + i * j;
+            end loop;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 18
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 20
+      caption: 'Вложенные циклы в простой форме записи c наличием вложенного continue'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          while i < 14 loop
+            i := i + 1;
+            --
+            if i >= 4 then
+              continue;
+            end if;
+            --
+            j := 0;
+            while j < 7 loop
+              j := j + 1;
+              --
+              if j >= 3 then
+                continue;
+              end if;
+              --
+              total := total + i * j;
+            end loop;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 18
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 21
+      caption: 'Вложенные циклы в простой форме записи c наличием вложенного continue на главный цикл с меткой'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          while i < 14 loop
+            i := i + 1;
+            --
+            j := 1;
+            while j < 3 loop
+              continue outer_loop when i > 4;
+              --
+              total := total + i * j;
+              --
+              j := j + 1;
+            end loop;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 30
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 22
+      caption: 'Вложенные циклы в простой форме записи c наличием вложенного continue на главный цикл с меткой'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          while i < 14 loop
+            i := i + 1;
+            --
+            j := 1;
+            while j < 3 loop
+              if i > 4 then
+                continue outer_loop;
+              end if;
+              --
+              total := total + i * j;
+              --
+              j := j + 1;
+            end loop;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 30
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 23
+      caption: 'Цикл с несколькими continue, continue много, должен сработать каждый с истиной'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          while i < 7 loop
+            i := i + 1;
+            --
+            continue when i = 1;
+            continue when i = 3;
+            continue when i = 5;
+            continue when i = 9;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 19
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 24
+      caption: 'Цикл с несколькими continue, continue много, должен сработать каждый с истиной'
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          while i < 7 loop
+            i := i + 1;
+            --
+            if i = 1 then
+              continue;
+            end if;
+            continue when i = 3;
+            if i = 5 then
+              continue;
+            end if;
+            continue when i = 9;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 19
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 25
+      caption: 'Простая форма записи с вечно ложным условием в переменной'
+      code: |
+        declare
+          i number := 0;
+          bln boolean := false;
+        begin
+          while bln loop
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 0
+            }
+          ]
+        }
+      comment: ''

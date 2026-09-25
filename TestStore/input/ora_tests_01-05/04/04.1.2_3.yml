@@ -1,0 +1,488 @@
+Test:
+  chapter: '04.1.2'
+  jira_issue: ''
+  name: '04.1.2'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 61
+      caption: "Сравнение двух дат (проверка больше или равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+        begin
+          if dat1 >= dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 62
+      caption: "Сравнение двух дат (проверка больше или равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat1 >= dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 63
+      caption: "Сравнение двух одинаковых дат c разницей в точности"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2025 00:00:01', 'dd/mm/yyyy hh24:mi:ss');
+        begin
+          if dat1 >= dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 64
+      caption: "Сравнение двух одинаковых дат c разницей в точности"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2025 00:00:00', 'dd/mm/yyyy hh24:mi:ss');
+        begin
+          if dat1 >= dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 65
+      caption: "Сравнение двух одинаковых дат c разницей в точности"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025 00:00:01', 'dd/mm/yyyy hh24:mi:ss');
+          dat2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat1 >= dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 66
+      caption: "Сравнение двух одинаковых дат c разницей в точности"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025 00:01:00', 'dd/mm/yyyy hh24:mi:ss');
+          dat2 date := to_date('01/01/2025 00:00:00', 'dd/mm/yyyy hh24:mi:ss');
+        begin
+          if dat1 = dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 67
+      caption: "Сравнение двух одинаковых дат c разницей в точности"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025 00:01:00', 'dd/mm/yyyy hh24:mi:ss');
+          dat2 date := to_date('01/01/2025 01:00:00', 'dd/mm/yyyy hh24:mi:ss');
+        begin
+          if dat1 <> dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "TRUE"}]}'
+      comment: ''
+    - id: 68
+      caption: "Сравнение числа и null (проверка равно)"
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := null;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 69
+      caption: "Сравнение числа и null (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := null;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 70
+      caption: "Сравнение числа и null (проверка меньше)"
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := null;
+        begin
+          if n1 < n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 71
+      caption: "Сравнение числа и null (проверка больше)"
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := null;
+        begin
+          if n1 > n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 72
+      caption: "Сравнение числа и null (проверка меньше или равно)"
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := null;
+        begin
+          if n1 <= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 73
+      caption: "Сравнение числа и null (проверка больше или равно)"
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := null;
+        begin
+          if n1 >= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 74
+      caption: "Сравнение результата вычислений и null"
+      code: |
+        declare
+          n1 number := 1.5;
+          n2 number := 0.5;
+          n3 number := null;
+        begin
+          if n1 + n2 = n3 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 75
+      caption: "Сравнение строки и null (проверка равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := null;
+        begin
+          if str1 = str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 76
+      caption: "Сравнение строки и null (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := null;
+        begin
+          if str1 != str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 77
+      caption: "Сравнение строки и null (проверка меньше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := null;
+        begin
+          if str1 < str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 78
+      caption: "Сравнение строки и null (проверка больше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := null;
+        begin
+          if str1 > str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 79
+      caption: "Сравнение строки и null (проверка меньше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := null;
+        begin
+          if str1 <= str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 80
+      caption: "Сравнение строки и null (проверка больше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := null;
+        begin
+          if str1 >= str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 81
+      caption: "Сравнение строки и пустой строки (проверка равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := '';
+        begin
+          if str1 = str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 82
+      caption: "Сравнение строки и пустой строки (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := '';
+        begin
+          if str1 != str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 83
+      caption: "Сравнение строки и пустой строки (проверка меньше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := '';
+        begin
+          if str1 < str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 84
+      caption: "Сравнение строки и пустой строки (проверка больше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := '';
+        begin
+          if str1 > str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 85
+      caption: "Сравнение строки и пустой строки (проверка меньше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := '';
+        begin
+          if str1 <= str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 86
+      caption: "Сравнение строки и пустой строки (проверка больше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := '';
+        begin
+          if str1 >= str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 87
+      caption: "Сравнение пустой строки и пустой строки (проверка равно)"
+      code: |
+        declare
+          str1 varchar2(20) := '';
+          str2 varchar2(20) := '';
+        begin
+          if str1 = str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 88
+      caption: "Сравнение пустой строки и пустой строки (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          str1 varchar2(20) := '';
+          str2 varchar2(20) := '';
+        begin
+          if str1 != str2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 89
+      caption: "Сравнение даты и null (проверка равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := null;
+        begin
+          if dat1 = dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''
+    - id: 90
+      caption: "Сравнение даты и null (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := null;
+        begin
+          if dat1 != dat2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      result: '{"resultType": "binds", "inputBinds": [{"name": "res", "type": "varchar2"}], "outputBinds": [{"name": "res", "type": "varchar2", "value": "FALSE"}]}'
+      comment: ''

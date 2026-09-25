@@ -1,0 +1,826 @@
+Test:
+  chapter: '01.2'
+  jira_issue: ''
+  name: '01.2'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: 'Блок кода без бинд-переменных с объявленной переменной'
+      code: |
+        declare
+          n number;
+        begin
+          null;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 2
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется значением при объявлении'
+      code: |
+        declare
+          n number := 2;
+        begin
+          null;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 3
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется значением в коде + проверка работы с number и присвоения ему отрицательного значения'
+      code: |
+        declare
+          n number;
+        begin
+          n := -2;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 4
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется значением при объявлении, в коде значение меняется'
+      code: |
+        declare
+          n number := 2;
+        begin
+          n := 3;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 5
+      caption: 'Объявление переменной varchar2 и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          txt varchar2(20);
+        begin
+          txt := 'Hello';
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 6
+      caption: 'Объявление переменной date и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          dt date;
+        begin
+          dt := sysdate;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 7
+      caption: 'Объявление переменной date и инициализация её значением в теле блока кода, заданным в виде литерала'
+      code: |
+        declare
+          dt date;
+        begin
+          dt := to_date('01/01/2025', 'dd/mm/yyyy');
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 8
+      caption: 'Объявление переменной timestamp и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          ts timestamp;
+        begin
+          ts := systimestamp;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 9
+      caption: 'Объявление переменной timestamp with time zone и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          ts timestamp with time zone;
+        begin
+          ts := systimestamp;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 10
+      caption: 'Объявление переменной boolean и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          bl boolean;
+        begin
+          bl := true;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 11
+      caption: 'Объявление переменной clob и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          clb clob;
+        begin
+          clb := 'Hello, world!';
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 12
+      caption: 'Объявление переменной blob и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          blb blob;
+        begin
+          blb := utl_raw.cast_to_raw('Hello');
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 13
+      caption: 'Объявление переменной pls_integer и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          n pls_integer;
+        begin
+          n := 2;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 14
+      caption: 'Объявление переменной number(a, b) и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          n number(10, 2);
+        begin
+          n := 123.45;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 15
+      caption: 'Объявление переменной char(a) и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          n char(5);
+        begin
+          n := '123';
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 16
+      caption: 'Объявление переменной varchar2(32767) c максимально допустимой длиной в PL/SQL и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          txt varchar2(32767);
+        begin
+          txt := rpad('x', 32767, 'x');
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 17
+      caption: 'Объявление переменной с инициализацией при объявлении и присвоение ей пустого значения в теле блока кода'
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          bl := null;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 18
+      caption: 'Объявление переменной varchar2 и инициализация её значением в теле блока кода путём конкатенации символов'
+      code: |
+        declare
+          txt varchar2(20);
+        begin
+          txt := chr(13) || chr(10);
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 19
+      caption: 'Объявление переменной, инициализация её значением бинд-переменной в теле блока кода и присвоение этого значения в другую бинд-переменную'
+      code: |
+        declare
+          n number;
+        begin
+          n := :input_n;
+          :out_n := n;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 20
+      caption: 'Объявление переменной и сразу инициализация её значением бинд-переменной, после присвоение этого значения в другую бинд-переменную'
+      code: |
+        declare
+          n number := :input_n;
+        begin
+          :out_n := n;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "input_n",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 21
+      caption: 'Объявление переменной без инициализации (значение = null), присвоения этого значения бинд-переменной'
+      code: |
+        declare
+          n number;
+        begin
+          :out_n := n;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 22
+      caption: 'Объявление переменной number(a, b) и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          n number(10, 2);
+        begin
+          n := 123.45689;
+          :out_num := n;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": 123.46
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": 123.46
+            }
+          ]
+        }
+      comment: ''
+    - id: 23
+      caption: 'Объявление переменной number(a, b) и инициализация её значением в теле блока кода'
+      code: |
+        declare
+          n number(10, 2);
+        begin
+          n := 123.45256;
+          :out_num := n;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": 123.45
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": 123.45
+            }
+          ]
+        }
+      comment: ''
+    - id: 24
+      caption: 'Присвоение переменной number строки, в которой содержится число'
+      code: |
+        declare
+          n number(10, 2);
+        begin
+          n := '123.45256';
+          :out_num := n;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": 123.45
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_num",
+              "type": "number",
+              "value": 123.45
+            }
+          ]
+        }
+      comment: ''
+    - id: 25
+      caption: 'Присвоение переменной varchar2 вещественного числа'
+      code: |
+        declare
+          txt varchar2(20);
+        begin
+          txt := 123.45256;
+          :out_txt := txt;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": "123,45256"
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": "123,45256"
+            }
+          ]
+        }
+      comment: ''
+    - id: 26
+      caption: 'Присвоение одноименной бинд-переменной в переменную и получение из переменной значения. В Java это должны быть две разные переменные.'
+      code: |
+        declare
+          in_out number;
+        begin
+          in_out := :in_out + 1;
+          :out1 := in_out;
+          :out2 := :in_out;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "in_out",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out1",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out2",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "in_out",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out1",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out2",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "in_out",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out1",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out2",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "in_out",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out1",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "out2",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 27
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется значением при объявлении, в коде значение меняется на значение с очень большой точностью'
+      code: |
+        declare
+          n number := 2;
+        begin
+          n := 0.666666666666666666666666666666666666666666666666666666666666666666666666666666;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 28
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется целочисленным значением с максимальной величиной'
+      code: |
+        declare
+          n pls_integer;
+        begin
+          n := 2147483647;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 29
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется целочисленным значением с максимальной величиной'
+      code: |
+        declare
+          n pls_integer;
+        begin
+          n := 2147483648;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "error",
+          "inputBinds": [],
+          "error": {
+            "errorCode": -1476
+          }
+        }
+      comment: ''
+    - id: 30
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется целочисленным значением за границей максимальной величины'
+      code: |
+        declare
+          n binary_integer;
+        begin
+          n := 2147483647;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 31
+      caption: 'Блок кода без бинд-переменных с объявленной переменной, которая инициализируется целочисленным значением за границей максимальной величины'
+      code: |
+        declare
+          n binary_integer;
+        begin
+          n := 2147483648;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "error",
+          "inputBinds": [],
+          "error": {
+            "errorCode": -1476
+          }
+        }
+      comment: ''

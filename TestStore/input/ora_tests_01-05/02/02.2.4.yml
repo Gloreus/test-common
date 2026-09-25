@@ -1,0 +1,4047 @@
+Test:
+  chapter: 02.2.4
+  jira_issue: ''
+  name: Двоичные типы данных
+  caption: Передача PL/SQL-содержимого в SQL-запрос в бинд-переменные
+  comment: ''
+  cases:
+  - id: 1
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - бинд переменная типа blob
+    code: |
+      declare
+        v_str blob := utl_raw.cast_to_raw('test_value');
+      begin
+        select v_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "746573745F76616C7565"
+          }
+        ]
+      }
+    comment: ''
+  - id: 2
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - константа бинд переменная blob
+    code: |
+      declare
+        c_str constant blob := utl_raw.cast_to_raw('constant_value');
+      begin
+        select c_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "636F6E7374616E745F76616C7565"
+          }
+        ]
+      }
+    comment: ''
+  - id: 3
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная бинд переменная типа blob
+    code: |
+      declare
+        c_str blob := tc_testing.pkg_bind.pkg_blob;
+      begin
+        select c_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "74657374"
+          }
+        ]
+      }
+    comment: ''
+  - id: 4
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа blob
+    code: |
+      declare
+        c_str constant blob := tc_testing.pkg_bind.c_pkg_blob;
+      begin
+        select c_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "74657374"
+          }
+        ]
+      }
+    comment: ''
+  - id: 5
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      поле объектного типа blob
+    code: |
+      declare
+        v_obj tc_testing.obj_str_blob := tc_testing.obj_str_blob(utl_raw.cast_to_raw('object_value'));
+      begin
+        select v_obj.attr_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "6F626A6563745F76616C7565"
+          }
+        ]
+      }
+    comment: ''
+  - id: 6
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      элемента varray типа blob
+    code: |
+      declare
+        type t_str_varray is varray(10) of blob;
+        v_varray t_str_varray := t_str_varray(utl_raw.cast_to_raw('a'), utl_raw.cast_to_raw('b'), utl_raw.cast_to_raw('c'));
+      begin
+        select v_varray(3) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "63"
+          }
+        ]
+      }
+    comment: ''
+  - id: 7
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      конструктор результат функции объектного типа blob
+    code: |
+      declare
+        v_obj tc_testing.obj_blob_func_type := tc_testing.obj_blob_func_type(utl_raw.cast_to_raw('method_value'));
+      begin
+        select v_obj.get_str() into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "6D6574686F645F76616C7565"
+          }
+        ]
+      }
+    comment: ''
+  - id: 8
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('hello');
+      begin
+        select p_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "68656C6C6F"
+          }
+        ]
+      }
+    comment: ''
+  - id: 9
+    caption: |-
+      Проверка корректности использования бинд-переменных результат вычисления простой select в переменную blob (конкатенация)
+      sql
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('world');
+      begin
+        select 'hello ' || p_str into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "hello world"
+          }
+        ]
+      }
+    comment: ''
+  - id: 10
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob - Конкатенация BLOB с использованием UTL_RAW.CONCAT
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('world');
+        v_result blob;
+      begin
+        v_result := utl_raw.concat(utl_raw.cast_to_raw('hello '), p_str);
+        select v_result into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "68656C6C6F20776F726C64"
+          }
+        ]
+      }
+    comment: ''
+  - id: 11
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (функция UPPER)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('test');
+      begin
+        select upper(p_str) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "TEST"
+          }
+        ]
+      }
+    comment: ''
+  - id: 12
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (функция LOWER)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('TEST');
+      begin
+        select lower(p_str) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "test"
+          }
+        ]
+      }
+    comment: ''
+  - id: 13
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (функция SUBSTR)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('abcdef');
+      begin
+        select substr(p_str, 2, 3) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "0BCD"
+          }
+        ]
+      }
+    comment: ''
+  - id: 14
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (функция LENGTH)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('test_string');
+      begin
+        select length(p_str) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 11
+          }
+        ]
+      }
+    comment: ''
+  - id: 15
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (функция TRIM)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw(' test ');
+      begin
+        select trim(p_str) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "test"
+          }
+        ]
+      }
+    comment: ''
+  - id: 16
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob(case)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('A');
+      begin
+        select case
+          when to_char(p_str) = 'A' then 'Alpha'
+          when to_char(p_str) = 'B' then 'Beta'
+          else 'Other'
+        end into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "Alpha"
+          }
+        ]
+      }
+    comment: ''
+  - id: 17
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (case с вычислением)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('test');
+      begin
+        select case to_char(p_str)
+          when 'test' then 'matched'
+          when 'demo' then 'demo_matched'
+          else 'no_match'
+        end into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "matched"
+          }
+        ]
+      }
+    comment: ''
+  - id: 18
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (decode в select)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('Y');
+      begin
+        select decode(to_char(p_str), 'Y', 'Yes', 'N', 'No', 'Unknown') into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "Yes"
+          }
+        ]
+      }
+    comment: ''
+  - id: 19
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob (nvl в select)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('default');
+      begin
+        select nvl(null, to_char(p_str)) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "default"
+          }
+        ]
+      }
+    comment: ''
+  - id: 20
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную blob(coalesce в select)
+    code: |
+      declare
+        p_str1 blob := utl_raw.cast_to_raw('first');
+        p_str2 blob := utl_raw.cast_to_raw('second');
+      begin
+        select coalesce(null, to_char(p_str1), to_char(p_str2)) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "first"
+          }
+        ]
+      }
+    comment: ''
+  - id: 21
+    caption: Проверка корректности использования бинд-переменных - табличный тип как
+      таблица в FROM
+    code: |
+      declare
+        v_tab tc_testing.blob_tab_type
+        := tc_testing.blob_tab_type(
+          utl_raw.cast_to_raw('apple'), utl_raw.cast_to_raw('banana'), utl_raw.cast_to_raw('cherry')
+        );
+      begin
+        select column_value into:res
+        from table(v_tab)
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "6170706C65"
+          }
+        ]
+      }
+    comment: ''
+  - id: 22
+    caption: Проверка корректности использования бинд-переменных - конструктор табличного
+      типа в FROM с JOIN
+    code: |-
+      declare
+       p_str blob := utl_raw.cast_to_raw('b1');
+      begin
+       select t.column_value into :res
+       from table(tc_testing.tab_str_type('b1', 'b2', 'b3')) t
+       join tc_testing.sample_types s on t.column_value = utl_raw.cast_to_varchar2(s.type_blob)
+       where t.column_value = utl_raw.cast_to_varchar2(p_str) and id != 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "b1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 23
+    caption: Проверка корректности использования бинд-переменных в where (сравнение
+      =)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('b1');
+      begin
+        select type_blob into:res
+        from tc_testing.sample_types
+        where utl_raw.cast_to_varchar2(type_blob) = utl_raw.cast_to_varchar2(p_str) and id != 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "6231"
+          }
+        ]
+      }
+    comment: ''
+  - id: 24
+    caption: Проверка корректности использования бинд-переменных в where (сравнение
+      >)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('b1');
+      begin
+        select type_blob into:res
+        from tc_testing.sample_types
+        where utl_raw.cast_to_varchar2(type_blob) in ('sample text', utl_raw.cast_to_varchar2(p_str)) and id != 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "b1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 25
+    caption: Проверка корректности использования бинд-переменных в where (like)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('b3%');
+      begin
+        select utl_raw.cast_to_varchar2(type_blob) into:res
+        from tc_testing.sample_types
+        where utl_raw.cast_to_varchar2(type_blob) like utl_raw.cast_to_varchar2(p_str) and id != 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "b3"
+          }
+        ]
+      }
+    comment: ''
+  - id: 26
+    caption: Проверка корректности использования бинд-переменных в JOIN - on
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('b1');
+      begin
+        select utl_raw.cast_to_varchar2(st1.type_blob) into:res
+        from tc_testing.sample_types st2
+        inner join tc_testing.sample_types st1
+          on
+            utl_raw.cast_to_varchar2(st1.type_blob) = utl_raw.cast_to_varchar2(st2.type_blob)
+            and utl_raw.cast_to_varchar2(st1.type_blob) = utl_raw.cast_to_varchar2(p_str)
+        where st1.id != 2 and st2.id != 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "b1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 27
+    caption: Проверка корректности использования бинд-переменных в JOIN - (select)
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('b1');
+      begin
+        select utl_raw.cast_to_varchar2(dbms_lob.substr(type_blob, 2000, 1)) into:res
+          from tc_testing.sample_types
+         where utl_raw.cast_to_varchar2(dbms_lob.substr(type_blob, 2000, 1)) = utl_raw.cast_to_varchar2(p_str)
+           and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "b1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 28
+    caption: Проверка корректности использования бинд-переменных в подзапросах
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('b1');
+      begin
+        select utl_raw.cast_to_varchar2(st.type_blob) into:res
+        from tc_testing.sample_types st
+        where utl_raw.cast_to_varchar2(st.type_blob) in (
+          select utl_raw.cast_to_varchar2(type_blob)
+          from tc_testing.sample_types
+          where utl_raw.cast_to_varchar2(type_blob) = utl_raw.cast_to_varchar2(p_str) and id != 2
+        ) and st.id != 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "B1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 29
+    caption: Проверка корректности использования бинд-переменных глобальной функции
+      пакета с параметром - blob
+    code: |
+      declare
+        l_str blob := utl_raw.cast_to_raw('input');
+      begin
+        select tc_testing.pkg_bind.pkg_func_blob(l_str) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "696E707574"
+          }
+        ]
+      }
+    comment: ''
+  - id: 30
+    caption: Проверка корректности использования бинд-переменных функции объектного
+      типа для типа blob
+    code: |
+      declare
+        l_obj tc_testing.obj_str_type_blob;
+        l_str blob := utl_raw.cast_to_raw('object_input');
+      begin
+        l_obj := tc_testing.obj_str_type_blob(l_str);
+        select l_obj.get_value() into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "6F626A6563745F696E707574"
+          }
+        ]
+      }
+    comment: ''
+  - id: 31
+    caption: Проверка корректности использования бинд-переменных - XMLType в WHERE
+      условии
+    code: |
+      declare
+        v_xml xmltype := xmltype('<root><value>test</value></root>');
+        p_str blob := utl_raw.cast_to_raw('test');
+      begin
+        select 1 into:res
+        from dual
+        where extractvalue(v_xml, '/root/value') = to_char(p_str);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 32
+    caption: Проверка корректности использования бинд-переменных - SET оператор UNION
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('bl1');
+        v_result varchar2(2000);
+      begin
+        select utl_raw.cast_to_varchar2(dbms_lob.substr(type_blob, 2000, 1))
+          into v_result
+          from (
+            select type_blob
+            from tc_testing.sample_types
+            where dbms_lob.compare(type_blob, p_str, 1, 1, dbms_lob.getlength(p_str)) < 0
+            union all
+            select type_blob
+            from tc_testing.sample_types
+            where dbms_lob.compare(type_blob, p_str, 1, 1, dbms_lob.getlength(p_str)) > 0
+          )
+          where rownum = 1;
+
+        :res := v_result;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "\u0001\u0002\u0003\u0004\u0005"
+          }
+        ]
+      }
+    comment: ''
+  - id: 33
+    caption: Проверка корректности использования бинд-переменных - SET оператор UNION
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('626c31');
+        v_result varchar2(2000);
+      begin
+        select utl_raw.cast_to_varchar2(dbms_lob.substr(type_blob, 2000, 1))
+          into v_result
+          from (
+            select type_blob
+            from tc_testing.sample_types
+            where dbms_lob.compare(type_blob, p_str, 1, 1, dbms_lob.getlength(p_str)) < 0
+            union all
+            select type_blob
+            from tc_testing.sample_types
+            where dbms_lob.compare(type_blob, p_str, 1, 1, dbms_lob.getlength(p_str)) > 0
+          )
+          where rownum = 1;
+
+        :res := v_result;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "\u0001\u0002\u0003\u0004\u0005"
+          }
+        ]
+      }
+    comment: ''
+  - id: 34
+    caption: Проверка корректности использования бинд-переменных blob- глобальная
+      функция
+    code: |
+      declare
+        p_str blob := utl_raw.cast_to_raw('input');
+      begin
+        select tc_testing.global_func_blob(p_str) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "696E707574"
+          }
+        ]
+      }
+    comment: ''
+  - id: 35
+    caption: Проверка корректности использования бинд-переменных blob- JOIN с табличными
+      типами
+    code: |-
+      declare
+       v_tab tc_testing.blob_tab_type := tc_testing.blob_tab_type(utl_raw.cast_to_raw('b1'), utl_raw.cast_to_raw('b2'), utl_raw.cast_to_raw('b3'));
+      begin
+       select t.column_value into :res
+       from table(v_tab) t
+       left join tc_testing.sample_types a on
+       utl_raw.cast_to_varchar2(t.column_value) = utl_raw.cast_to_varchar2(a.type_blob)
+       where a.id = 22;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "blob",
+            "value": "6233"
+          }
+        ]
+      }
+    comment: ''
+  - id: 36
+    caption: Проверка корректности использования бинд-переменных blob- WHERE с IS
+      NULL для BLOB
+    code: |
+      declare
+        p_blob blob;
+      begin
+        select count(*) into:res
+        from dual
+        where p_blob is null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 37
+    caption: Проверка корректности использования бинд-переменных blob- GROUP BY с
+      BLOB
+    code: |
+      declare
+        p_blob blob := utl_raw.cast_to_raw('b3');
+      begin
+        select max(id) into:res
+        from tc_testing.sample_types
+        where id != 2
+        group by utl_raw.cast_to_varchar2(type_blob)
+        having utl_raw.cast_to_varchar2(type_blob) = utl_raw.cast_to_varchar2(p_blob);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 22
+          }
+        ]
+      }
+    comment: ''
+  - id: 38
+    caption: Проверка корректности использования бинд-переменных blob- ORDER BY с
+      BLOB
+    code: |
+      declare
+        p_blob blob := utl_raw.cast_to_raw('b3');
+      begin
+        select utl_raw.cast_to_varchar2(type_blob) into:res
+        from (
+          select type_blob
+          from tc_testing.sample_types
+          where id != 2
+          order by utl_raw.cast_to_varchar2(type_blob)
+        )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "\u0001\u0002\u0003\u0004\u0005"
+          }
+        ]
+      }
+    comment: ''
+  - id: 39
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - бинд переменная типа raw
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('Hello World');
+      begin
+        select l_raw into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "48656C6C6F20576F726C64"
+          }
+        ]
+      }
+    comment: ''
+  - id: 40
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - константа бинд переменная типа raw
+    code: |
+      declare
+        l_raw constant raw(30) := utl_raw.cast_to_raw('Hello World');
+      begin
+        select l_raw into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "48656C6C6F20576F726C64"
+          }
+        ]
+      }
+    comment: ''
+  - id: 41
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная бинд переменная типа raw
+    code: |
+      declare
+        l_raw raw(30) := tc_testing.pkg_bind.pkg_raw;
+      begin
+        select l_raw into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "48656C6C6F20576F726C64"
+          }
+        ]
+      }
+    comment: ''
+  - id: 42
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа raw
+    code: |
+      declare
+        l_raw raw(30) := tc_testing.pkg_bind.c_pkg_raw;
+      begin
+        select l_raw into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "48656C6C6F20576F726C64"
+          }
+        ]
+      }
+    comment: ''
+  - id: 43
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - проверка конструктора табличного типа с параметром, зависящим от поля таблицы,
+      возвращающего raw.
+    code: |
+      declare
+        l_res raw(30) := utl_raw.cast_to_raw('HEXTORAW01');
+      begin
+        select column_value into l_res
+        from table(tc_testing.raw_tab_cons(l_res))
+        where rownum = 1;
+        :res := l_res;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "484558544F5241573031"
+          }
+        ]
+      }
+    comment: ''
+  - id: 44
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - проверка конструктора объектного типа с параметром, зависящим от поля таблицы,
+      возвращающего raw.
+    code: |
+      declare
+        l_res raw(30) := utl_raw.cast_to_raw('Hello World');
+      begin
+        select tc_testing.pkg_bind.raw_reverse(l_res) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "646C726F57206F6C6C6548"
+          }
+        ]
+      }
+    comment: ''
+  - id: 45
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в подзапрос с оператором all. используется обычная
+      переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('5');
+      begin
+        select max(id) into:res
+        from tc_testing.sample_types
+        where type_raw <= all(
+          select l_raw
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "22"
+          }
+        ]
+      }
+    comment: ''
+  - id: 46
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в условие where is null. используется обычная
+      переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw = l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 47
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в оператор case. используется обычная переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select
+          case
+            when type_raw = l_raw then 'совпадает'
+            else 'не совпадает'
+          end
+        into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "не совпадает"
+          }
+        ]
+      }
+    comment: ''
+  - id: 48
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в оператор group by. используется обычная переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        group by l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "22"
+          }
+        ]
+      }
+    comment: ''
+  - id: 49
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в join условие on. используется обычная переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select a.id into:res
+        from tc_testing.sample_types a
+        inner join tc_testing.sample_types b on a.type_raw = b.type_raw and a.type_raw = l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 50
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в подзапрос в where. используется обычная переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where type_raw = (
+          select l_raw
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 51
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в подзапрос в from. используется обычная переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select d into:res
+        from (
+          select l_raw as d
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "31"
+          }
+        ]
+      }
+    comment: ''
+  - id: 52
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в коррелированный подзапрос. используется обычная
+      переменная.
+    code: |-
+      declare
+       l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+       select id into :res from tc_testing.sample_types a where exists (select 1 from dual where a.type_raw = l_raw);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 53
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в подзапрос с оператором in. используется обычная
+      переменная.
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where type_raw in (
+          select l_raw
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 54
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в where для сравнения =
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw = l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 55
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в where для сравнения >
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw > l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 56
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в where для условия in
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw in (l_raw, utl_raw.cast_to_raw('3'));
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 57
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в where для условия not in
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw not in (l_raw);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 5
+          }
+        ]
+      }
+    comment: ''
+  - id: 58
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование обычной переменной типа raw в выражении case в select
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select case when type_raw = l_raw then 1 else 0 end into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 59
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование обычной переменной типа raw в выражении case с несколькими условиями
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+        l_raw2 raw(30) := utl_raw.cast_to_raw('2');
+      begin
+        select case type_raw when l_raw then 1 when l_raw2 then 2 else 0 end into:res
+        from tc_testing.sample_types
+        where id = 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 60
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в предложение group by
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select max(id) into:res
+        from tc_testing.sample_types
+        group by l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 22
+          }
+        ]
+      }
+    comment: ''
+  - id: 61
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в предложение having
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select 1 into:res
+        from tc_testing.sample_types
+        having max(type_raw) > l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 62
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в предложение order by
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select id into:res
+        from (
+          select id
+          from tc_testing.sample_types
+          order by l_raw
+        )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 63
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в подзапрос в where
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw = (
+          select l_raw
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 64
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в подзапрос в from
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from (
+          select l_raw as r
+          from dual
+        ) t
+        where r is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 65
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование обычной переменной типа raw в join условии on
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types a
+        inner join tc_testing.sample_types b on a.type_raw = l_raw and b.type_raw = l_raw
+        where a.id = 1 and b.id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 66
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование обычной переменной типа raw в подзапросе с exists
+    code: |-
+      declare
+       l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+       select count(*) into :res from tc_testing.sample_types a where exists (select 1 from dual where a.type_raw = l_raw);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 67
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание объектного типа с полем raw и использование его в where
+    code: |
+      declare
+        l_obj tc_testing.obj_raw := tc_testing.obj_raw(utl_raw.cast_to_raw('1'));
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where sample_types.type_raw = l_obj.r;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 68
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание varray типа raw и использование его элемента в where
+    code: |
+      declare
+        l_arr tc_testing.varray_raw := tc_testing.varray_raw(utl_raw.cast_to_raw('1'), utl_raw.cast_to_raw('2'));
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw = l_arr(1);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 69
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание табличного типа raw и использование его в from
+    code: |
+      declare
+        l_tab tc_testing.tab_raw := tc_testing.tab_raw(utl_raw.cast_to_raw('1'), utl_raw.cast_to_raw('2'));
+      begin
+        select count(*) into:res
+        from table(l_tab);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 70
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование табличного типа raw в join с таблицей
+    code: |-
+      declare
+       l_tab tc_testing.tab_raw := tc_testing.tab_raw(utl_raw.cast_to_raw('1'), utl_raw.cast_to_raw('2'));
+      begin
+       select count(*) into :res from tc_testing.sample_types a join table(l_tab) b on a.type_raw = b.column_value;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 71
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание глобальной функции, возвращающей raw, и использование ее в where
+    code: |
+      declare
+        l_res raw(30) := tc_testing.func_raw;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where sample_types.type_raw = tc_testing.func_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 72
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание пакетной функции, возвращающей raw, и использование ее в where
+    code: |
+      declare
+        l_res raw(30) := tc_testing.func_raw;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where sample_types.type_raw = tc_testing.pkg_bind.func_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 73
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в функцию utl_raw.cast_to_varchar2 в
+      select
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select utl_raw.cast_to_varchar2(l_raw) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 74
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в выражение decode в select
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select decode(type_raw, l_raw, 1, 0) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 75
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в выражение union all
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('1');
+      begin
+        select count(*) into:res
+        from (
+          select type_raw
+          from tc_testing.sample_types
+          union all
+          select l_raw
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 23
+          }
+        ]
+      }
+    comment: ''
+  - id: 76
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в where для условия between
+    code: |
+      declare
+        l_raw1 raw(30) := utl_raw.cast_to_raw('1');
+        l_raw2 raw(30) := utl_raw.cast_to_raw('5');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw between l_raw1 and l_raw2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 77
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа raw в where для условия is null
+    code: |
+      declare
+        l_raw raw(30) := null;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_raw is null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 16
+          }
+        ]
+      }
+    comment: ''
+  - id: 78
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в where для условия like (через преобразование)
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('test');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where utl_raw.cast_to_varchar2(type_raw) like '%1%';
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 79
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование XMLType с атрибутом raw
+    code: |
+      declare
+        l_xml xmltype := xmltype('<data><raw>313233</raw></data>');
+        l_raw raw(30);
+      begin
+        select hextoraw(extractvalue(l_xml, '/data/raw')) into l_raw
+        from dual;
+        select l_raw into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "313233"
+          }
+        ]
+      }
+    comment: ''
+  - id: 80
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа raw в подзапрос с оператором any
+    code: |
+      declare
+        l_raw raw(30) := utl_raw.cast_to_raw('3');
+      begin
+        select max(id) into:res
+        from tc_testing.sample_types
+        where type_raw = any(
+          select l_raw
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 22
+          }
+        ]
+      }
+    comment: ''
+  - id: 81
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование табличного типа raw в сложном условии join
+    code: |-
+      declare
+       l_tab tc_testing.tab_raw := tc_testing.tab_raw(
+       utl_raw.cast_to_raw('1'),
+       utl_raw.cast_to_raw('2')
+       );
+       l_raw raw(30) := utl_raw.cast_to_raw('0');
+      begin
+       select count(*) into :res from tc_testing.sample_types a
+       join table(l_tab) b on a.type_raw > l_raw and b.column_value > l_raw;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 6
+          }
+        ]
+      }
+    comment: ''

@@ -1,0 +1,4955 @@
+Test:
+  chapter: 02.2.3
+  jira_issue: ''
+  name: Дата и время
+  caption: ' Передача PL/SQL-содержимого в SQL-запрос в бинд-переменные'
+  comment: ''
+  cases:
+  - id: 1
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - бинд переменная типа interval
+    code: |-
+      declare
+       v_result interval day(2) to second(0) := interval '10 05:30:00' day to second;
+      begin
+       select v_result into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000010 05:30:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 2
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - константа бинд переменная interval
+    code: |-
+      declare
+       v_result constant interval day(2) to second(0) := interval '10 05:30:00' day to second;
+      begin
+       select v_result into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000010 05:30:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 3
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная бинд переменная типа interval
+    code: |-
+      declare
+       v_inter interval year to month := tc_testing.pkg_bind.pkg_interval;
+      begin
+       select v_inter into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000001-02"
+          }
+        ]
+      }
+    comment: ''
+  - id: 4
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа interval
+    code: |-
+      declare
+       v_inter interval year to month := tc_testing.pkg_bind.c_pkg_interval;
+      begin
+       select v_inter into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000001-02"
+          }
+        ]
+      }
+    comment: ''
+  - id: 5
+    caption: Проверка корректности использования бинд-переменных - арифметические
+      операции с INTERVAL
+    code: |-
+      declare
+       p_int1 interval day to second := interval '2 06:00:00' day to second;
+       p_int2 interval day to second := interval '1 12:30:00' day to second;
+      begin
+       select p_int1 + p_int2 into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000003 18:30:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 6
+    caption: Проверка корректности использования бинд-переменных - функция EXTRACT
+      из INTERVAL
+    code: |-
+      declare
+       p_int interval day to second := interval '2 14:45:30' day to second;
+      begin
+       select extract(day from p_int) || 'days '||
+       extract(hour from p_int) || 'hours'
+       into :res
+       from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "2days 14hours"
+          }
+        ]
+      }
+    comment: ''
+  - id: 7
+    caption: Проверка корректности использования бинд-переменных - арифметические
+      операции с INTERVAL
+    code: |-
+      declare
+       p_int interval day to second := interval '1 06:00:00' day to second;
+      begin
+       select p_int * 3 into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000003 18:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 8
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      поле объектного типа interval
+    code: |
+      declare
+        v_obj tc_testing.obj_interval := tc_testing.obj_interval(1, 2, 30, 45);
+      begin
+        select v_obj.interval_value into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000001 02:30:45.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 9
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      функции объектного типа interval
+    code: |-
+      declare
+       v_interval interval day to second := interval '2 03:15:00' day to second;
+      begin
+       select tc_testing.pkg_bind.pkg_func_interval(v_interval) into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+02 03:15:00.000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 10
+    caption: Проверка корректности использования бинд-переменных INTERVAL в выражении
+      SELECT с арифметикой
+    code: |-
+      declare
+       v_interval interval day to second := interval '1 12:00:00' day to second;
+      begin
+       select v_interval + interval '2' hour into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000001 14:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 11
+    caption: Проверка корректности использования бинд-переменных INTERVAL в WHERE
+      сравнении
+    code: |-
+      declare
+       v_interval interval day to second := interval '0' day;
+      begin
+       select type_interval_day_to_second into :res
+       from tc_testing.sample_types
+       where type_interval_day_to_second = v_interval
+       and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 12
+    caption: Проверка корректности использования бинд-переменных INTERVAL в WHERE
+      сравнении (>)
+    code: |-
+      declare
+       v_interval interval day(2) to second(0) := interval '2' day;
+      begin
+       select type_interval_day_to_second into :res
+       from tc_testing.sample_types
+       where type_interval_day_to_second > v_interval
+       and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+999999999 23:59:59.999999999"
+          }
+        ]
+      }
+    comment: ''
+  - id: 13
+    caption: Проверка корректности использования бинд-переменных INTERVAL в WHERE
+      с BETWEEN
+    code: |-
+      declare
+       v_start interval day(2) to second(0) := interval '0' day;
+       v_end interval day(2) to second(0) := interval '2' day;
+      begin
+       select type_interval_day_to_second into :res
+       from tc_testing.sample_types
+       where type_interval_day_to_second between v_start and v_end
+       and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000001"
+          }
+        ]
+      }
+    comment: ''
+  - id: 14
+    caption: Проверка корректности использования бинд-переменных INTERVAL в WHERE
+      с IN
+    code: |-
+      declare
+       v_interval1 interval day(2) to second(0) := interval '0' day;
+       v_interval2 interval day(2) to second(0) := interval '3' day;
+      begin
+       select type_interval_day_to_second into :res
+         from tc_testing.sample_types
+        where type_interval_day_to_second in (v_interval1, v_interval2)
+       and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 15
+    caption: Проверка корректности использования бинд-переменных INTERVAL в GROUP
+      BY
+    code: |-
+      declare
+       v_interval interval day(2) to second(0) := interval '0' day;
+      begin
+       select count(*) into :res
+       from tc_testing.sample_types
+       where type_interval_day_to_second = v_interval
+       group by v_interval;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 16
+    caption: Проверка корректности использования бинд-переменных INTERVAL в HAVING
+    code: |-
+      declare
+       v_interval interval day(2) to second(0) := interval '0' day;
+      begin
+       select type_interval_day_to_second into :res
+        from tc_testing.sample_types
+      group by type_interval_day_to_second
+       having type_interval_day_to_second = v_interval;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 17
+    caption: Проверка корректности использования бинд-переменных INTERVAL в ORDER
+      BY
+    code: |-
+      declare
+       v_interval interval day(2) to second(0) := interval '0' day;
+      begin
+       select type_interval_day_to_second into :res
+        from tc_testing.sample_types
+        where type_interval_day_to_second = v_interval
+        order by v_interval;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 18
+    caption: Проверка корректности использования бинд-переменных INTERVAL в JOIN ON
+      условии
+    code: |-
+      declare
+       v_interval interval day(2) to second(0) := interval '0' day;
+      begin
+       select a1.type_interval_day_to_second into :res
+       from tc_testing.sample_types a2
+       join tc_testing.sample_types a1 on a1.type_interval_day_to_second = a2.type_interval_day_to_second and a1.type_interval_day_to_second = v_interval
+       where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 19
+    caption: Проверка корректности использования бинд-переменных INTERVAL в подзапросе
+    code: |-
+      declare
+       v_interval interval day(2) to second(0) := interval '0' day;
+      begin
+       select a.type_interval_day_to_second into :res
+       from tc_testing.sample_types a
+       where a.type_interval_day_to_second in (
+       select type_interval_day_to_second
+       from tc_testing.sample_types
+       where type_interval_day_to_second = v_interval
+       );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 20
+    caption: Проверка корректности использования бинд-переменных INTERVAL YEAR TO
+      MONTH
+    code: |-
+      declare
+       v_interval interval year to month := interval '1-6' year to month;
+      begin
+       select v_interval into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000001-06"
+          }
+        ]
+      }
+    comment: ''
+  - id: 21
+    caption: Проверка корректности использования бинд-переменных INTERVAL в CASE выражении
+    code: |-
+      declare
+       p_int interval day to second := interval '36' hour;
+      begin
+       select case
+       when p_int > interval '1' day then 'More than 1 day'
+       when p_int = interval '1' day then 'Exactly 1 day' else
+       'Less than 1 day' end into :res
+       from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "More than 1 day"
+          }
+        ]
+      }
+    comment: ''
+  - id: 22
+    caption: Проверка корректности использования бинд-переменных - табличный тип INTERVAL
+      как таблица в FROM
+    code: |
+      declare
+        v_tab tc_testing.interval_tab_type := tc_testing.interval_tab_type(
+          interval '1 00:00:00' day to second,
+          interval '2 12:00:00' day to second,
+          interval '0 06:30:00' day to second
+        );
+      begin
+        select column_value into:res
+        from table(v_tab)
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+01 00:00:00.000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 23
+    caption: Проверка корректности использования бинд-переменных глобальной функции
+      пакета с параметром - INTERVAL
+    code: |-
+      declare
+       l_interval interval day to second := interval'2 04:15:30.500' day to second;
+      begin
+       select tc_testing.pkg_bind.pkg_func_interval_param(l_interval) into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+02 05:15:30.500000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 24
+    caption: Проверка корректности использования бинд-переменных - INTERVAL в WHERE
+      условии
+    code: |-
+      declare
+       p_interval interval day to second := interval '1 00:00:00' day to second;
+      begin
+       select 1 into :res from dual
+       where interval '2 12:00:00' day to second > p_interval;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 25
+    caption: Проверка корректности использования бинд-переменных - SET оператор UNION
+      с INTERVAL
+    code: |-
+      declare
+       p_interval interval day to second := interval '1 06:00:00' day to second;
+      begin
+       select type_interval_day_to_second into :res
+       from (
+           select type_interval_day_to_second from tc_testing.sample_types where type_interval_day_to_second < p_interval
+           union
+           select type_interval_day_to_second from tc_testing.sample_types where type_interval_day_to_second > p_interval
+           )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "-999999999 23:59:59.999999999"
+          }
+        ]
+      }
+    comment: ''
+  - id: 26
+    caption: Проверка корректности использования бинд-переменных INTERVAL - аналитическая
+      функция
+    code: |-
+      declare
+       p_interval interval day to second := interval '1 00:00:00' day to second;
+      begin
+       select type_interval_day_to_second into :res from (
+       select type_interval_day_to_second, row_number() over (order by type_interval_day_to_second) as rn
+       from tc_testing.sample_types
+       where type_interval_day_to_second > p_interval
+       ) where rn = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000010 10:10:10.000010000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 27
+    caption: Проверка корректности использования бинд-переменных INTERVAL - глобальная
+      функция
+    code: |-
+      declare
+       l_interval interval day to second := interval '3 08:15:20.300' day to second;
+      begin
+       select tc_testing.pkg_bind.global_interval_func() into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+05 10:20:30.111000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 28
+    caption: Проверка корректности использования бинд-переменных - WHERE с IS NULL
+      для INTERVAL
+    code: |-
+      declare
+       v_interval interval day to second;
+      begin
+       select count(*) into :res
+       from dual
+       where v_interval is null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 29
+    caption: Проверка корректности использования бинд-переменных - Элемент табличного
+      типа INTERVAL как значение
+    code: |-
+      declare
+       type t_interval_tab is table of interval day to second;
+       v_tab t_interval_tab := t_interval_tab(
+       interval '1 00:00:00' day to second,
+       interval '2 12:00:00' day to second
+       );
+      begin
+       select v_tab(1) into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000001 00:00:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 30
+    caption: Проверка корректности использования бинд-переменных- Varray типа INTERVAL
+    code: |-
+      declare
+       type t_interval_varray is varray(5) of interval day to second;
+       v_varray t_interval_varray := t_interval_varray(
+       interval '0 01:00:00' day to second,
+       interval '0 02:30:00' day to second
+       );
+      begin
+       select v_varray(2) into :res from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+000000000 02:30:00.000000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 31
+    caption: Проверка корректности использования бинд-переменных-JOIN с табличным
+      типом INTERVAL
+    code: |-
+      declare
+       v_tab tc_testing.interval_tab_type := tc_testing.interval_tab_type(
+       interval '0 00:00:00' day to second,
+       interval '2 00:00:00' day to second
+       );
+      begin
+       select t.column_value into :res
+       from table(v_tab) t
+       join tc_testing.sample_types s on t.column_value = s.type_interval_day_to_second
+       where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "+00 00:00:00.000000"
+          }
+        ]
+      }
+    comment: ''
+  - id: 32
+    caption: Проверка корректности использования бинд-переменных-
+    code: |-
+      declare
+       v_interval interval day to second := interval '1 00:00:00' day to second;
+      begin
+       select 1 into :res from dual
+       where v_interval in (
+       select column_value
+       from table(tc_testing.interval_tab_type(
+       interval '1 00:00:00' day to second,
+       interval '2 00:00:00' day to second
+       ))
+       );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "1"
+          }
+        ]
+      }
+    comment: ''
+  - id: 33
+    caption: Проверка корректности использования бинд-переменных-INTERVAL в функции,
+      зависящей от поля таблицы
+    code: |-
+      declare
+       v_interval interval day to second := interval '1 00:00:00' day to second;
+      begin
+       select tc_testing.pkg_bind.pkg_func_interval_param(s.type_interval_day_to_second) into :res
+       from tc_testing.sample_types s
+       where s.id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ]
+      }
+    comment: ''
+  - id: 34
+    caption: Проверка корректности использования бинд-переменных-WHERE с NOT NULL
+      для INTERVAL
+    code: |-
+      declare
+       v_interval interval day to second := interval '1 00:00:00' day to second;
+      begin
+       select count(*) into :res
+       from dual
+       where v_interval is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 35
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - бинд переменная типа date
+    code: |
+      declare
+        v_date date := to_date('12.05.2026', 'dd.mm.yyyy');
+      begin
+        select v_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "12/05/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 36
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - константа бинд переменная типа date
+    code: |
+      declare
+        v_date constant date := to_date('12.05.2026', 'dd.mm.yyyy');
+      begin
+        select v_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "12/05/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 37
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная бинд переменная типа date
+    code: |
+      declare
+        v_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select v_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "12/01/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 38
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа date
+    code: |
+      declare
+        v_date date := tc_testing.pkg_bind.c_pkg_date;
+      begin
+        select v_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "12/05/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 39
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для сравнения =
+    code: |
+      declare
+        l_date date := to_date('01.01.2000', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 40
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача пакетной переменной типа date в where для сравнения >
+    code: |
+      declare
+        v_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where sample_types.type_date > tc_testing.pkg_bind.pkg_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 6
+          }
+        ]
+      }
+    comment: ''
+  - id: 41
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача пакетной константы типа date в where для сравнения <=
+    code: |
+      declare
+        v_date date := tc_testing.pkg_bind.c_pkg_date;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date <= v_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 8
+          }
+        ]
+      }
+    comment: ''
+  - id: 42
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача результата глобальной функции, возвращающей date, в where для сравнения
+      =
+    code: |
+      declare
+        v_date date := tc_testing.pkg_bind.global_func_date;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = v_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 43
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для between
+    code: |
+      declare
+        l_date1 date := to_date('31.12.1999', 'dd.mm.yyyy');
+        l_date2 date := to_date('02.01.2000', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date between l_date1 and l_date2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 44
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для условия is null
+    code: |
+      declare
+        l_date date := null;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date is null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 10
+          }
+        ]
+      }
+    comment: ''
+  - id: 45
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для условия is not null
+    code: |
+      declare
+        l_date date := to_date('31.12.1999', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where l_date is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 19
+          }
+        ]
+      }
+    comment: ''
+  - id: 46
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование обычной переменной типа date в выражении case в select
+    code: |
+      declare
+        l_date date := to_date('31.12.1999', 'dd.mm.yyyy');
+      begin
+        select case when type_date < l_date then 1 else 0 end into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 47
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в предложение order by
+    code: |
+      declare
+        l_date date := to_date('31.12.1999', 'dd.mm.yyyy');
+      begin
+        select id into:res
+        from (
+          select id
+          from tc_testing.sample_types
+          order by l_date
+        )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 48
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в предложение group by
+    code: |
+      declare
+        l_date date := to_date('31.12.1999', 'dd.mm.yyyy');
+      begin
+        select max(id) into:res
+        from tc_testing.sample_types
+        group by l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 19
+          }
+        ]
+      }
+    comment: ''
+  - id: 49
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в предложение having
+    code: |
+      declare
+        l_date date := to_date('05.03.2026', 'dd.mm.yyyy');
+      begin
+        select max(type_date) into:res
+        from tc_testing.sample_types
+        where type_date <= l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "01/01/0001 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 50
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в подзапрос в where
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = (
+          select l_date
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 51
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в подзапрос в from
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from (
+          select l_date as d
+          from dual
+        ) t
+        where d is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 52
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в функцию to_char в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select to_char(l_date, 'dd.mm.yyyy') into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "31.12.2026"
+          }
+        ]
+      }
+    comment: ''
+  - id: 53
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в функцию add_months в where
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date < add_months(l_date, 1);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 8
+          }
+        ]
+      }
+    comment: ''
+  - id: 54
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача пакетной переменной типа date в функцию trunc в where
+    code: |
+      declare
+        l_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where trunc(sample_types.type_date) = trunc(tc_testing.pkg_bind.pkg_date);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 55
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача результата глобальной функции date в функцию last_day в select
+    code: |
+      declare
+        l_date date := tc_testing.pkg_bind.global_func_date;
+      begin
+        select last_day(l_date) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "31/01/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 56
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в join условие on
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types a
+        inner join tc_testing.sample_types b on a.type_date > l_date and b.type_date > l_date
+        where a.id = 1 and b.id = 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 57
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в подзапрос с exists
+    code: |-
+      declare
+       l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+       select count(*) into :res from tc_testing.sample_types a where exists (select 1 from dual where a.type_date < l_date);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 8
+          }
+        ]
+      }
+    comment: ''
+  - id: 58
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание объектного типа с полем date и использование его в where
+    code: |
+      declare
+        l_obj tc_testing.obj_date := tc_testing.obj_date(to_date('31.12.2026', 'dd.mm.yyyy'));
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where sample_types.type_date > l_obj.d;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 59
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание varray типа date и использование его элемента в where
+    code: |
+      declare
+        l_arr tc_testing.varray_date
+        := tc_testing.varray_date(to_date('31.12.2026', 'dd.mm.yyyy'), to_date('01.12.2026', 'dd.mm.yyyy'));
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = l_arr(1);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 60
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание табличного типа и использование его в from (join)
+    code: |
+      declare
+        l_tab tc_testing.tab_date
+        := tc_testing.tab_date(
+          to_date('01.12.2026', 'dd.mm.yyyy'), to_date('02.12.2026', 'dd.mm.yyyy'), to_date('31.12.2026', 'dd.mm.yyyy')
+        );
+      begin
+        select count(*) into:res
+        from table(l_tab);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 61
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование табличного типа в join с таблицей
+    code: |-
+      declare
+       l_tab tc_testing.tab_date := tc_testing.tab_date(to_date('01.12.2026', 'dd.mm.yyyy'), to_date('02.12.2026', 'dd.mm.yyyy'), to_date('31.12.2026', 'dd.mm.yyyy'));
+      begin
+       select count(*) into :res from tc_testing.sample_types a join table(l_tab) b on a.type_date = b.column_value;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 62
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в функцию, зависящую от поля таблицы
+      (глобальная)
+    code: |-
+      declare
+       l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+       select count(*) into :res from tc_testing.sample_types where type_date = tc_testing.func_date(l_date) - 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 63
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в выражение decode в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select decode(type_date, l_date, 1, 0) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 64
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в выражение coalesce в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select coalesce(type_date, l_date) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "31/12/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 65
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в функцию extract в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select extract(year from l_date) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2026
+          }
+        ]
+      }
+    comment: ''
+  - id: 66
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача пакетной переменной типа date в функцию months_between в select
+    code: |
+      declare
+        l_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select months_between(l_date, to_date('31.12.2026', 'dd.mm.yyyy')) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": -11.61290322580645161290322580645161290323
+          }
+        ]
+      }
+    comment: ''
+  - id: 67
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в выражение union all
+    code: |
+      declare
+        l_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select count(*) into:res
+        from (
+          select type_date
+          from tc_testing.sample_types
+          union all
+          select l_date
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 68
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа date в условие where is null. используется обычная
+      переменная.
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 69
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа date в оператор case. используется обычная переменная.
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select
+          case
+            when type_date = l_date then 'совпадает'
+            else 'не совпадает'
+          end
+        into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "не совпадает"
+          }
+        ]
+      }
+    comment: ''
+  - id: 70
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для оператора IN
+    code: |
+      declare
+        l_date1 date := to_date('01.01.2000', 'dd.mm.yyyy');
+        l_date2 date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date in (l_date1, l_date2);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 71
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для оператора LIKE
+    code: |
+      declare
+        l_date date := to_date('31.12.2026', 'dd.mm.yyyy');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where to_char(type_date, 'YYYY') like '202%';
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 5
+          }
+        ]
+      }
+    comment: ''
+  - id: 72
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование функции объектного типа, возвращающей date
+    code: |
+      declare
+        l_obj tc_testing.obj_date_func := tc_testing.obj_date_func(to_date('31.12.2026', 'dd.mm.yyyy'));
+      begin
+        select l_obj.get_date() into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "31/12/2026 00:00:00"
+          }
+        ]
+      }
+    comment: ''
+  - id: 73
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование XMLType с атрибутом date
+    code: |
+      declare
+        l_xml xmltype := xmltype('<data><date>31.12.2026</date></data>');
+        l_date date;
+      begin
+        select extractvalue(l_xml, '/data/date') into:res
+        from dual;
+        select l_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ]
+      }
+    comment: ''
+  - id: 74
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование табличного типа в сложном условии JOIN
+    code: |-
+      declare
+       l_tab tc_testing.tab_date := tc_testing.tab_date(
+       to_date('01.12.2026', 'dd.mm.yyyy'),
+       to_date('02.12.2026', 'dd.mm.yyyy')
+       );
+       l_date date := to_date('31.12.2025', 'dd.mm.yyyy');
+      begin
+       select count(*) into :res from tc_testing.sample_types a
+       join table(l_tab) b on a.type_date > l_date and b.column_value > l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 12
+          }
+        ]
+      }
+    comment: ''
+  - id: 75
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - бинд переменная типа date
+    code: |
+      declare
+        v_date date := to_date('12.05.2026 14:30:45', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select v_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "12/05/2026 14:30:45"
+          }
+        ]
+      }
+    comment: ''
+  - id: 76
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - константа бинд переменная типа date
+    code: |
+      declare
+        v_date constant date := to_date('12.05.2026 14:30:45', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select v_date into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "12/05/2026 14:30:45"
+          }
+        ]
+      }
+    comment: ''
+  - id: 77
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для сравнения =
+    code: |
+      declare
+        l_date date := to_date('01.01.2000 00:00:00', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 78
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для between
+    code: |
+      declare
+        l_date1 date := to_date('31.12.1999 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+        l_date2 date := to_date('02.01.2000 00:00:01', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date between l_date1 and l_date2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 79
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для условия is null
+    code: |
+      declare
+        l_date date := null;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date is null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 10
+          }
+        ]
+      }
+    comment: ''
+  - id: 80
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в where для условия is not null
+    code: |
+      declare
+        l_date date := to_date('31.12.1999 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where l_date is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 19
+          }
+        ]
+      }
+    comment: ''
+  - id: 81
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование обычной переменной типа date в выражении case в select
+    code: |
+      declare
+        l_date date := to_date('31.12.1999 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select case when type_date < l_date then 1 else 0 end into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 82
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в предложение order by
+    code: |
+      declare
+        l_date date := to_date('31.12.1999 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select id into:res
+        from (
+          select id
+          from tc_testing.sample_types
+          order by l_date
+        )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 83
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в предложение group by
+    code: |
+      declare
+        l_date date := to_date('31.12.1999 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select max(id) into:res
+        from tc_testing.sample_types
+        group by l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 19
+          }
+        ]
+      }
+    comment: ''
+  - id: 84
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в предложение having
+    code: |
+      declare
+        l_date date := to_date('03.05.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select max(type_date) into:res
+        from tc_testing.sample_types
+        having max(l_date) is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "date",
+            "value": "31/12/9999 23:59:59"
+          }
+        ]
+      }
+    comment: ''
+  - id: 85
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в подзапрос в where
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = (
+          select l_date
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 86
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в подзапрос в from
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from (
+          select l_date as d
+          from dual
+        ) t
+        where d is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 87
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в функцию to_char в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select to_char(l_date, 'dd.mm.yyyy hh24:mi:ss') into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "31.12.2026 23:59:59"
+          }
+        ]
+      }
+    comment: ''
+  - id: 88
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в функцию add_months в where
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date < add_months(l_date, 1);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 8
+          }
+        ]
+      }
+    comment: ''
+  - id: 89
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача пакетной переменной типа date в функцию trunc в where
+    code: |
+      declare
+        l_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where trunc(sample_types.type_date) = trunc(tc_testing.pkg_bind.pkg_date);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 90
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в join условие on
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types a
+        inner join tc_testing.sample_types b on a.type_date > l_date and b.type_date > l_date
+        where a.id = 1 and b.id = 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 91
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в подзапрос с exists
+    code: |-
+      declare
+       l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+       select count(*) into :res from tc_testing.sample_types a where exists (select 1 from dual where a.type_date < l_date);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 8
+          }
+        ]
+      }
+    comment: ''
+  - id: 92
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание объектного типа с полем date и использование его в where
+    code: |
+      declare
+        l_obj tc_testing.obj_date := tc_testing.obj_date(to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss'));
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where sample_types.type_date > l_obj.d;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 93
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание varray типа date и использование его элемента в where
+    code: |
+      declare
+        l_arr tc_testing.varray_date
+        := tc_testing.varray_date(
+          to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss'), to_date('01.12.2026 10:30:15', 'dd.mm.yyyy hh24:mi:ss')
+        );
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = l_arr(1);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 94
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - создание табличного типа и использование его в from (join)
+    code: |
+      declare
+        l_tab tc_testing.tab_date
+        := tc_testing.tab_date(
+          to_date('01.12.2026 09:00:00', 'dd.mm.yyyy hh24:mi:ss'),
+          to_date('02.12.2026 14:45:30', 'dd.mm.yyyy hh24:mi:ss'),
+          to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss')
+        );
+      begin
+        select count(*) into:res
+        from table(l_tab);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 95
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование табличного типа в join с таблицей
+    code: |-
+      declare
+       l_tab tc_testing.tab_date := tc_testing.tab_date(to_date('01.12.2026 09:00:00', 'dd.mm.yyyy hh24:mi:ss'), to_date('02.12.2026 14:45:30', 'dd.mm.yyyy hh24:mi:ss'), to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss'));
+      begin
+       select count(*) into :res from tc_testing.sample_types a join table(l_tab) b on a.type_date = b.column_value;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 96
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в выражение decode в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select decode(type_date, l_date, 1, 0) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "0"
+          }
+        ]
+      }
+    comment: ''
+  - id: 97
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача обычной переменной типа date в выражение coalesce в select
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select coalesce(type_date, l_date) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "31-DEC-26"
+          }
+        ]
+      }
+    comment: ''
+  - id: 98
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача пакетной переменной типа date в функцию months_between в select
+    code: |
+      declare
+        l_date date := tc_testing.pkg_bind.pkg_date;
+      begin
+        select months_between(l_date, to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss')) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": -11.64516091696535244922341696535244922342
+          }
+        ]
+      }
+    comment: ''
+  - id: 99
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа date в условие where is null. используется обычная
+      переменная.
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_date = l_date;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 100
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа date в оператор case. используется обычная переменная.
+    code: |
+      declare
+        l_date date := to_date('31.12.2026 23:59:59', 'dd.mm.yyyy hh24:mi:ss');
+      begin
+        select
+          case
+            when type_date = l_date then 'совпадает'
+            else 'не совпадает'
+          end
+        into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "не совпадает"
+          }
+        ]
+      }
+    comment: ''

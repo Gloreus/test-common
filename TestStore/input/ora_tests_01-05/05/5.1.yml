@@ -1,0 +1,1321 @@
+Test:
+  chapter: '5.1'
+  jira_issue: ''
+  name: '5.1'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: "Цикл с выходом в конце цикла по exit when"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 2
+      caption: "Цикл с выходом в конце по exit (внешнее условие)"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            if i >= 10 then
+              exit;
+            end if;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 10
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 3
+      caption: "Цикл с выходом в начале цикла по exit when"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            exit when i > 5;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 4
+      caption: "Цикл с выходом в начале по exit (внешнее условие)"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            if i >= 10 then
+              exit;
+            end if;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 10
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 5
+      caption: "Цикл с выходом в середине цикла по exit when"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            exit when i > 5;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 7
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 6
+      caption: "Цикл с выходом в середине по exit (внешнее условие)"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            if i >= 10 then
+              exit;
+            end if;
+            --
+            i := i + 1;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 11
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 7
+      caption: "Вложенные циклы, работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          i number := 0;
+          j number;
+        begin
+          loop
+            i := i + 1;
+            --
+            j := 1;
+            loop
+              exit when j > 2;
+              --
+              i := i + j;
+              j := j + 1;
+            end loop;
+            --
+            exit when i >= 10;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 12
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 8
+      caption: "Вложенные циклы, работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          i number := 0;
+          j number;
+        begin
+          loop
+            i := i + 1;
+            --
+            j := 1;
+            loop
+              if j > 2 then
+                exit;
+              end if;
+              --
+              i := i + j;
+              j := j + 1;
+            end loop;
+            --
+            if i >= 10 then
+              exit;
+            end if;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 12
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 9
+      caption: "Вложенные циклы (для внешнего цикла задана метка), работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          loop
+            j := 0;
+            loop
+              exit outer_loop when i = 2 and j = 3;
+              --
+              j := j + 1;
+              total := total + j;
+              --
+              exit when j > 5;
+            end loop;
+            --
+            i := i + 1;
+            total := total + j;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 60
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 10
+      caption: "Вложенные циклы (для внешнего цикла задана метка), работающие с разными переменными, у каждого свой exit, exit вложенного не влияет на внешний"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          loop
+            j := 0;
+            loop
+              exit outer_loop when i = 2 and j = 3;
+              --
+              j := j + 1;
+              total := total + j;
+              --
+              exit when j > 5;
+            end loop;
+            --
+            i := i + 1;
+            total := total + j;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 60
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 11
+      caption: "Цикл с выходом по exit when, exit when много, должен сработать первый с истиной"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            exit when i > 7;
+            exit when i > 9;
+            exit when i > 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 12
+      caption: "Цикл с выходом по exit when, exit when много, должен сработать первый с истиной"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            if i > 7 then
+              exit;
+            end if;
+            exit when i > 9;
+            exit when i > 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 13
+      caption: "Цикл с пропуском операций по continue"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            if mod(i, 2) = 0 then
+              continue;
+            end if;
+            --
+            total := total + i;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 16
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 14
+      caption: "Цикл с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            continue when mod(i, 2) = 0;
+            --
+            total := total + i;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 16
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 15
+      caption: "Цикл с пропуском операций по continue when c пустым условием"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            continue when null;
+            --
+            total := total + i;
+            --
+            exit when i > 5;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 21
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 16
+      caption: "Вложенные циклы с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          loop
+            i := i + 1;
+            --
+            j := 0;
+            loop
+              j := j + 1;
+              --
+              continue when j = 2;
+              exit when j > 2;
+              --
+              total := total + j;
+            end loop;
+            --
+            continue when i > 5 and i < 10;
+            exit when i >= 10;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 25
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 17
+      caption: "Вложенные циклы с пропуском операций по continue"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          loop
+            i := i + 1;
+            --
+            j := 0;
+            loop
+              j := j + 1;
+              --
+              if j = 2 then
+                continue;
+              end if;
+              exit when j > 2;
+              --
+              total := total + j;
+            end loop;
+            --
+            if i > 5 and i < 10 then
+              continue;
+            end if;
+            exit when i >= 10;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 25
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 18
+      caption: "Вложенные циклы (для внешнего цикла задана метка) с пропуском операций по continue"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          loop
+            i := i + 1;
+            --
+            j := 0;
+            loop
+              j := j + 1;
+              --
+              if j = 2 and i > 5 and i < 10 then
+                continue outer_loop;
+              end if;
+              exit when j > 2;
+              --
+              total := total + j;
+            end loop;
+            --
+            exit when i >= 10;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 37
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 19
+      caption: "Вложенные циклы (для внешнего цикла задана метка) с пропуском операций по continue when"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+          j number;
+        begin
+          <<outer_loop>>
+          loop
+            i := i + 1;
+            --
+            j := 0;
+            loop
+              j := j + 1;
+              --
+              continue outer_loop when j = 2 and i > 5 and i < 10;
+              exit when j > 2;
+              --
+              total := total + j;
+            end loop;
+            --
+            exit when i >= 10;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 37
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 20
+      caption: "Цикл с несколькими continue, continue много, должен сработать каждый с истиной"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            continue when i = 1;
+            continue when i = 3;
+            continue when i = 5;
+            continue when i = 9;
+            --
+            exit when i = 7;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 12
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 21
+      caption: "Цикл с несколькими continue, continue много, должен сработать каждый с истиной"
+      code: |
+        declare
+          total number := 0;
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            if i = 1 then
+              continue;
+            end if;
+            continue when i = 3;
+            if i = 5 then
+              continue;
+            end if;
+            continue when i = 9;
+            --
+            exit when i = 7;
+            --
+            total := total + i;
+          end loop;
+          --
+          :res := total;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 12
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 22
+      caption: "Цикл с выходом по exit when, exit when много, должен сработать первый с истиной, в перечне есть exit с неопределённым значением"
+      code: |
+        declare
+          i number := 0;
+        begin
+          loop
+            i := i + 1;
+            --
+            exit when i > 7;
+            exit when null;
+            exit when i > 5;
+          end loop;
+          --
+          :res := i;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": 6
+            }
+          ]
+        }
+      comment: ''

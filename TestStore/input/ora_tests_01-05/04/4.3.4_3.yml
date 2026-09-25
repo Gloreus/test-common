@@ -1,0 +1,1364 @@
+Test:
+  chapter: '04.3.4'
+  jira_issue: ''
+  name: '04.3.4'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 101
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 1 not in (-1, null, 0, null, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 102
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 1 not in (null, null, null) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 103
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if '' not in ('A', 'B', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 104
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 'A' not in ('A', 'B', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 105
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 'D' not in ('A', 'B', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 106
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 'aBc' not in ('ABC', 'aBc', 'AbC') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 107
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 'abc' not in ('ABC', 'aBc', 'AbC') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 108
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 'B' not in ('A', 'B', '', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 109
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 'X' not in ('', null, '') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 110
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if null not in ('', null, '') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 111
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if null not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 112
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if to_date('01/01/2024', 'dd/mm/yyyy') not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 113
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if to_date('01/01/2022', 'dd/mm/yyyy') not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 114
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if to_date('01/01/2025', 'dd/mm/yyyy') not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,null
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,null
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 115
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if to_date('01/01/2025', 'dd/mm/yyyy') not in (null, null, null) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 116
+      caption: 'Проверка оператора not in (на "заданном" значении, неявное приведение типов)'
+      code: |
+        begin
+          if 2 not in ('1', '2', '3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 117
+      caption: 'Проверка оператора not in (на "заданном" значении, неявное приведение типов)'
+      code: |
+        begin
+          if 5 not in ('1', '2', '3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 118
+      caption: 'Проверка оператора not in (на "заданном" значении, неявное приведение типов)'
+      code: |
+        begin
+          if '2' not in (1, 2, 3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 119
+      caption: 'Проверка оператора not in (на "заданном" значении, неявное приведение типов)'
+      code: |
+        begin
+          if '5' not in (1, 2, 3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 120
+      caption: 'Проверка оператора not in (на "заданном" значении, неявное приведение типов)'
+      code: |
+        begin
+          if 5 not in ('1', 'A', '2', 'B', '3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "error",
+          "error": {
+            "errorCode": -6502,
+            "message": "ORA-06502: PL/SQL: numeric or value error: character to number conversion error"
+          }
+        }
+      comment: ''
+
+    - id: 121
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          n number := null;
+        begin
+          if n not in (-1, 0, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 122
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          n number := 1;
+        begin
+          if n not in (-1, 0, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 123
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not in (-1, 0, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 124
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          n number := null;
+        begin
+          if n not in (null, null, null) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 125
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          n number := 1;
+        begin
+          if n not in (-1, null, 0, null, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 126
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          n number := 1;
+        begin
+          if n not in (null, null, null) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 127
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := '';
+        begin
+          if str not in ('A', 'B', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 128
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'A';
+        begin
+          if str not in ('A', 'B', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 129
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'D';
+        begin
+          if str not in ('A', 'B', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 130
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'aBc';
+        begin
+          if str not in ('ABC', 'aBc', 'AbC') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 131
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'abc';
+        begin
+          if str not in ('ABC', 'aBc', 'AbC') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 132
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'B';
+        begin
+          if str not in ('A', 'B', '', 'C') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 133
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'X';
+        begin
+          if str not in ('', null, '') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 134
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          str varchar2(20) := null;
+        begin
+          if str not in ('', null, '') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 135
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          dat date := null;
+        begin
+          if dat not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 136
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          dat date := to_date('01/01/2024', 'dd/mm/yyyy');
+        begin
+          if dat not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 137
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          dat date := to_date('01/01/2022', 'dd/mm/yyyy');
+        begin
+          if dat not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 138
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat not in (to_date('01/01/2023', 'dd/mm/yyyy')
+          ,null
+          ,to_date('01/01/2024', 'dd/mm/yyyy')
+          ,null
+          ,to_date('01/01/2025', 'dd/mm/yyyy')
+          )
+          then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 139
+      caption: 'Проверка оператора not in (левая часть задана переменной)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat not in (null, null, null) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 140
+      caption: 'Проверка оператора not in (левая часть задана переменной, неявное приведение типов)'
+      code: |
+        declare
+          n number := 2;
+        begin
+          if n not in ('1', '2', '3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 141
+      caption: 'Проверка оператора not in (левая часть задана переменной, неявное приведение типов)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not in ('1', '2', '3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 142
+      caption: 'Проверка оператора not in (левая часть задана переменной, неявное приведение типов)'
+      code: |
+        declare
+          str varchar2(20) := '2';
+        begin
+          if str not in (1, 2, 3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 143
+      caption: 'Проверка оператора not in (левая часть задана переменной, неявное приведение типов)'
+      code: |
+        declare
+          str varchar2(20) := '5';
+        begin
+          if str not in (1, 2, 3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 144
+      caption: 'Проверка оператора not in (левая часть задана переменной, неявное приведение типов)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not in ('1', 'A', '2', 'B', '3') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "error",
+          "error": {
+            "errorCode": -6502,
+            "message": "ORA-06502: PL/SQL: numeric or value error: character to number conversion error"
+          }
+        }
+      comment: ''
+
+    - id: 145
+      caption: 'Проверка оператора not in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := null;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+        begin
+          if n not in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 146
+      caption: 'Проверка оператора not in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+        begin
+          if n not in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 147
+      caption: 'Проверка оператора not in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 5;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+        begin
+          if n not in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 148
+      caption: 'Проверка оператора not in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := null;
+          right1 number := null;
+          right2 number := null;
+          right3 number := null;
+        begin
+          if n not in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 149
+      caption: 'Проверка оператора not in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := -1;
+          right2 number := null;
+          right3 number := 0;
+          right4 number := null;
+          right5 number := 1;
+        begin
+          if n not in (right1, right2, right3, right4, right5) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 150
+      caption: 'Проверка оператора not in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := null;
+          right2 number := null;
+          right3 number := null;
+        begin
+          if n not in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''

@@ -1,0 +1,1554 @@
+Test:
+  chapter: '4.3.3'
+  jira_issue: ''
+  name: '4.3.3'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 103
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if null not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 104
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 5 not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 105
+      caption: 'Проверка оператора not between (на "заданном" значении, проверка на левой границе)'
+      code: |
+        begin
+          if 1 not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 106
+      caption: 'Проверка оператора not between (на "заданном" значении, проверка на правой границе)'
+      code: |
+        begin
+          if 10 not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 107
+      caption: 'Проверка оператора not between (на "заданном" значении, проверка на минимальном интервале)'
+      code: |
+        begin
+          if 5 not between 5 and 5 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 108
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 15 not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 109
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if -3 not between -5 and 0 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 110
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if -8 not between -5 and 0 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 111
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 5 not between null and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 112
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 5 not between 1 and null then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 113
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 5 not between null and null then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 114
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 5 not between null and null then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 115
+      caption: 'Проверка оператора not between (на "заданном" значении, проверка вхождения с результатами вычислений)'
+      code: |
+        begin
+          if 2 + 3 not between 100 - 99 and 5 * 2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 116
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if null not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 117
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if to_date('01/06/2024', 'dd/mm/yyyy') not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 118
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if to_date('01/06/2023', 'dd/mm/yyyy') not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 119
+      caption: 'Проверка оператора not between (на "заданном" значении, проверка на границе)'
+      code: |
+        begin
+          if to_date('01/01/2025', 'dd/mm/yyyy') not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 120
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if null not between 'A' and 'Z' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 121
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 'abc' not between 'aaa' and 'bbb' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 122
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 'test' not between 'aaa' and 'zzz' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 123
+      caption: 'Проверка оператора not between (на "заданном" значении)'
+      code: |
+        begin
+          if 'zzz' not between 'aaa' and 'bbb' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 124
+      caption: 'Проверка оператора not between (на "заданном" значении, проверка на границе)'
+      code: |
+        begin
+          if 'bbb' not between 'aaa' and 'bbb' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 125
+      caption: 'Проверка оператора not between (на "заданном" значении, неявное приведение)'
+      code: |
+        begin
+          if 5 not between '1' and '10' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 126
+      caption: 'Проверка оператора not between (на "заданном" значении, неявное приведение)'
+      code: |
+        begin
+          if '5' not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 127
+      caption: 'Проверка оператора not between (на "заданном" значении, перевёрнутые границы)'
+      code: |
+        begin
+          if 5 not between 10 and 1 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 128
+      caption: 'Проверка оператора not between (на "заданном" значении, перевёрнутые границы)'
+      code: |
+        begin
+          if 15 not between 10 and 1 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 129
+      caption: 'Проверка оператора not between (на "заданном" значении, перевёрнутые границы)'
+      code: |
+        begin
+          if 'A' not between 'Z' and 'A' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 130
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          n number := null;
+        begin
+          if n not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 131
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 132
+      caption: 'Проверка оператора not between (на значении переменной, проверка на левой границе)'
+      code: |
+        declare
+          n number := 1;
+        begin
+          if n not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 133
+      caption: 'Проверка оператора not between (на значении переменной, проверка на правой границе)'
+      code: |
+        declare
+          n number := 10;
+        begin
+          if n not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 134
+      caption: 'Проверка оператора not between (на значении переменной, проверка на минимальном интервале)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not between 5 and 5 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 135
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          n number := 15;
+        begin
+          if n not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 136
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          n number := -3;
+        begin
+          if n not between -5 and 0 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 137
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          n number := -8;
+        begin
+          if n not between -5 and 0 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 138
+      caption: 'Проверка оператора not between (на значении переменной, проверка вхождения с результатами вычислений)'
+      code: |
+        declare
+          n1 number := 2;
+          n2 number := 3;
+        begin
+          if n1 + n2 not between 100 - 99 and 5 * 2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 139
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          dat date := null;
+        begin
+          if dat not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 140
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          dat date := to_date('01/06/2024', 'dd/mm/yyyy');
+        begin
+          if dat not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 141
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          dat date := to_date('01/06/2023', 'dd/mm/yyyy');
+        begin
+          if dat not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 142
+      caption: 'Проверка оператора not between (на значении переменной, проверка на границе)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat not between to_date('01/01/2024', 'dd/mm/yyyy') and to_date('01/01/2025', 'dd/mm/yyyy') then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 143
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          str varchar2(20) := null;
+        begin
+          if str not between 'A' and 'Z' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 144
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'abc';
+        begin
+          if str not between 'aaa' and 'bbb' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 145
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'test';
+        begin
+          if str not between 'aaa' and 'zzz' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 146
+      caption: 'Проверка оператора not between (на значении переменной)'
+      code: |
+        declare
+          str varchar2(20) := 'zzz';
+        begin
+          if str not between 'aaa' and 'bbb' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 147
+      caption: 'Проверка оператора not between (на значении переменной, проверка на границе)'
+      code: |
+        declare
+          str varchar2(20) := 'bbb';
+        begin
+          if str not between 'aaa' and 'bbb' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 148
+      caption: 'Проверка оператора not between (на значении переменной, неявное приведение)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not between '1' and '10' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 149
+      caption: 'Проверка оператора not between (на значении переменной, неявное приведение)'
+      code: |
+        declare
+          str varchar2(20) := '5';
+        begin
+          if str not between 1 and 10 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 150
+      caption: 'Проверка оператора not between (на значении переменной, перевёрнутые границы)'
+      code: |
+        declare
+          n number := 5;
+        begin
+          if n not between 10 and 1 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 151
+      caption: 'Проверка оператора not between (на значении переменной, перевёрнутые границы)'
+      code: |
+        declare
+          n number := 15;
+        begin
+          if n not between 10 and 1 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+    - id: 152
+      caption: 'Проверка оператора not between (на значении переменной, перевёрнутые границы)'
+      code: |
+        declare
+          str varchar2(20) := 'A';
+        begin
+          if str not between 'Z' and 'A' then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''

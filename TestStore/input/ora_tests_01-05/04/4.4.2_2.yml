@@ -1,0 +1,2656 @@
+Test:
+  chapter: '4.4.2'
+  jira_issue: ''
+  name: '4.4.2'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 51
+      caption: 'Проверка оператора and между двумя пустыми значениями, следом оператор or'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null and null or null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 52
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or true and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 53
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or false and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 54
+      caption: 'Проверка оператора or между bool-значением и пустым значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or null and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 55
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or true and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 56
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or false and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 57
+      caption: 'Проверка оператора or между bool-значением и пустым значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or null and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 58
+      caption: 'Проверка оператора or между пустым значением и bool-значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or true and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 59
+      caption: 'Проверка оператора or между пустым значением и bool-значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or false and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 60
+      caption: 'Проверка оператора or между двумя пустыми значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or null and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 61
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or true and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 62
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or false and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 63
+      caption: 'Проверка оператора or между bool-значением и пустым значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or null and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 64
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or true and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 65
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or false and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 66
+      caption: 'Проверка оператора or между bool-значением и пустым значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or null and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 67
+      caption: 'Проверка оператора or между пустым значением и bool-значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or true and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 68
+      caption: 'Проверка оператора or между пустым значением и bool-значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or false and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 69
+      caption: 'Проверка оператора or между двумя пустыми значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or null and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 70
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or true and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 71
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or false and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 72
+      caption: 'Проверка оператора or между bool-значением и пустым значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := true or null and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 73
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or true and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 74
+      caption: 'Проверка оператора or между двумя bool-значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or false and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 75
+      caption: 'Проверка оператора or между bool-значением и пустым значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := false or null and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 76
+      caption: 'Проверка оператора or между пустым значением и bool-значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or true and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 77
+      caption: 'Проверка оператора or между пустым значением и bool-значением, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or false and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 78
+      caption: 'Проверка оператора or между двумя пустыми значениями, следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := null or null and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 79
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or true) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 80
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or false) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 81
+      caption: 'Проверка оператора or между bool-значением и пустым значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or null) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 82
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or true) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 83
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or false) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 84
+      caption: 'Проверка оператора or между bool-значением и пустым значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or null) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 85
+      caption: 'Проверка оператора or между пустым значением и bool-значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (null or true) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 86
+      caption: 'Проверка оператора or между пустым значением и bool-значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (null or false) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 87
+      caption: 'Проверка оператора or между двумя пустыми значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (null or null) and true;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 88
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or true) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 89
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or false) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 90
+      caption: 'Проверка оператора or между bool-значением и пустым значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or null) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 91
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or true) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 92
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or false) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 93
+      caption: 'Проверка оператора or между bool-значением и пустым значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or null) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 94
+      caption: 'Проверка оператора or между пустым значением и bool-значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (null or true) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 95
+      caption: 'Проверка оператора or между пустым значением и bool-значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (null or false) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 96
+      caption: 'Проверка оператора or между двумя пустыми значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (null or null) and false;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 97
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or true) and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 98
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or false) and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 99
+      caption: 'Проверка оператора or между bool-значением и пустым значением (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (true or null) and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 100
+      caption: 'Проверка оператора or между двумя bool-значениями (заключено в скобки), следом оператор and'
+      code: |
+        declare
+          res boolean;
+        begin
+          res := (false or true) and null;
+          if res is null then
+            :res := 'NULL';
+          elsif res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "NULL"
+            }
+          ]
+        }
+      comment: ''

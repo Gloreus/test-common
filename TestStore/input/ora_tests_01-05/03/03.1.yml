@@ -1,0 +1,1852 @@
+Test: 
+  chapter: '03.1'
+  jira_issue: ''
+  name: '03.1'
+  caption: ''
+  comment: autogenerate
+  cases:
+    - id: 1
+      caption: Сложение двух определённых положительных чисел
+      code: |-
+        begin
+        :n := 1 + 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 3
+        }
+        ]
+        }
+      comment: ''
+    - id: 2
+      caption: Сложение двух определённых положительных чисел, заключённых в скобки
+      code: |-
+        begin
+        :n := (1) + (2);
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 3
+        }
+        ]
+        }
+      comment: ''
+    - id: 3
+      caption: Сложение двух определённых чисел: положительного и отрицательного
+      code: |-
+        begin
+        :n := -5 + 3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -2
+        }
+        ]
+        }
+      comment: ''
+    - id: 4
+      caption: Сложение двух определённых чисел: отрицательного и положительного
+      code: |-
+        begin
+        :n := 5 + -3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 2
+        }
+        ]
+        }
+      comment: ''
+    - id: 5
+      caption: Сложение двух определённых отрицательных чисел
+      code: |-
+        begin
+        :n := -1 + -2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -3
+        }
+        ]
+        }
+      comment: ''
+    - id: 6
+      caption: Разница двух определённых положительных чисел
+      code: |-
+        begin
+        :n := 6 - 4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 2
+        }
+        ]
+        }
+      comment: ''
+    - id: 7
+      caption: Разница двух определённых чисел: положительного и отрицательного
+      code: |-
+        begin
+        :n := 1 - -2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 3
+        }
+        ]
+        }
+      comment: ''
+    - id: 8
+      caption: Разница двух определённых чисел: отрицательного и положительного
+      code: |-
+        begin
+        :n := -1 - 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -3
+        }
+        ]
+        }
+      comment: ''
+    - id: 9
+      caption: Разница двух определённых отрицательных чисел
+      code: |-
+        begin
+        :n := -1 - -2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 1
+        }
+        ]
+        }
+      comment: ''
+    - id: 10
+      caption: Разница двух определённых отрицательных чисел, заключённых в скобки
+      code: |-
+        begin
+        :n := (-1) - (-2);
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 1
+        }
+        ]
+        }
+      comment: ''
+    - id: 11
+      caption: Разница двух определённых отрицательных чисел, заключённых в скобки
+      code: |-
+        begin
+        :n := -(1) - -(2);
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 1
+        }
+        ]
+        }
+      comment: ''
+    - id: 12
+      caption: Умножение двух определённых положительных чисел, результат - целое число
+      code: |-
+        begin
+        :n := 3 * 4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 12
+        }
+        ]
+        }
+      comment: ''
+    - id: 13
+      caption: Умножение двух определённых положительных чисел, результат - вещественное число
+      code: |-
+        begin
+        :n := 2.5 * 3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 7.5
+        }
+        ]
+        }
+      comment: ''
+    - id: 14
+      caption: Умножение двух определённых чисел: положительного и отрицательного
+      code: |-
+        begin
+        :n := 3 * -4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -12
+        }
+        ]
+        }
+      comment: ''
+    - id: 15
+      caption: Деление двух определённых положительных чисел, результат - целое число
+      code: |-
+        begin
+        :n := 10 / 5;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 2
+        }
+        ]
+        }
+      comment: ''
+    - id: 16
+      caption: Деление двух определённых положительных чисел, результат - вещественное число
+      code: |-
+        begin
+        :n := 7 / 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 3.5
+        }
+        ]
+        }
+      comment: ''
+    - id: 17
+      caption: Деление двух определённых чисел: положительного и отрицательного
+      code: |-
+        begin
+        :n := 10 / -2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -5
+        }
+        ]
+        }
+      comment: ''
+    - id: 18
+      caption: Возведение в степень определённого положительного числа, результат – целое число
+      code: |-
+        begin
+        :n := 2 ** 3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 8
+        }
+        ]
+        }
+      comment: ''
+    - id: 19
+      caption: Возведение в степень определённого положительного числа, результат – вещественное число
+      code: |-
+        begin
+        :n := 2.5 ** 3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 15.625
+        }
+        ]
+        }
+      comment: ''
+    - id: 20
+      caption: Возведение в степень определённого отрицательного числа
+      code: |-
+        begin
+        :n := -2 ** 3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -8
+        }
+        ]
+        }
+      comment: ''
+    - id: 21
+      caption: Возведение в степень определённого отрицательного числа, заключённого в скобки
+      code: |-
+        begin
+        :n := (-2) ** 3;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -8
+        }
+        ]
+        }
+      comment: ''
+    - id: 22
+      caption: Возведение в нулевую степень определённого положительного числа
+      code: |-
+        begin
+        :n := 5 ** 0;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 1
+        }
+        ]
+        }
+      comment: ''
+    - id: 23
+      caption: Возведение в отрицательную степень определённого положительного числа
+      code: |-
+        begin
+        :n := 4 ** (-2);
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 0.0625
+        }
+        ]
+        }
+      comment: ''
+    - id: 24
+      caption: Арифметические операции с разным приоритетом над определёнными числами
+      code: |-
+        begin
+        :n := 2 + 3 * 4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 14
+        }
+        ]
+        }
+      comment: ''
+    - id: 25
+      caption: Арифметические операции с разным приоритетом над определёнными числами
+      code: |-
+        begin
+        :n := -2 - 5 / 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -4.5
+        }
+        ]
+        }
+      comment: ''
+    - id: 26
+      caption: Арифметические операции с разным приоритетом над определёнными числами, приоритет задаётся скобками
+      code: |-
+        begin
+        :n := (2 + 3) * 4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 20
+        }
+        ]
+        }
+      comment: ''
+    - id: 27
+      caption: Арифметические операции с разным приоритетом над определёнными числами, приоритет задаётся скобками, перед скобками минус
+      code: |-
+        begin
+        :n := -(2 + 3) * 4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -20
+        }
+        ]
+        }
+      comment: ''
+    - id: 28
+      caption: Арифметические операции с разным приоритетом над определёнными числами, приоритет задаётся скобками, перед скобками минус
+      code: |-
+        begin
+        :n := -(2 + 3) * 4;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -20
+        }
+        ]
+        }
+      comment: ''
+    - id: 29
+      caption: Арифметические операции с разным приоритетом над определёнными числами
+      code: |-
+        begin
+        :n := 2 + 3 ** 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 11
+        }
+        ]
+        }
+      comment: ''
+    - id: 30
+      caption: Арифметические операции с разным приоритетом над определёнными числами, приоритет задаётся скобками
+      code: |-
+        begin
+        :n := (2 + 3) ** 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 25
+        }
+        ]
+        }
+      comment: ''
+    - id: 31
+      caption: Одинаковые арифметические операции, приоритет определяется скобками, без скобок не работает
+      code: |-
+        begin
+        :n := (2 ** 3) ** 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 64
+        }
+        ]
+        }
+      comment: ''
+    - id: 32
+      caption: Одинаковые арифметические операции, приоритет определяется скобками, без скобок не работает
+      code: |-
+        begin
+        :n := 2 ** (3 ** 2);
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 512
+        }
+        ]
+        }
+      comment: ''
+    - id: 33
+      caption: Арифметическая операция с определённым и неопределённым числом
+      code: |-
+        begin
+        :n := null + 5;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      comment: ''
+    - id: 34
+      caption: Арифметическая операция с определённым и неопределённым числом
+      code: |-
+        begin
+        :n := 5 - null;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      comment: ''
+    - id: 35
+      caption: Арифметическая операция с определённым и неопределённым числом
+      code: |-
+        begin
+        :n := null * 5;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      comment: ''
+    - id: 36
+      caption: Арифметическая операция с определённым и неопределённым числом
+      code: |-
+        begin
+        :n := 5 / null;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      comment: ''
+    - id: 37
+      caption: Арифметическая операция с определённым и неопределённым числом
+      code: |-
+        begin
+        :n := null ** 5;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      comment: ''
+    - id: 38
+      caption: Арифметическая операция с неопределёнными числами
+      code: |-
+        begin
+        :n := null + null;
+        end;
+      input: ''
+      result: ''
+      comment: ''
+    - id: 39
+      caption: Сложный пример: много арифметических операций с разным приоритетом
+      code: |-
+        begin
+        :n := 8 - ((4 + 2)) * 3 / 2;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": -1
+        }
+        ]
+        }
+      comment: ''
+    - id: 40
+      caption: Арифметическая операция с числом и строкой, в которой заключено число
+      code: |-
+        begin
+        :n := 1 + '1';
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 2
+        }
+        ]
+        }
+      comment: ''
+    - id: 41
+      caption: Арифметическая операция с числом и строкой, в которой заключено не число
+      code: |-
+        begin
+        :n := 1 + 'A';
+        end;
+      input: ''
+      result: |-
+        {
+        "resultType": "error",
+        "error": {
+        "standardException": "INVALID_NUMBER"
+        }
+        }
+      comment: ''
+    - id: 42
+      caption: Арифметическая операция со строками, в которых заключены числа
+      code: |-
+        begin
+        :n := '1' * '2';
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 2
+        }
+        ]
+        }
+      comment: ''
+    - id: 43
+      caption: Арифметическая операция с целочисленными значениями с результатом – максимальной величиной
+      code: |-
+        begin
+        :n := 2147483646 + 1;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 2147483647
+        }
+        ]
+        }
+      comment: ''
+    - id: 44
+      caption: Арифметическая операция с целочисленными значениями с результатом – за границей максимальной величины
+      code: |-
+        begin
+        :n := 2147483647 + 1;
+        end;
+      input: ''
+      result: |-
+        {
+        "resultType": "error",
+        "error": {
+        "standardException": "VALUE_ERROR"
+        }
+        }
+      comment: ''
+    - id: 45
+      caption: Возведение в вещественную степень определённого положительного числа, результат – вещественное число
+      code: |-
+        begin
+        :n := 12.25 ** 0.5;
+        end;
+      input: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ]
+        }
+      result: |-
+        {
+        "resultType": "binds",
+        "inputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": null
+        }
+        ],
+        "outputBinds": [
+        {
+        "name": "n",
+        "type": "number",
+        "value": 3.5
+        }
+        ]
+        }
+      comment: ''

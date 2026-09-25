@@ -1,0 +1,407 @@
+Test:
+  chapter: '03.4'
+  jira_issue: ''
+  name: '03.4'
+  caption: ''
+  comment: autogenerate
+  cases:
+    - id: 1
+      caption: Конкатенация двух строк
+      code: |-
+        begin
+        :txt := 'Hello, ' || 'World!';
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Hello, World!"
+            }
+          ]
+        }
+      comment: ''
+    - id: 2
+      caption: Конкатенация трёх строк
+      code: |-
+        begin
+        :txt := 'A' || 'B' || 'C';
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "ABC"
+            }
+          ]
+        }
+      comment: ''
+    - id: 3
+      caption: Конкатенация двух строк
+      code: |-
+        declare
+        vStr varchar2(20) := 'Start';
+        begin
+        :txt := vStr || 'End';
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "StartEnd"
+            }
+          ]
+        }
+      comment: ''
+    - id: 4
+      caption: Конкатенация двух строк
+      code: |-
+        declare
+        vStr1 varchar2(20) := 'Start';
+        vStr2 varchar2(20) := 'End';
+        begin
+        :txt := vStr1 || vStr2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "StartEnd"
+            }
+          ]
+        }
+      comment: ''
+    - id: 5
+      caption: Конкатенация строки и числа
+      code: |-
+        begin
+        :txt := 'Число=' || 123;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число=123"
+            }
+          ]
+        }
+      comment: ''
+    - id: 6
+      caption: Конкатенация строки и числа
+      code: |-
+        declare
+        vStr varchar2(20) := 'Число=';
+        vNum number := 123;
+        begin
+        :txt := vStr || vNum;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число=123"
+            }
+          ]
+        }
+      comment: ''
+    - id: 7
+      caption: Конкатенация строки и null
+      code: |-
+        begin
+        :txt := 'Число=' || null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число="
+            }
+          ]
+        }
+      comment: ''
+    - id: 8
+      caption: Конкатенация строки и null
+      code: |-
+        declare
+        vStr1 varchar2(20) := 'Число=';
+        vStr2 varchar2(20) := null;
+        begin
+        :txt := vStr1 || vStr2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число="
+            }
+          ]
+        }
+      comment: ''
+    - id: 9
+      caption: Конкатенация строки и null
+      code: |-
+        begin
+        :txt := null || 'Число=';
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число="
+            }
+          ]
+        }
+      comment: ''
+    - id: 10
+      caption: Конкатенация строки и null
+      code: |-
+        declare
+        vStr1 varchar2(20) := 'Число=';
+        vStr2 varchar2(20) := null;
+        begin
+        :txt := vStr2 || vStr1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число="
+            }
+          ]
+        }
+      comment: ''
+    - id: 11
+      caption: Конкатенация null и null
+      code: |-
+        begin
+        :txt := null || null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 12
+      caption: Конкатенация null и null
+      code: |-
+        declare
+        vStr1 varchar2(20) := null;
+        vStr2 varchar2(20) := null;
+        begin
+        :txt := vStr1 || vStr2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 13
+      caption: Конкатенация пустой строки и null
+      code: |-
+        begin
+        :txt := '' || null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 14
+      caption: Конкатенация пустой строки и null
+      code: |-
+        declare
+        vStr1 varchar2(20) := '';
+        vStr2 varchar2(20) := null;
+        begin
+        :txt := vStr1 || vStr2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 15
+      caption: Конкатенация строки и результата арифметической операции
+      code: |-
+        begin
+        :txt := 'Число=' || (100 + 23);
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число=123"
+            }
+          ]
+        }
+      comment: ''
+    - id: 16
+      caption: Конкатенация строки и вещественного числа
+      code: |-
+        begin
+        :txt := 'Число=' || 123.653000;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число=123.653"
+            }
+          ]
+        }
+      comment: ''
+    - id: 17
+      caption: Конкатенация строки и вещественного числа
+      code: |-
+        begin
+        :txt := 'Число=' || 123.6530001;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число=123.6530001"
+            }
+          ]
+        }
+      comment: ''
+    - id: 18
+      caption: Конкатенация строки и вещественного числа с большой точностью
+      code: |-
+        begin
+        :txt := 'Число=' || 0.666666666666666666666666666666666666666666666666666666666666666666666666666666;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Число=.6666666666666666666666666666666666666667"
+            }
+          ]
+        }
+      comment: ''
+    - id: 19
+      caption: Конкатенация строки, в которой число, и результата арифметической операции (приоритетно выполняется до конкатенации)
+      code: |-
+        begin
+        :txt := '500' || 100 + 25 ;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "500125"
+            }
+          ]
+        }
+      comment: ''

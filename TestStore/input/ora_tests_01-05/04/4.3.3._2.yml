@@ -1,0 +1,1725 @@
+Test:
+  chapter: '4.3.3'
+  jira_issue: ''
+  name: '4.3.3'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 71
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка на границе)"
+      code: |-
+        declare
+          str varchar2(20) := 'bbb';
+          left varchar2(20) := 'aaa';
+          right varchar2(20) := 'bbb';
+        begin
+          if str between left and right then 
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 72
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, неявное приведение)"
+      code: |-
+        declare
+          n number := 5;
+          left varchar2(20) := '1';
+          right varchar2(20) := '10';
+        begin
+          if n between left and right then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 73
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, неявное приведение)"
+      code: |-
+        declare
+          str varchar2(20) := '5';
+          left number := 1;
+          right number := 10;
+        begin
+          if str between left and right then 
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 74
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, перевёрнутые границы)"
+      code: |-
+        declare
+          n number := 5;
+          left number := 10;
+          right number := 1;
+        begin
+          if n between left and right then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 75
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, перевёрнутые границы)"
+      code: |-
+        declare
+          n number := 15;
+          left number := 10;
+          right number := 1;
+        begin
+          if n between left and right then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 76
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, перевёрнутые границы)"
+      code: |-
+        declare
+          str varchar2(20) := 'A';
+          left varchar2(20) := 'Z';
+          right varchar2(20) := 'A';
+        begin
+          if str between left and right then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 77
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := null;
+          left number := 1;
+          right number := 10;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 78
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 5;
+          left number := 1;
+          right number := 10;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 79
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка на левой границе, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 1;
+          left number := 1;
+          right number := 10;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 80
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка на правой границе, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 10;
+          left number := 1;
+          right number := 10;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 81
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка на минимальном интервале, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 5;
+          left number := 5;
+          right number := 5;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 82
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 15;
+          left number := 1;
+          right number := 10;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 83
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := -3;
+          left number := -5;
+          right number := 0;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 84
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := -8;
+          left number := -5;
+          right number := 0;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 85
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 5;
+          left number := null;
+          right number := 10;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 86
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 5;
+          left number := 1;
+          right number := null;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 87
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, сохранение результата в переменную)"
+      code: |-
+        declare
+          n number := 5;
+          left number := null;
+          right number := null;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 88
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка вхождения с результатами вычислений)"
+      code: |-
+        declare
+          n1 number := 2;
+          n2 number := 3;
+          left1 number := null;
+          left2 number := null;
+          right1 number := null;
+          right2 number := null;
+          res boolean;
+        begin
+          res := n1 + n2 between left1 - left2 and right1 * right2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 89
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          dat date := null;
+          left date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 90
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          dat date := to_date('01/06/2024', 'dd/mm/yyyy');
+          left date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 91
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          dat date := to_date('01/06/2023', 'dd/mm/yyyy');
+          left date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat between left and right;
+          if res then 
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 92
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка на границе)"
+      code: |-
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+          left date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 93
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          str varchar2(20) := null;
+          left varchar2(20) := 'A';
+          right varchar2(20) := 'Z';
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 94
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          str varchar2(20) := 'abc';
+          left varchar2(20) := 'aaa';
+          right varchar2(20) := 'bbb';
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 95
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          str varchar2(20) := 'test';
+          left varchar2(20) := 'aaa';
+          right varchar2(20) := 'zzz';
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 96
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными)"
+      code: |-
+        declare
+          str varchar2(20) := 'zzz';
+          left varchar2(20) := 'aaa';
+          right varchar2(20) := 'bbb';
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 97
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, проверка на границе)"
+      code: |-
+        declare
+          str varchar2(20) := 'bbb';
+          left varchar2(20) := 'aaa';
+          right varchar2(20) := 'bbb';
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then 
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 98
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, неявное приведение)"
+      code: |-
+        declare
+          n number := 5;
+          left varchar2(20) := '1';
+          right varchar2(20) := '10';
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 99
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, неявное приведение)"
+      code: |-
+        declare
+          str varchar2(20) := '5';
+          left number := 1;
+          right number := 10;
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then 
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 100
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, перевёрнутые границы)"
+      code: |-
+        declare
+          n number := 5;
+          left number := 10;
+          right number := 1;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 101
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, перевёрнутые границы)"
+      code: |-
+        declare
+          n number := 15;
+          left number := 10;
+          right number := 1;
+          res boolean;
+        begin
+          res := n between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 102
+      caption: "Проверка оператора between (на значении переменной, концы интервала заданы переменными, перевёрнутые границы)"
+      code: |-
+        declare
+          str varchar2(20) := 'A';
+          left varchar2(20) := 'Z';
+          right varchar2(20) := 'A';
+          res boolean;
+        begin
+          res := str between left and right;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''

@@ -1,0 +1,1301 @@
+Test:
+  chapter: '03.3'
+  jira_issue: ''
+  name: '03.3'
+  caption: ''
+  comment: autogenerate
+  cases:
+    - id: 1
+      caption: Прибавление к дате дней, дата и количество дней задаётся бинд-переменными
+      code: |-
+        begin
+        :dt_out := :dt_in + :num_in;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "01/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "01/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 2
+      caption: Прибавление к дате дней, дата задаётся бинд-переменной
+      code: |-
+        begin
+        :dt_out := :dt_in + 10;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "11/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 3
+      caption: Прибавление к дате дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + 1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 4
+      caption: Прибавление к дате дней, дата и количество дней задаётся переменными
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        vNum number := 1;
+        begin
+        :dt_out := vDt + vNum;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 5
+      caption: Вычитание из даты дней, дата и количество дней задаётся бинд-переменными
+      code: |-
+        begin
+        :dt_out := :dt_in - :num_in;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "20/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "20/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "19/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 6
+      caption: Вычитание из даты дней, дата задаётся бинд-переменной
+      code: |-
+        begin
+        :dt_out := :dt_in - 10;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "20/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "date",
+              "value": "20/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "10/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 7
+      caption: Вычитание из даты дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt date := to_date('20/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt - 1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "19/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 8
+      caption: Вычитание из даты дней, дата и количество дней задаётся переменными
+      code: |-
+        declare
+        vDt date := to_date('20/01/2025', 'dd/mm/yyyy');
+        vNum number := 1;
+        begin
+        :dt_out := vDt - vNum;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "19/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 9
+      caption: Разность дат, заданных бинд-переменными
+      code: |-
+        begin
+        :num := :dt_in_1 - :dt_in_2;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in_1",
+              "type": "date",
+              "value": "10/01/2025"
+            },
+            {
+              "name": "dt_in_2",
+              "type": "date",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in_1",
+              "type": "date",
+              "value": "10/01/2025"
+            },
+            {
+              "name": "dt_in_2",
+              "type": "date",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 9
+            }
+          ]
+        }
+      comment: ''
+    - id: 10
+      caption: Разность дат, заданных переменными
+      code: |-
+        declare
+        vDt1 date := to_date('10/01/2025', 'dd/mm/yyyy');
+        vDt2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt1 - vDt2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 9
+            }
+          ]
+        }
+      comment: ''
+    - id: 11
+      caption: Разность дат, заданных переменными
+      code: |-
+        declare
+        vDt1 date := to_date('10/01/2025', 'dd/mm/yyyy');
+        vDt2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt2 - vDt1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -9
+            }
+          ]
+        }
+      comment: ''
+    - id: 12
+      caption: Разность дат, заданных переменными
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt - vDt;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 0
+            }
+          ]
+        }
+      comment: ''
+    - id: 13
+      caption: Комбинация: прибавление к дате дней и разница дат
+      code: |-
+        declare
+        vDt date := to_date('10/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt + 5 - vDt;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        }
+      comment: ''
+    - id: 14
+      caption: Комбинация: прибавление к дате дней и разница дат (со скобками)
+      code: |-
+        declare
+        vDt date := to_date('10/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt - (vDt + 5);
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            }
+          ]
+        }
+      comment: ''
+    - id: 15
+      caption: Прибавление к дате дней, дата задаётся переменной, а дни - не определены
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 16
+      caption: Вычитание из даты дней, дата задаётся переменной, а дни - не определены
+      code: |-
+        declare
+        vDt date := to_date('20/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt - null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 17
+      caption: Прибавление к дате дней, дата задаётся пустой переменной
+      code: |-
+        declare
+        vDt date := null;
+        begin
+        :dt_out := vDt + 1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 18
+      caption: Разность дат, заданных переменными, одна из дат не определена
+      code: |-
+        declare
+        vDt1 date := to_date('10/01/2025', 'dd/mm/yyyy');
+        vDt2 date := null;
+        begin
+        :num := vDt2 - vDt1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 19
+      caption: Прибавление к дате дней, дата и количество дней задаётся переменными, количество дней – строка, содержащая число
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        vStr varchar2(20) := '1';
+        begin
+        :dt_out := vDt + vStr;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 20
+      caption: Прибавление к дате дней, дата задаётся переменной, количество дней – бинд-переменная строка, содержащая число
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + '1';
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 21
+      caption: Прибавление к дате дней, дата задаётся переменной, количество дней – бинд-переменная строка, содержащая число
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + :num_str;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num_str",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num_str",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 22
+      caption: Комбинация: прибавление к дате вещественное число дней и разница дат
+      code: |-
+        declare
+        vDt date := to_date('10/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt + 1 / 2 - vDt;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 0.5
+            }
+          ]
+        }
+      comment: ''
+    - id: 23
+      caption: Прибавление к дате вещественного числа дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + 1 / 2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "01/01/2025 12:00:00"
+            }
+          ]
+        }
+      comment: ''
+    - id: 24
+      caption: Вычитание из даты вещественного числа дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt date := to_date('02/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt - 1 / 4;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "date",
+              "value": "01/01/2025 18:00:00"
+            }
+          ]
+        }
+      comment: ''
+    - id: 25
+      caption: Прибавление к дате (timestamp) дней, дата и количество дней задаётся бинд-переменными
+      code: |-
+        begin
+        :dt_out := :dt_in + :num_in;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "01/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "01/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 26
+      caption: Прибавление к дате (timestamp) дней, дата задаётся бинд-переменной
+      code: |-
+        begin
+        :dt_out := :dt_in + 10;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "11/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 27
+      caption: Прибавление к дате (timestamp) дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + 1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 28
+      caption: Прибавление к дате (timestamp) дней, дата и количество дней задаётся переменными
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        vNum number := 1;
+        begin
+        :dt_out := vDt + vNum;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "02/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 29
+      caption: Вычитание из даты (timestamp) дней, дата и количество дней задаётся бинд-переменными
+      code: |-
+        begin
+        :dt_out := :dt_in - :num_in;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "20/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "20/01/2025"
+            },
+            {
+              "name": "num_in",
+              "type": "number",
+              "value": 1
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "19/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 30
+      caption: Вычитание из даты (timestamp) дней, дата задаётся бинд-переменной
+      code: |-
+        begin
+        :dt_out := :dt_in - 10;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "20/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in",
+              "type": "timestamp",
+              "value": "20/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "10/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 31
+      caption: Вычитание из даты (timestamp) дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('20/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt - 1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "19/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 32
+      caption: Вычитание из даты (timestamp) дней, дата и количество дней задаётся переменными
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('20/01/2025', 'dd/mm/yyyy');
+        vNum number := 1;
+        begin
+        :dt_out := vDt - vNum;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "19/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 33
+      caption: Разность дат (timestamp), заданных бинд-переменными
+      code: |-
+        begin
+        :num := :dt_in_1 - :dt_in_2;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in_1",
+              "type": "timestamp",
+              "value": "2/01/2025"
+            },
+            {
+              "name": "dt_in_2",
+              "type": "timestamp",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt_in_1",
+              "type": "timestamp",
+              "value": "2/01/2025"
+            },
+            {
+              "name": "dt_in_2",
+              "type": "timestamp",
+              "value": "01/01/2025"
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "1 00:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 34
+      caption: Разность дат (timestamp), заданных переменными
+      code: |-
+        declare
+        vDt1 timestamp := to_timestamp('02/01/2025', 'dd/mm/yyyy');
+        vDt2 timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt1 - vDt2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "1 00:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 35
+      caption: Разность дат (timestamp), заданных переменными
+      code: |-
+        declare
+        vDt1 timestamp := to_timestamp('02/01/2025', 'dd/mm/yyyy');
+        vDt2 timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt2 - vDt1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "-1 00:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 36
+      caption: Разность дат (timestamp), заданных переменными
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt - vDt;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "0 00:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 37
+      caption: Комбинация: прибавление к дате (timestamp) дней и разница дат (timestamp)
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('10/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt + 5 - vDt;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "5 00:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 38
+      caption: Комбинация: прибавление к дате (timestamp) дней и разница дат (timestamp) (со скобками)
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('10/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt - (vDt + 5);
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "-5 00:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 39
+      caption: Прибавление к дате (timestamp) дней, дата задаётся переменной, а дни - не определены
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 40
+      caption: Вычитание из даты (timestamp) дней, дата задаётся переменной, а дни - не определены
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('20/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt - null;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 41
+      caption: Прибавление к дате (timestamp) дней, дата задаётся пустой переменной
+      code: |-
+        declare
+        vDt timestamp := null;
+        begin
+        :dt_out := vDt + 1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 42
+      caption: Разность дат (timestamp), заданных переменными, одна из дат не определена
+      code: |-
+        declare
+        vDt1 timestamp := to_timestamp('10/01/2025', 'dd/mm/yyyy');
+        vDt2 timestamp := null;
+        begin
+        :num := vDt2 - vDt1;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 43
+      caption: Комбинация: прибавление к дате (timestamp) вещественное число дней и разница дат (timestamp)
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('10/01/2025', 'dd/mm/yyyy');
+        begin
+        :num := vDt + 1 / 2 - vDt;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "interval day to second",
+              "value": "0 12:00:00.000"
+            }
+          ]
+        }
+      comment: ''
+    - id: 44
+      caption: Прибавление к дате (timestamp) вещественного числа дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('01/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt + 1 / 2;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "01/01/2025 12:00:00"
+            }
+          ]
+        }
+      comment: ''
+    - id: 45
+      caption: Вычитание из даты (timestamp) вещественного числа дней, дата задаётся переменной
+      code: |-
+        declare
+        vDt timestamp := to_timestamp('02/01/2025', 'dd/mm/yyyy');
+        begin
+        :dt_out := vDt - 1 / 4;
+        end;
+      input: '{}'
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "dt_out",
+              "type": "timestamp",
+              "value": "01/01/2025 18:00:00"
+            }
+          ]
+        }
+      comment: ''

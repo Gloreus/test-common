@@ -1,0 +1,903 @@
+Test:
+  chapter: '4.2.1'
+  jira_issue: ''
+  name: '4.2.1'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: 'Проверка полной записи оператора, в котором есть elsif (входящий параметр такой, что значение попадает в группу if)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := 'if';
+          elsif :num < 15 then
+            :res := 'elsif';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "if"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "if"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 2
+      caption: 'Проверка полной записи оператора, в котором есть elsif (входящий параметр такой, что значение попадает в группу elsif)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := 'if';
+          elsif :num < 15 then
+            :res := 'elsif';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "elsif"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "elsif"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 3
+      caption: 'Проверка полной записи оператора, в котором есть elsif (входящий параметр такой, что значение попадает в группу else)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := 'if';
+          elsif :num < 15 then
+            :res := 'elsif';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 4
+      caption: 'Проверка полной записи оператора, в котором есть НЕСКОЛЬКО elsif (входящий параметр такой, что значение попадает в последнюю группу elsif)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := 'if';
+          elsif :num < 15 then
+            :res := 'elsif 1';
+          elsif :num < 150 then
+            :res := 'elsif 2';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "elsif 2"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "elsif 2"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 5
+      caption: 'Проверка полной записи оператора, в котором есть НЕСКОЛЬКО elsif (входящий параметр пустой)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := 'if';
+          elsif :num < 15 then
+            :res := 'elsif 1';
+          elsif :num < 150 then
+            :res := 'elsif 2';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 6
+      caption: 'Проверка полной записи оператора, в котором есть вложенный оператор if - else - end if (входящий параметр такой, что значение попадает в группу elsif, далее в группу if)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := '1 if';
+          elsif :num < 15 then
+            if :num < 10 then
+              :res := '2 if';
+            else
+              :res := '2 else';
+            end if;
+          else
+            :res := '1 else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 7
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 7
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "2 if"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 7
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 7
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "2 if"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 7
+      caption: 'Проверка полной записи оператора, в котором есть вложенный оператор if - else - end if (входящий параметр такой, что значение попадает в группу elsif, далее в группу else)'
+      code: |
+        begin
+          if :num < 5 then
+            :res := '1 if';
+          elsif :num < 15 then
+            if null then
+              :res := '2 if';
+            else
+              :res := '2 else';
+            end if;
+          else
+            :res := '1 else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 12
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 12
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "2 else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 12
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 12
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "2 else"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 8
+      caption: 'Проверка оператора, в условии которого стоит null'
+      code: |
+        begin
+          if null then
+            :res := 'if';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 9
+      caption: 'Проверка оператора, в условии которого стоит null'
+      code: |
+        declare
+          bool boolean;
+        begin
+          if bool then
+            :res := 'if';
+          else
+            :res := 'else';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 10
+      caption: 'Проверка записи оператора, в котором нет elsif и else (входящий параметр такой, что значение попадает в if)'
+      code: |
+        begin
+          :res := 'begin';
+          if :num < 5 then
+            :res := 'if';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "if"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "if"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 11
+      caption: 'Проверка записи оператора, в котором нет elsif и else (входящий параметр такой, что значение попадает в if)'
+      code: |
+        begin
+          :res := 'begin';
+          if :num < 5 then
+            :res := 'if';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 12
+      caption: 'Проверка записи оператора, в котором нет elsif и else (входящий параметр пустой)'
+      code: |
+        begin
+          :res := 'begin';
+          if :num < 5 then
+            :res := 'if';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 13
+      caption: 'Проверка записи оператора, в котором нет elsif и else, в условии которого стоит null'
+      code: |
+        begin
+          :res := 'begin';
+          if null then
+            :res := 'if';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 14
+      caption: 'Проверка записи оператора, в котором нет elsif и else, в условии которого стоит null'
+      code: |
+        declare
+          bool boolean;
+        begin
+          :res := 'begin';
+          if bool then
+            :res := 'if';
+          end if;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "begin"
+            }
+          ]
+        }
+      comment: ''

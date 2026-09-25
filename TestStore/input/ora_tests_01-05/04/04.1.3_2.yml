@@ -1,0 +1,577 @@
+Test:
+  chapter: '04.1.3'
+  jira_issue: ''
+  name: '04.1.3'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 31
+      caption: "Сравнение результата вычислений и числа (проверка сравнения суммы вещественных чисел с целым)"
+      code: |
+        declare
+          n1 number := 1.5;
+          n2 number := 0.5;
+          n3 number := 2;
+          res boolean;
+        begin
+          res := n1 + n2 = n3;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 32
+      caption: "Сравнение двух строк (проверка равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'abc';
+          res boolean;
+        begin
+          res := str1 = str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 33
+      caption: "Сравнение двух строк (проверка равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'bac';
+          res boolean;
+        begin
+          res := str1 = str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 34
+      caption: "Сравнение двух строк (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'abc';
+          res boolean;
+        begin
+          res := str1 != str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 35
+      caption: "Сравнение двух строк (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'bac';
+          res boolean;
+        begin
+          res := str1 != str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 36
+      caption: "Сравнение двух строк (проверка меньше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'bac';
+          res boolean;
+        begin
+          res := str1 < str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 37
+      caption: "Сравнение двух строк (проверка меньше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'aaa';
+          res boolean;
+        begin
+          res := str1 < str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 38
+      caption: "Сравнение двух строк (проверка больше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'bac';
+          res boolean;
+        begin
+          res := str1 > str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 39
+      caption: "Сравнение двух строк (проверка больше)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'aaa';
+          res boolean;
+        begin
+          res := str1 > str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 40
+      caption: "Сравнение двух строк (проверка меньше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'bac';
+          res boolean;
+        begin
+          res := str1 <= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 41
+      caption: "Сравнение двух строк (проверка меньше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'aaa';
+          res boolean;
+        begin
+          res := str1 <= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 42
+      caption: "Сравнение двух строк (проверка меньше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'abc';
+          res boolean;
+        begin
+          res := str1 <= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 43
+      caption: "Сравнение двух строк (проверка больше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'bac';
+          res boolean;
+        begin
+          res := str1 >= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 44
+      caption: "Сравнение двух строк (проверка больше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'aaa';
+          res boolean;
+        begin
+          res := str1 >= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 45
+      caption: "Сравнение двух строк (проверка больше или равно)"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'abc';
+          res boolean;
+        begin
+          res := str1 >= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 46
+      caption: "Сравнение двух одинаковых строк в разном регистре"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'ABC';
+          res boolean;
+        begin
+          res := str1 >= str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 47
+      caption: "Сравнение двух одинаковых строк в разном регистре"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'ABC';
+          res boolean;
+        begin
+          res := str1 = str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 48
+      caption: "Сравнение двух одинаковых строк в разном регистре"
+      code: |
+        declare
+          str1 varchar2(20) := 'abc';
+          str2 varchar2(20) := 'ABC';
+          res boolean;
+        begin
+          res := str1 <> str2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 49
+      caption: "Сравнение двух дат (проверка равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 = dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 50
+      caption: "Сравнение двух дат (проверка равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2026', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 = dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 51
+      caption: "Сравнение двух дат (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 != dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 52
+      caption: "Сравнение двух дат (проверка НЕ равно, привычная запись)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2026', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 != dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 53
+      caption: "Сравнение двух дат (проверка меньше)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2026', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 < dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 54
+      caption: "Сравнение двух дат (проверка меньше)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 < dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 55
+      caption: "Сравнение двух дат (проверка больше)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2026', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 > dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 56
+      caption: "Сравнение двух дат (проверка больше)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 > dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 57
+      caption: "Сравнение двух дат (проверка меньше или равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2026', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 <= dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 58
+      caption: "Сравнение двух дат (проверка меньше или равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 <= dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+
+    - id: 59
+      caption: "Сравнение двух дат (проверка меньше или равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 <= dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+
+    - id: 60
+      caption: "Сравнение двух дат (проверка больше или равно)"
+      code: |
+        declare
+          dat1 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          dat2 date := to_date('01/01/2026', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat1 >= dat2;
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''

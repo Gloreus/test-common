@@ -1,0 +1,4497 @@
+Test:
+  chapter: '4.2.3'
+  jira_issue: ''
+  name: '4.2.3'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 2
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу третьего when, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 3
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 4
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when и else (входящий параметр не определён, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+            when null then :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 5
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when и else (входящий параметр не определён, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 6
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when и else (входящий параметр не определён, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 7
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 8
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу третьего when, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 9
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает не попадает в одну из групп, сравнение чисел)"
+      code: |
+        begin
+          case :num
+            when 1 then :res := 'one';
+            when 2 then :res := 'two';
+            when 3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 10
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when, сравнение строк)"
+      code: |
+        begin
+          case :str
+            when 'AAA' then :res := 'one';
+            when 'BBB' then :res := 'two';
+            when 'CCC' then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 11
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу третьего when, сравнение строк)"
+      code: |
+        begin
+          case :str
+            when 'AAA' then :res := 'one';
+            when 'BBB' then :res := 'two';
+            when 'CCC' then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 12
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else, сравнение строк)"
+      code: |
+        begin
+          case :str
+            when 'AAA' then :res := 'one';
+            when 'BBB' then :res := 'two';
+            when 'CCC' then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 13
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when, сравнение строк)"
+      code: |
+        begin
+          case :str
+            when 'AAA' then :res := 'one';
+            when 'BBB' then :res := 'two';
+            when 'CCC' then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 14
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу третьего when, сравнение строк)"
+      code: |
+        begin
+          case :str
+            when 'AAA' then :res := 'one';
+            when 'BBB' then :res := 'two';
+            when 'CCC' then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 15
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение не попадает в одну из групп, сравнение строк)"
+      code: |
+        begin
+          case :str
+            when 'AAA' then :res := 'one';
+            when 'BBB' then :res := 'two';
+            when 'CCC' then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 16
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу первого when, сравнение логических значений)"
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          case bl
+            when true then :res := 'true';
+            when false then :res := 'false';
+            else :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "true"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "true"
+            }
+          ]
+        }
+      comment: ''
+    - id: 17
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу третьего when, сравнение логических значений)"
+      code: |
+        declare
+          bl boolean := false;
+        begin
+          case bl
+            when true then :res := 'true';
+            when false then :res := 'false';
+            else :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "false"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "false"
+            }
+          ]
+        }
+      comment: ''
+    - id: 18
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу else, сравнение логических значений)"
+      code: |
+        declare
+          bl boolean;
+        begin
+          case bl
+            when true then :res := 'true';
+            when false then :res := 'false';
+            else :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "null"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "null"
+            }
+          ]
+        }
+      comment: ''
+    - id: 19
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when, сравнение числа и строк с неявным приведением)"
+      code: |
+        begin
+          case :num
+            when '1' then :res := 'one';
+            when '2' then :res := 'two';
+            when '3' then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 20
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу третьего when, сравнение числа и строк с неявным приведением)"
+      code: |
+        begin
+          case :num
+            when '1' then :res := 'one';
+            when '2' then :res := 'two';
+            when '3' then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 21
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else, сравнение числа и строк с неявным приведением)"
+      code: |
+        begin
+          case :num
+            when '1' then :res := 'one';
+            when '2' then :res := 'two';
+            when '3' then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 22
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when, сравнение числа и строк с неявным приведением)"
+      code: |
+        begin
+          case :num
+            when '1' then :res := 'one';
+            when '2' then :res := 'two';
+            when '3' then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 23
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу третьего when, сравнение числа и строк с неявным приведением)"
+      code: |
+        begin
+          case :num
+            when '1' then :res := 'one';
+            when '2' then :res := 'two';
+            when '3' then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 24
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение не попадает в одну из групп, сравнение числа и строк с неявным приведением)"
+      code: |
+        begin
+          case :num
+            when '1' then :res := 'one';
+            when '2' then :res := 'two';
+            when '3' then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 25
+      caption: "Проверка полной записи оператора в поисковой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when)"
+      code: |
+        begin
+          case
+            when :num < 5 then :res := 'when 1';
+            when :num < 15 then :res := 'when 2';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 1"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 1"
+            }
+          ]
+        }
+      comment: ''
+    - id: 26
+      caption: "Проверка полной записи оператора в поисковой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу второго when)"
+      code: |
+        begin
+          case
+            when :num < 5 then :res := 'when 1';
+            when :num < 15 then :res := 'when 2';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 2"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 2"
+            }
+          ]
+        }
+      comment: ''
+    - id: 27
+      caption: "Проверка полной записи оператора в поисковой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else)"
+      code: |
+        begin
+          case
+            when :num < 5 then :res := 'when 1';
+            when :num < 15 then :res := 'when 2';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+    - id: 28
+      caption: "Проверка записи оператора в поисковой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when)"
+      code: |
+        begin
+          case
+            when :num < 5 then :res := 'when 1';
+            when :num < 15 then :res := 'when 2';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 1"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": -5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 1"
+            }
+          ]
+        }
+      comment: ''
+    - id: 29
+      caption: "Проверка записи оператора в поисковой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу второго when)"
+      code: |
+        begin
+          case
+            when :num < 5 then :res := 'when 1';
+            when :num < 15 then :res := 'when 2';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 2"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 2"
+            }
+          ]
+        }
+      comment: ''
+    - id: 30
+      caption: "Проверка записи оператора в поисковой форме, в котором есть несколько when, без else (входящий параметр такой, что значение не попадает в одну из групп)"
+      code: |
+        begin
+          case
+            when :num < 5 then :res := 'when 1';
+            when :num < 15 then :res := 'when 2';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 31
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу первого when, сравнение логических значений)"
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          case
+            when bl then :res := 'when 1';
+            when bl then :res := 'when 2';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 1"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 1"
+            }
+          ]
+        }
+      comment: ''
+    - id: 32
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу третьего when, сравнение логических значений)"
+      code: |
+        declare
+          bl boolean := false;
+        begin
+          case
+            when bl then :res := 'when 1';
+            when not bl then :res := 'when 2';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 2"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when 2"
+            }
+          ]
+        }
+      comment: ''
+    - id: 33
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу else, сравнение логических значений)"
+      code: |
+        declare
+          bl boolean;
+        begin
+          case
+            when bl then :res := 'when 1';
+            when bl then :res := 'when 2';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+    - id: 34
+      caption: "Проверка полной записи оператора в поисковой форме, в котором есть when и else, сложное составное условие (входящий параметр такой, что значение попадает в группу when)"
+      code: |
+        begin
+          case
+            when not (:num > 10) and :num > 0 then :res := 'when';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 5
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when"
+            }
+          ]
+        }
+      comment: ''
+    - id: 35
+      caption: "Проверка полной записи оператора в поисковой форме, в котором есть when и else, сложное составное условие (входящий параметр такой, что значение попадает в группу else)"
+      code: |
+        begin
+          case
+            when not (:num > 10) and :num > 0 then :res := 'when';
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 100
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+    - id: 36
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого when, входящий параметр для первого внутреннего when)"
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          case
+            when bl then
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 37
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого when, входящий параметр для третьего внутреннего when)"
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          case
+            when bl then
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 38
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого when, входящий параметр для внутреннего else)"
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          case
+            when bl then
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 39
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу else, вложенный оператор не исполняется)"
+      code: |
+        declare
+          bl boolean := false;
+        begin
+          case
+            when bl then
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+            else :res := 'else';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "else"
+            }
+          ]
+        }
+      comment: ''
+    - id: 40
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого else, входящий параметр для первого внутреннего when)"
+      code: |
+        declare
+          bl boolean := false;
+        begin
+          case
+            when bl then :res := 'when';
+            else
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 41
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого else, входящий параметр для третьего внутреннего when)"
+      code: |
+        declare
+          bl boolean := false;
+        begin
+          case
+            when bl then :res := 'when';
+            else
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 42
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого else, входящий параметр для внутреннего else)"
+      code: |
+        declare
+          bl boolean := false;
+        begin
+          case
+            when bl then :res := 'when';
+            else
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 43
+      caption: "Проверка полной записи оператора в поисковой форме, в который вложен оператор в простой форме (переменная определена так, что значение попадает в группу первого when, вложенный оператор не исполняется)"
+      code: |
+        declare
+          bl boolean := true;
+        begin
+          case
+            when bl then :res := 'when';
+            else
+              case :num
+                when 1 then :res := 'one';
+                when 2 then :res := 'two';
+                when 3 then :res := 'three';
+                else :res := 'other';
+              end case;
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "when"
+            }
+          ]
+        }
+      comment: ''
+    - id: 44
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 45
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу третьего when, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 46
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 47
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when и else (входящий параметр не определён, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+            when null then :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 48
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when и else (входящий параметр не определён, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 49
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when и else (входящий параметр не определён, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 50
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 51
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу третьего when, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 52
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает не попадает в одну из групп, сравнение чисел, заданных переменными)"
+      code: |
+        declare
+          num1 number := 1;
+          num2 number := 2;
+          num3 number := 3;
+        begin
+          case :num
+            when num1 then :res := 'one';
+            when num2 then :res := 'two';
+            when num3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 53
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when, сравнение строк, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := 'AAA';
+          str2 varchar2(200) := 'BBB';
+          str3 varchar2(200) := 'CCC';
+        begin
+          case :str
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 54
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу третьего when, сравнение строк, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := 'AAA';
+          str2 varchar2(200) := 'BBB';
+          str3 varchar2(200) := 'CCC';
+        begin
+          case :str
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 55
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else, сравнение строк, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := 'AAA';
+          str2 varchar2(200) := 'BBB';
+          str3 varchar2(200) := 'CCC';
+        begin
+          case :str
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 56
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when, сравнение строк, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := 'AAA';
+          str2 varchar2(200) := 'BBB';
+          str3 varchar2(200) := 'CCC';
+        begin
+          case :str
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "AAA"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 57
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу третьего when, сравнение строк, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := 'AAA';
+          str2 varchar2(200) := 'BBB';
+          str3 varchar2(200) := 'CCC';
+        begin
+          case :str
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "CCC"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 58
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение не попадает в одну из групп, сравнение строк, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := 'AAA';
+          str2 varchar2(200) := 'BBB';
+          str3 varchar2(200) := 'CCC';
+        begin
+          case :str
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "str",
+              "type": "varchar2",
+              "value": "GGG"
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''
+    - id: 59
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу первого when, сравнение логических значений, заданных переменными)"
+      code: |
+        declare
+          bl boolean := true;
+          bl_true boolean := true;
+          bl_false boolean := false;
+        begin
+          case bl
+            when bl_true then :res := 'true';
+            when bl_false then :res := 'false';
+            else :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "true"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "true"
+            }
+          ]
+        }
+      comment: ''
+    - id: 60
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу третьего when, сравнение логических значений, заданных переменными)"
+      code: |
+        declare
+          bl boolean := false;
+          bl_true boolean := true;
+          bl_false boolean := false;
+        begin
+          case bl
+            when bl_true then :res := 'true';
+            when bl_false then :res := 'false';
+            else :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "false"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "false"
+            }
+          ]
+        }
+      comment: ''
+    - id: 61
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (переменная определена так, что значение попадает в группу else, сравнение логических значений, заданных переменными)"
+      code: |
+        declare
+          bl boolean;
+          bl_true boolean := true;
+          bl_false boolean := false;
+        begin
+          case bl
+            when bl_true then :res := 'true';
+            when bl_false then :res := 'false';
+            else :res := 'null';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "null"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "null"
+            }
+          ]
+        }
+      comment: ''
+    - id: 62
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу первого when, сравнение числа и строк с неявным приведением, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := '1';
+          str2 varchar2(200) := '2';
+          str3 varchar2(200) := '3';
+        begin
+          case :num
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 63
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу третьего when, сравнение числа и строк с неявным приведением, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := '1';
+          str2 varchar2(200) := '2';
+          str3 varchar2(200) := '3';
+        begin
+          case :num
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 64
+      caption: "Проверка полной записи оператора в простой форме, в котором есть несколько when и else (входящий параметр такой, что значение попадает в группу else, сравнение числа и строк с неявным приведением, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := '1';
+          str2 varchar2(200) := '2';
+          str3 varchar2(200) := '3';
+        begin
+          case :num
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+            else :res := 'other';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "other"
+            }
+          ]
+        }
+      comment: ''
+    - id: 65
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу первого when, сравнение числа и строк с неявным приведением, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := '1';
+          str2 varchar2(200) := '2';
+          str3 varchar2(200) := '3';
+        begin
+          case :num
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "one"
+            }
+          ]
+        }
+      comment: ''
+    - id: 66
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение попадает в группу третьего when, сравнение числа и строк с неявным приведением, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := '1';
+          str2 varchar2(200) := '2';
+          str3 varchar2(200) := '3';
+        begin
+          case :num
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "three"
+            }
+          ]
+        }
+      comment: ''
+    - id: 67
+      caption: "Проверка записи оператора в простой форме, в котором есть несколько when, без else (входящий параметр такой, что значение не попадает в одну из групп, сравнение числа и строк с неявным приведением, заданных переменными)"
+      code: |
+        declare
+          str1 varchar2(200) := '1';
+          str2 varchar2(200) := '2';
+          str3 varchar2(200) := '3';
+        begin
+          case :num
+            when str1 then :res := 'one';
+            when str2 then :res := 'two';
+            when str3 then :res := 'three';
+          end case;
+        end;
+      input: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      result: |-
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "num",
+              "type": "number",
+              "value": 10
+            },
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": ""
+            }
+          ]
+        }
+      comment: ''

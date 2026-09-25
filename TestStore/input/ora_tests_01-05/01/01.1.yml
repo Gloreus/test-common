@@ -1,0 +1,1488 @@
+Test:
+  chapter: '01.1'
+  jira_issue: ''
+  name: '01.1'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: 'Блок кода без бинд-переменных'
+      code: |
+        begin
+          null;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 2
+      caption: 'Исключённый давно тест'
+      code: |
+        begin
+          null;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 3
+      caption: 'Исключённый давно тест'
+      code: |
+        begin
+          null;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": []
+        }
+      comment: ''
+    - id: 4
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением'
+      code: |
+        begin
+          :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 5
+      caption: 'Блок кода с инициализацией бинд-переменной простым отрицательным значением'
+      code: |
+        begin
+          :n := -2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": -2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": -2
+            }
+          ]
+        }
+      comment: ''
+    - id: 6
+      caption: 'Блок кода с инициализацией бинд-переменной значением другой бинд-переменной'
+      code: |
+        begin
+          :b := :a;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 7
+      caption: 'Блок кода с инициализацией бинд-переменной значением другой бинд-переменной, к которой применена математическая операция'
+      code: |
+        begin
+          :b := :a * 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "a",
+              "type": "number",
+              "value": null
+            },
+            {
+              "name": "b",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 8
+      caption: "Блок кода с инициализацией бинд-переменной значением другой бинд-переменной, к которой применена математическая операция"
+      code: |
+        begin
+          :out_txt := :in_txt || ' world!';
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "in_txt",
+              "type": "varchar2",
+              "value": null
+            },
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "in_txt",
+              "type": "varchar2",
+              "value": null
+            },
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "in_txt",
+              "type": "varchar2",
+              "value": null
+            },
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "in_txt",
+              "type": "varchar2",
+              "value": null
+            },
+            {
+              "name": "out_txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 9
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции однострочный комментарий (в одной строке)'
+      code: |
+        begin
+          :n := 2; -- Присвоение!
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 10
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции однострочный комментарий (перед операцией)'
+      code: |
+        begin
+          -- Присвоение!
+          :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 11
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции однострочный комментарий (после операции)'
+      code: |
+        begin
+          :n := 2;
+          -- Присвоение!
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 12
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции многострочный комментарий (в одной строке)'
+      code: |
+        begin
+          :n := 2; /* Присвоение! */
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 13
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции многострочный комментарий (перед операцией)'
+      code: |
+        begin
+          /* Присвоение! */
+          :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 14
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции многострочный комментарий (после операции)'
+      code: |
+        begin
+          :n := 2;
+          /* Присвоение! */
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 15
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции многострочный комментарий (начался перед операцией, закончился в строке операции)'
+      code: |
+        begin
+          /* Присвоение
+          ! */ :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 16
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, есть для операции многострочный комментарий (начался в строке операции, закончился после операции)'
+      code: |
+        begin
+          :n := 2; /* Присвоение
+          ! */
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 17
+      caption: 'Блок кода с однострочным комментарием до блока кода'
+      code: |
+        -- Комментарий
+        begin
+          :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 18
+      caption: 'Блок кода с однострочным комментарием после блока кода'
+      code: |
+        begin
+          :n := 2;
+        end;
+        -- Комментарий
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 19
+      caption: 'Блок кода с многострочным комментарием до блока кода'
+      code: |
+        /*
+        Комментарий
+        */
+        begin
+          :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 20
+      caption: 'Блок кода с многострочным комментарием после блока кода'
+      code: |
+        begin
+          :n := 2;
+        end;
+        /*
+        Комментарий
+        */
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 21
+      caption: 'Блок кода с многострочным комментарием, в котором другой блок с однострочным комментарием'
+      code: |
+        /*
+        begin
+        :txt := 'test';
+        -- Блок кода исключен
+        end;
+        */
+        begin
+          :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 22
+      caption: 'Блок кода с инициализацией бинд-переменной результатом вычисления, выполняющимся с ошибкой (деление на 0)'
+      code: |
+        begin
+          :n := 2 / 0;
+        end;
+      input: |
+        {
+          "resultType": "error",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "error": {
+            "standardException": "ZERO_DIVIDE"
+          }
+        }
+      result: |
+        {
+          "resultType": "error",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "error": {
+            "standardException": "ZERO_DIVIDE"
+          }
+        }
+      comment: ''
+    - id: 23
+      caption: 'Блок кода с инициализацией бинд-переменной простым значением, без исключения (часть из блока исключений не выполняется)'
+      code: |
+        begin
+          :n := 1;
+        exception
+          when others then
+            :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      comment: ''
+    - id: 24
+      caption: 'Блок кода с инициализацией бинд-переменной результатом вычисления, выполняющимся с ошибкой (деление на 0), инициализация происходит из обработчика исключения (общего)'
+      code: |
+        begin
+          :n := 2 / 0;
+        exception
+          when others then
+            :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        }
+      comment: ''
+    - id: 25
+      caption: 'Блок кода с инициализацией бинд-переменной результатом вычисления, выполняющимся с ошибкой (деление на 0), инициализация происходит из обработчика исключения (для конкретной ошибки)'
+      code: |
+        begin
+          :n := 2 / 0;
+        exception
+          when ZERO_DIVIDE then
+            :n := 1;
+          when others then
+            :n := 2;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        }
+      comment: ''
+    - id: 26
+      caption: 'Блок кода с инициализацией бинд-переменной date значением, заданным в виде литерала'
+      code: |
+        begin
+          :dt := to_date('01/01/2025', 'dd/mm/yyyy');
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt",
+              "type": "date",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt",
+              "type": "date",
+              "value": "01/01/2025"
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "dt",
+              "type": "date",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "dt",
+              "type": "date",
+              "value": "01/01/2025"
+            }
+          ]
+        }
+      comment: ''
+    - id: 27
+      caption: 'Блок кода с инициализацией бинд-переменной varchar2 строкой'
+      code: |
+        begin
+          :txt := 'Hello';
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Hello"
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "Hello"
+            }
+          ]
+        }
+      comment: ''
+    - id: 28
+      caption: 'Блок кода с инициализацией бинд-переменной boolean значением в теле блока кода'
+      code: |
+        begin
+          :bl := true;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "bl",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "bl",
+              "type": "varchar2",
+              "value": "true"
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "bl",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "bl",
+              "type": "varchar2",
+              "value": "true"
+            }
+          ]
+        }
+      comment: ''
+    - id: 29
+      caption: 'Блок кода с инициализацией бинд-переменной varchar2 максимально допустимой длиной в PL/SQL в теле блока кода'
+      code: |
+        begin
+          :txt := rpad('x', 32767, 'x');
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.."
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "txt",
+              "type": "varchar2",
+              "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.."
+            }
+          ]
+        }
+      comment: ''
+    - id: 30
+      caption: 'Блок кода с инициализацией бинд-переменной значением null в теле блока кода'
+      code: |
+        begin
+          :n := null;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ]
+        }
+      comment: ''
+    - id: 31
+      caption: 'Проверка операции выброса исключений'
+      code: |
+        begin
+          raise VALUE_ERROR;
+        end;
+      input: |
+        {
+          "resultType": "error",
+          "inputBinds": [],
+          "error": {
+            "standardException": "VALUE_ERROR"
+          }
+        }
+      result: |
+        {
+          "resultType": "error",
+          "inputBinds": [],
+          "error": {
+            "standardException": "VALUE_ERROR"
+          }
+        }
+      comment: ''
+    - id: 32
+      caption: 'Проверка операции выброса пользовательских исключений'
+      code: |
+        begin
+          raise_application_error(-20001, 'My error');
+        end;
+      input: |
+        {
+          "resultType": "error",
+          "inputBinds": [],
+          "error": {
+            "errorCode": -20001,
+            "message": "My error"
+          }
+        }
+      result: |
+        {
+          "resultType": "error",
+          "inputBinds": [],
+          "error": {
+            "errorCode": -20001,
+            "message": "My error"
+          }
+        }
+      comment: ''
+    - id: 33
+      caption: 'Проверка прерывания работы алгоритма при выбросе исключения'
+      code: |
+        begin
+          :txt := 'before exception';
+          raise VALUE_ERROR;
+          :txt := :txt || ' | after exception';
+        exception
+          when VALUE_ERROR then
+            :txt := :txt || ' | caught exception';
+        end;
+      input: ''
+      result: ''
+      comment: ''
+    - id: 34
+      caption: 'Блок кода с инициализацией бинд-переменной значением с очень большой точностью'
+      code: |
+        begin
+          :n := 0.666666666666666666666666666666666666666666666666666666666666666666666666666666;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 0.6666666666666667
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 0.6666666666666667
+            }
+          ]
+        }
+      comment: ''
+    - id: 35
+      caption: 'Блок кода с инициализацией бинд-переменной целочисленным значением с максимальной величиной'
+      code: |
+        begin
+          :n := 2147483647;
+        end;
+      input: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2147483647
+            }
+          ]
+        }
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": 2147483647
+            }
+          ]
+        }
+      comment: ''
+    - id: 36
+      caption: 'Блок кода с инициализацией бинд-переменной целочисленным значением за границей максимальной величины'
+      code: |
+        begin
+          :n := 2147483648;
+        end;
+      input: |
+        {
+          "resultType": "error",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "error": {
+            "errorCode": -1476
+          }
+        }
+      result: |
+        {
+          "resultType": "error",
+          "inputBinds": [
+            {
+              "name": "n",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "error": {
+            "errorCode": -1476
+          }
+        }
+      comment: ''
+    - id: 37
+      caption: ''
+      code: ''
+      input: ''
+      result: ''
+      comment: ''
+    - id: 38
+      caption: ''
+      code: 'Вернуть тест 33, мы теперь поддерживаем такой код'
+      input: ''
+      result: ''
+      comment: ''

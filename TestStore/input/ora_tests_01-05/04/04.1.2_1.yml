@@ -1,0 +1,487 @@
+Test:
+  chapter: '04.1.2'
+  jira_issue: ''
+  name: '04.1.2'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 1
+      caption: 'Сравнение двух чисел (проверка равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 2
+      caption: 'Сравнение двух чисел (проверка равно) с разной точностью'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1.0;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 3
+      caption: 'Сравнение двух чисел (проверка равно) с разной точностью'
+      code: |
+        declare
+          n1 number(7) := 1;
+          n2 number(7, 2) := 1;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 4
+      caption: 'Сравнение двух чисел (проверка равно) с разной точностью'
+      code: |
+        declare
+          n1 number(7, 1) := 1.1;
+          n2 number(7, 2) := 1.1;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 5
+      caption: 'Сравнение двух чисел (проверка равно) с разной точностью'
+      code: |
+        declare
+          n1 number(10, 4) := 1.1000;
+          n2 number(10, 2) := 1.10;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 6
+      caption: 'Сравнение двух чисел (проверка равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 = n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 7
+      caption: 'Сравнение двух чисел (проверка НЕ равно, привычная запись)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 8
+      caption: 'Сравнение двух чисел (проверка НЕ равно, привычная запись) с разной точностью'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1.0;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 9
+      caption: 'Сравнение двух чисел (проверка НЕ равно, привычная запись) с разной точностью'
+      code: |
+        declare
+          n1 number(7) := 1;
+          n2 number(7, 2) := 1;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 10
+      caption: 'Сравнение двух чисел (проверка НЕ равно, привычная запись) с разной точностью'
+      code: |
+        declare
+          n1 number(7, 1) := 1.1;
+          n2 number(7, 2) := 1.1;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 11
+      caption: 'Сравнение двух чисел (проверка НЕ равно, привычная запись) с разной точностью'
+      code: |
+        declare
+          n1 number(10, 4) := 1.1000;
+          n2 number(10, 2) := 1.10;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 12
+      caption: 'Сравнение двух чисел (проверка НЕ равно, привычная запись)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 != n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 13
+      caption: 'Сравнение двух чисел (проверка НЕ равно, запись в виде <>)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 <> n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 14
+      caption: 'Сравнение двух чисел (проверка НЕ равно, запись в виде <>)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 <> n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 15
+      caption: 'Сравнение двух чисел (проверка НЕ равно, запись в виде ~=)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 ~= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 16
+      caption: 'Сравнение двух чисел (проверка НЕ равно, запись в виде ~=)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 ~= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 17
+      caption: 'Сравнение двух чисел (проверка НЕ равно, запись в виде ^=)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 ^= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 18
+      caption: 'Сравнение двух чисел (проверка НЕ равно, запись в виде ^=)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 ^= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 19
+      caption: 'Сравнение двух чисел (проверка меньше)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 < n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 20
+      caption: 'Сравнение двух чисел (проверка меньше)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 0;
+        begin
+          if n1 < n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 21
+      caption: 'Сравнение двух чисел (проверка больше)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 > n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 22
+      caption: 'Сравнение двух чисел (проверка больше)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 0;
+        begin
+          if n1 > n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 23
+      caption: 'Сравнение двух чисел (проверка больше) с разной точностью'
+      code: |
+        declare
+          n1 number(10, 3) := 7.001;
+          n2 number(10, 4) := 7.0009;
+        begin
+          if n1 > n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 24
+      caption: 'Сравнение двух чисел (проверка меньше или равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 <= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 25
+      caption: 'Сравнение двух чисел (проверка меньше или равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 0;
+        begin
+          if n1 <= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 26
+      caption: 'Сравнение двух чисел (проверка меньше или равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 <= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 27
+      caption: 'Сравнение двух чисел (проверка меньше или равно) с разной точностью'
+      code: |
+        declare
+          n1 number(10, 3) := 7.001;
+          n2 number(10, 4) := 7.0009;
+        begin
+          if n1 <= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 28
+      caption: 'Сравнение двух чисел (проверка больше или равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 2;
+        begin
+          if n1 >= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"FALSE"}]}'
+      comment: ''
+    - id: 29
+      caption: 'Сравнение двух чисел (проверка больше или равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 0;
+        begin
+          if n1 >= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''
+    - id: 30
+      caption: 'Сравнение двух чисел (проверка больше или равно)'
+      code: |
+        declare
+          n1 number := 1;
+          n2 number := 1;
+        begin
+          if n1 >= n2 then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      result: '{"resultType":"binds","inputBinds":[{"name":"res","type":"varchar2"}],"outputBinds":[{"name":"res","type":"varchar2","value":"TRUE"}]}'
+      comment: ''

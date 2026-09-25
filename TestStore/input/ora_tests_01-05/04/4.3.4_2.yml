@@ -1,0 +1,1540 @@
+Test:
+  chapter: '4.3.4'
+  jira_issue: ''
+  name: '4.3.4'
+  caption: ''
+  comment: 'autogenerate'
+  cases:
+    - id: 51
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 5;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+        begin
+          if n in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 52
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := null;
+          right1 number := null;
+          right2 number := null;
+          right3 number := null;
+        begin
+          if n in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 53
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := -1;
+          right2 number := null;
+          right3 number := 0;
+          right4 number := null;
+          right5 number := 1;
+        begin
+          if n in (right1, right2, right3, right4, right5) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 54
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := null;
+          right2 number := null;
+          right3 number := null;
+        begin
+          if n in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 55
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := '';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := 'C';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 56
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := 'A';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := 'C';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 57
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := 'D';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := 'C';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 58
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := 'aBc';
+          right1 varchar2(20) := 'ABC';
+          right2 varchar2(20) := 'aBc';
+          right3 varchar2(20) := 'AbC';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 59
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := 'abc';
+          right1 varchar2(20) := 'ABC';
+          right2 varchar2(20) := 'aBc';
+          right3 varchar2(20) := 'AbC';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 60
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := 'B';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := '';
+          right4 varchar2(20) := 'C';
+        begin
+          if str in (right1, right2, right3, right4) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 61
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := 'X';
+          right1 varchar2(20) := '';
+          right2 varchar2(20) := null;
+          right3 varchar2(20) := '';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 62
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          str varchar2(20) := null;
+          right1 varchar2(20) := '';
+          right2 varchar2(20) := null;
+          right3 varchar2(20) := '';
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 63
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          dat date := null;
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right3 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 64
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          dat date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right3 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 65
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          dat date := to_date('01/01/2022', 'dd/mm/yyyy');
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right3 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 66
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := null;
+          right3 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right4 date := null;
+          right5 date := to_date('01/01/2025', 'dd/mm/yyyy');
+        begin
+          if dat in (right1, right2, right3, right4, right5) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 67
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+          right1 date := null;
+          right2 date := null;
+          right3 date := null;
+        begin
+          if dat in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 68
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов)'
+      code: |
+        declare
+          n number := 2;
+          right1 varchar2(20) := '1';
+          right2 varchar2(20) := '2';
+          right3 varchar2(20) := '3';
+        begin
+          if n in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 69
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов)'
+      code: |
+        declare
+          n number := 5;
+          right1 varchar2(20) := '1';
+          right2 varchar2(20) := '2';
+          right3 varchar2(20) := '3';
+        begin
+          if n in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 70
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов)'
+      code: |
+        declare
+          str varchar2(20) := '2';
+          right1 number := 1;
+          right2 number := 2;
+          right3 number := 3;
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 71
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов)'
+      code: |
+        declare
+          str varchar2(20) := '5';
+          right1 number := 1;
+          right2 number := 2;
+          right3 number := 3;
+        begin
+          if str in (right1, right2, right3) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 72
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов)'
+      code: |
+        declare
+          n number := 5;
+          right1 varchar2(20) := '1';
+          right2 varchar2(20) := 'A';
+          right3 varchar2(20) := '2';
+          right4 varchar2(20) := 'B';
+          right5 varchar2(20) := '3';
+        begin
+          if n in (right1, right2, right3, right4, right5) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "error",
+          "error": {
+            "errorCode": -6502,
+            "message": "ORA-06502: PL/SQL: numeric or value error: character to number conversion error"
+          }
+        }
+      comment: ''
+
+    - id: 73
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := null;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 74
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 75
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 5;
+          right1 number := -1;
+          right2 number := 0;
+          right3 number := 1;
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 76
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := null;
+          right1 number := null;
+          right2 number := null;
+          right3 number := null;
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 77
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := -1;
+          right2 number := null;
+          right3 number := 0;
+          right4 number := null;
+          right5 number := 1;
+          res boolean;
+        begin
+          res := n in (right1, right2, right3, right4, right5);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 78
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 1;
+          right1 number := null;
+          right2 number := null;
+          right3 number := null;
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 79
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := '';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := 'C';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 80
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := 'A';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := 'C';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 81
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := 'D';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := 'C';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 82
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := 'aBc';
+          right1 varchar2(20) := 'ABC';
+          right2 varchar2(20) := 'aBc';
+          right3 varchar2(20) := 'AbC';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 83
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := 'abc';
+          right1 varchar2(20) := 'ABC';
+          right2 varchar2(20) := 'aBc';
+          right3 varchar2(20) := 'AbC';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 84
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := 'B';
+          right1 varchar2(20) := 'A';
+          right2 varchar2(20) := 'B';
+          right3 varchar2(20) := '';
+          right4 varchar2(20) := 'C';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3, right4);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 85
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := 'X';
+          right1 varchar2(20) := '';
+          right2 varchar2(20) := null;
+          right3 varchar2(20) := '';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 86
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := null;
+          right1 varchar2(20) := '';
+          right2 varchar2(20) := null;
+          right3 varchar2(20) := '';
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 87
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          dat date := null;
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right3 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 88
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          dat date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right3 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 89
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          dat date := to_date('01/01/2022', 'dd/mm/yyyy');
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right3 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 90
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+          right1 date := to_date('01/01/2023', 'dd/mm/yyyy');
+          right2 date := null;
+          right3 date := to_date('01/01/2024', 'dd/mm/yyyy');
+          right4 date := null;
+          right5 date := to_date('01/01/2025', 'dd/mm/yyyy');
+          res boolean;
+        begin
+          res := dat in (right1, right2, right3, right4, right5);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 91
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, сохранение результата в переменную)'
+      code: |
+        declare
+          dat date := to_date('01/01/2025', 'dd/mm/yyyy');
+          right1 date := null;
+          right2 date := null;
+          right3 date := null;
+          res boolean;
+        begin
+          res := dat in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 92
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 2;
+          right1 varchar2(20) := '1';
+          right2 varchar2(20) := '2';
+          right3 varchar2(20) := '3';
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 93
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 5;
+          right1 varchar2(20) := '1';
+          right2 varchar2(20) := '2';
+          right3 varchar2(20) := '3';
+          res boolean;
+        begin
+          res := n in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 94
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := '2';
+          right1 number := 1;
+          right2 number := 2;
+          right3 number := 3;
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 95
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов, сохранение результата в переменную)'
+      code: |
+        declare
+          str varchar2(20) := '5';
+          right1 number := 1;
+          right2 number := 2;
+          right3 number := 3;
+          res boolean;
+        begin
+          res := str in (right1, right2, right3);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 96
+      caption: 'Проверка оператора in (левая часть задана переменной, правая часть задана набором переменных, неявное приведение типов, сохранение результата в переменную)'
+      code: |
+        declare
+          n number := 5;
+          right1 varchar2(20) := '1';
+          right2 varchar2(20) := 'A';
+          right3 varchar2(20) := '2';
+          right4 varchar2(20) := 'B';
+          right5 varchar2(20) := '3';
+          res boolean;
+        begin
+          res := n in (right1, right2, right3, right4, right5);
+          if res then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "error",
+          "error": {
+            "errorCode": -6502,
+            "message": "ORA-06502: PL/SQL: numeric or value error: character to number conversion error"
+          }
+        }
+      comment: ''
+
+    - id: 97
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if null not in (-1, 0, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 98
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 1 not in (-1, 0, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 99
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if 5 not in (-1, 0, 1) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "TRUE"
+            }
+          ]
+        }
+      comment: ''
+
+    - id: 100
+      caption: 'Проверка оператора not in (на "заданном" значении)'
+      code: |
+        begin
+          if null not in (null, null, null) then
+            :res := 'TRUE';
+          else
+            :res := 'FALSE';
+          end if;
+        end;
+      input: ''
+      result: |
+        {
+          "resultType": "binds",
+          "inputBinds": [],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": "FALSE"
+            }
+          ]
+        }
+      comment: ''

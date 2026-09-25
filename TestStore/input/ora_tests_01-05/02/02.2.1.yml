@@ -1,0 +1,8105 @@
+Test:
+  chapter: 02.2.1
+  jira_issue: ''
+  name: 02.2.1 -  Бинд переменные Числовые типы данных
+  caption: 02.2.1 -  Бинд переменные Числовые типы данных
+  comment: ''
+  cases:
+  - id: 1
+    caption: Проверка корректности использования бинд-переменных - тип number
+    code: |
+      declare
+        v_num number := 100;
+      begin
+        select v_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 100
+          }
+        ]
+      }
+    comment: ''
+  - id: 2
+    caption: Проверка корректности использования бинд-переменных - константа бинд
+      переменная типа number
+    code: |
+      declare
+        c_num constant number := 100;
+      begin
+        select c_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 100
+          }
+        ]
+      }
+    comment: ''
+  - id: 3
+    caption: Проверка корректности использования бинд-переменных- пакетная бинд переменная
+      типа number
+    code: |
+      declare
+        v_num number := tc_testing.pkg_bind.pkg_num;
+      begin
+        select v_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 500
+          }
+        ]
+      }
+    comment: ''
+  - id: 4
+    caption: Проверка корректности использования бинд-переменных - пакетная константа
+      бинд переменная типа number
+    code: |
+      declare
+        v_num number := tc_testing.pkg_bind.c_pkg_num;
+      begin
+        select v_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1000
+          }
+        ]
+      }
+    comment: ''
+  - id: 5
+    caption: Проверка корректности использования бинд-переменных - элемент табличного
+      типа - бинд табличная переменная типа number
+    code: |
+      declare
+        type tab_type is table of number index by binary_integer;
+        v_tab tab_type;
+      begin
+        v_tab (1) := 100;
+        select v_tab(1) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 100
+          }
+        ]
+      }
+    comment: ''
+  - id: 6
+    caption: Проверка корректности использования бинд-переменных элемент табличного
+      типа - бинд переменная типа number
+    code: |
+      declare
+        type num_tab is table of number;
+        v_tab num_tab := num_tab(10, 20, 30);
+      begin
+        select v_tab(2) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 7
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      глобальной функции в бинд переменную типа number
+    code: |
+      declare
+        v_num number := tc_testing.global_func();
+      begin
+        select v_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 999
+          }
+        ]
+      }
+    comment: ''
+  - id: 8
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      пакетной функции бинд переменную типа number
+    code: |
+      declare
+        v_num number := tc_testing.pkg_bind.global_func();
+      begin
+        select v_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 999
+          }
+        ]
+      }
+    comment: ''
+  - id: 9
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      поля объектного типа number в select
+    code: |
+      declare
+        v_obj tc_testing.obj_num_type := tc_testing.obj_num_type(3);
+      begin
+        select v_obj.attr_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 10
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      поля объектного типа number
+    code: |
+      declare
+        v_outer tc_testing.outer_obj := tc_testing.outer_obj(100, tc_testing.inner_obj(50));
+        v_res number;
+      begin
+        select v_outer.get_inner_value() into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 50
+          }
+        ]
+      }
+    comment: ''
+  - id: 11
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      элемента varray типа number
+    code: |
+      declare
+        type t_num_varray is varray(10) of number;
+        v_varray t_num_varray := t_num_varray(2, 3, 4);
+      begin
+        select v_varray(3) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 12
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      конструктор объектного типа типа number
+    code: |-
+      declare
+       v_num number := tc_testing.obj_num_type(3).attr_num;
+      begin
+       select v_num into :res from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 13
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      конструктор Объектный тип в JOIN On
+    code: |
+      declare
+        v_obj tc_testing.obj_num_type := tc_testing.obj_num_type(2);
+      begin
+        select s1.id into:res
+        from tc_testing.sample_types s1
+        inner join tc_testing.sample_types s2 on s1.id = s2.id and s1.id = v_obj.attr_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 14
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      - Конструктор табличного типа в подзапросе
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id in (
+          select column_value
+          from table(tc_testing.tab_number_type(1, 2, 3))
+          where column_value > p_num
+        );
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 15
+    caption: |-
+      Проверка корректности использования бинд-переменных результат вычисления -
+      вложенный вызов конструкторов
+    code: |-
+      DECLARE
+          p_num NUMBER := 10;
+          v_res NUMBER;
+      BEGIN
+          SELECT tc_testing.obj_number_type.get_value(
+              (SELECT column_value FROM TABLE(tc_testing.tab_number_type(p_num, 20)) WHERE ROWNUM = 1)
+          ) INTO v_res
+          FROM DUAL;
+
+          :res := v_res;
+      END;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 10
+          }
+        ]
+      }
+    comment: ''
+  - id: 16
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      конструктор результат функции объектного типа number
+    code: |
+      declare
+        v_obj tc_testing.obj_num_func_type := tc_testing.obj_num_func_type(2);
+      begin
+        select v_obj.get_num() into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 17
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (сложение)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select 3 + p_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 6
+          }
+        ]
+      }
+    comment: ''
+  - id: 18
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (вычитание)
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select 3 - p_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 19
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (умножение)
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select 3 * p_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 6
+          }
+        ]
+      }
+    comment: ''
+  - id: 20
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (деление)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select 3 / p_num into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 21
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (с остатком от деления (MOD))
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select mod(5, p_num) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 22
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (с функцией POWER)
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select power(3, p_num) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 9
+          }
+        ]
+      }
+    comment: ''
+  - id: 23
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (с функцией sqrt)
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select sqrt(p_num) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1.41421356237309504880168872420969807857
+          }
+        ]
+      }
+    comment: ''
+  - id: 24
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (с функцией ROUND)
+    code: |
+      declare
+        p_num number := 2.567;
+      begin
+        select round(p_num, 2) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2.57
+          }
+        ]
+      }
+    comment: ''
+  - id: 25
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (с функцией trunc)
+    code: |
+      declare
+        p_num number := 2.567;
+      begin
+        select trunc(p_num, 2) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2.56
+          }
+        ]
+      }
+    comment: ''
+  - id: 26
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (case)
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select case
+          when 3 > p_num then 'Greater'
+          when 3 = p_num then 'Equal'
+          else 'Less'
+        end into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "Greater"
+          }
+        ]
+      }
+    comment: ''
+  - id: 27
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (case с вычислением)
+    code: |-
+      declare
+       p_num number := 2;
+      begin
+       select case 3
+       when to_number(p_num) then 3 * 10
+       when to_number(p_num) + 1 then 3 * 20
+       else 3
+       end into :res
+       from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 60
+          }
+        ]
+      }
+    comment: ''
+  - id: 28
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (case в select (с вложенным case) и две бинд
+      переменные)
+    code: |
+      declare
+        p_num number := 1;
+        p_num1 number := 2;
+      begin
+        select case
+          when 3 > p_num
+            then
+              case
+                when 3 < p_num1 then 'Between'
+                else 'Greater than both'
+              end
+          else 'Less or equal'
+        end into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "Greater than both"
+          }
+        ]
+      }
+    comment: ''
+  - id: 29
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (decode в select)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select decode(3, p_num, 'found', 'not found') into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "found"
+          }
+        ]
+      }
+    comment: ''
+  - id: 30
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (nvl в select)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select nvl(null, p_num) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 31
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (coalesce в select)
+    code: |
+      declare
+        p_num1 number := 1;
+        p_num2 number := 2;
+      begin
+        select coalesce(null, p_num1, p_num2) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 32
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (поле с псевдонимом)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select p_num as my_value into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 33
+    caption: Проверка корректности использования бинд-переменных результат вычисления
+      простой select в переменную number (поле в подзапросе)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select (
+          select p_num
+          from dual
+        ) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 34
+    caption: Проверка корректности использования бинд-переменных - табличный тип как
+      таблица в FROM
+    code: |
+      declare
+        v_tab tc_testing.num_tab := tc_testing.num_tab(10, 20, 30);
+      begin
+        select column_value into:res
+        from table(v_tab)
+        where rownum = 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 10
+          }
+        ]
+      }
+    comment: ''
+  - id: 35
+    caption: Проверка корректности использования бинд-переменных - конструктор табличного
+      типа в FROM с JOIN
+    code: |-
+      declare
+       v_tab tc_testing.num_tab := tc_testing.num_tab(1, 2, 3);
+      begin
+       select t.column_value into :res
+       from table(v_tab) t
+       join tc_testing.sample_types s on t.column_value = s.id
+       where t.column_value = 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 36
+    caption: Проверка корректности использования бинд-переменных - конструктор табличного
+      типа в FROM с JOIN
+    code: |
+      declare
+        v_tab tc_testing.num_tab := tc_testing.num_tab(10, 20, 30);
+      begin
+        select avg(column_value) into:res
+        from table(v_tab);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 37
+    caption: Проверка корректности использования бинд-переменных в where (сравнение
+      = )
+    code: |
+      declare
+        p_num number := 1;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id = p_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 38
+    caption: Проверка корректности использования бинд-переменных в where (сравнение
+      > )
+    code: |
+      declare
+        p_num number := 6;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id > p_num and rownum = 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 39
+    caption: Проверка корректности использования бинд-переменных в where (in)
+    code: |
+      declare
+        p_num number := 1;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id in (0, p_num);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 40
+    caption: Проверка корректности использования бинд-переменных в where (and)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id > 1 and id < p_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 41
+    caption: Проверка корректности использования бинд-переменных в where (like )
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where
+          to_char(id) like to_char(to_number(p_num), 'FM9999999999') || '%'
+          and id >= 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 42
+    caption: Проверка корректности использования бинд-переменных в where (between)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id between 2 and (p_num - 1);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 43
+    caption: Проверка корректности использования бинд-переменных в where (null)
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where (p_num is null or id < p_num);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 44
+    caption: Проверка корректности использования бинд-переменных в where (is null)
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where
+          p_num is not null
+          and id between 2 and (p_num - 1);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 45
+    caption: Проверка корректности использования бинд-переменных в group by
+    code: |
+      declare
+        p_num number := 1;
+      begin
+        select sum(id) into:res
+        from tc_testing.sample_types
+        group by p_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 190
+          }
+        ]
+      }
+    comment: ''
+  - id: 46
+    caption: Проверка корректности использования бинд-переменных в having
+    code: |-
+      declare
+       p_num number := 3;
+      begin
+       select sum(id)into :res
+       from tc_testing.sample_types
+       having count(id) > p_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 190
+          }
+        ]
+      }
+    comment: ''
+  - id: 47
+    caption: Проверка корректности использования бинд-переменных в order by
+    code: |
+      declare
+        p_num number := 1;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where id = 2
+        order by p_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 48
+    caption: Проверка корректности использования бинд-переменных в условии JOIN -
+      on
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select st1.id into:res
+        from tc_testing.sample_types st1
+        inner join tc_testing.sample_types st2 on st1.id = st2.id and st1.id = p_num
+        order by st1.id;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 49
+    caption: Проверка корректности использования две бинд-переменных в условии в JOIN
+      - on
+    code: |
+      declare
+        p_num_min number := 1;
+        p_num_max number := 3;
+      begin
+        select st1.id into:res
+        from tc_testing.sample_types st1
+        inner join tc_testing.sample_types st2
+          on
+            st1.id = st2.id
+            and st1.id > p_num_min
+            and st2.id < p_num_max;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 50
+    caption: Проверка корректности использования бинд-переменных в JOIN - в подзапросе
+      (select)
+    code: |
+      declare
+        p_num number := 1;
+      begin
+        with sub as (
+          select
+            id,
+            type_number
+          from tc_testing.sample_types
+          where type_number > p_num
+        )
+      select st.id into:res
+        from tc_testing.sample_types st
+        inner join sub on st.id = sub.id
+        order by st.id;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 51
+    caption: Проверка корректности использования бинд-переменных в подзапросах в where
+      - number
+    code: |
+      declare
+        p_num number := 2;
+      begin
+        select st.id into:res
+        from tc_testing.sample_types st
+        where st.id in (
+          select id
+          from tc_testing.sample_types
+          where id < p_num
+        );
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 52
+    caption: Проверка корректности использования бинд-переменных глобальной функции
+      пакета - number
+    code: |
+      declare
+        l_res number := tc_testing.pkg_bind.global_func;
+      begin
+        select l_res into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 999
+          }
+        ]
+      }
+    comment: ''
+  - id: 53
+    caption: Проверка корректности использования бинд-переменных с пакетной функцией
+      с параметром - number
+    code: |
+      declare
+        l_num number := 100;
+      begin
+        select tc_testing.pkg_bind.pkg_func_number(l_num) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 200
+          }
+        ]
+      }
+    comment: ''
+  - id: 54
+    caption: Проверка корректности использования бинд-переменных функции объектного
+      типа obj_number_type для типа NUMBER
+    code: |
+      declare
+        l_obj tc_testing.obj_number_type_1;
+        l_res number;
+        l_num number := 777;
+      begin
+        l_obj := tc_testing.obj_number_type_1(l_num);
+        select l_obj.get_value() into :res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 777
+          }
+        ]
+      }
+    comment: ''
+  - id: 55
+    caption: Проверка корректности использования бинд-переменных в конструкторе объектов
+      obj_number_type в SELECT для типа NUMBER
+    code: |
+      declare
+        l_res number := 888;
+      begin
+        select tc_testing.obj_number_type.get_value (l_res) value into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 888
+          }
+        ]
+      }
+    comment: ''
+  - id: 56
+    caption: Проверка корректности использования бинд-переменных в конструкторе табличного
+      типа tab_number_type в SELECT для типа NUMBER
+    code: |
+      declare
+        l_res number;
+        l_num number := 111;
+        l_num1 number := 222;
+        l_num2 number := 333;
+      begin
+        select column_value into l_res
+        from table(tc_testing.tab_number_type(l_num, l_num1, l_num2))
+        where rownum = 1;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 111
+          }
+        ]
+      }
+    comment: ''
+  - id: 57
+    caption: Проверка корректности использования бинд-переменных в пакетной переменной
+      pkg_bind.pkg_num в WHERE-условии для типа NUMBER
+    code: |
+      declare
+        l_res number;
+        l_num number := 500;
+      begin
+        select 1 into l_res
+        from dual
+        where tc_testing.pkg_bind.pkg_num = l_num;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 58
+    caption: Проверка корректности использования бинд-переменных константной пакетной
+      переменной pkg_bind.c_pkg_num в выражении select для типа NUMBER
+    code: |
+      declare
+        l_res number;
+        l_num number := 100;
+      begin
+        select tc_testing.pkg_bind.c_pkg_num + l_num into l_res
+        from dual;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1100
+          }
+        ]
+      }
+    comment: ''
+  - id: 59
+    caption: Проверка использования пакетной константы в арифметическом выражении-
+      NUMBER в select
+    code: |
+      declare
+        l_res number;
+      begin
+        select tc_testing.pkg_bind.pkg_func_number(tc_testing.pkg_bind.pkg_num) into l_res
+        from dual;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1000
+          }
+        ]
+      }
+    comment: ''
+  - id: 60
+    caption: Проверка корректности использования бинд-переменных вложенного вызова
+      функций для типа NUMBER в select
+    code: |
+      declare
+        l_res number;
+      begin
+        select tc_testing.pkg_bind.pkg_func_number(tc_testing.pkg_bind.global_func()) into l_res
+        from dual;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1998
+          }
+        ]
+      }
+    comment: ''
+  - id: 61
+    caption: Проверка корректности использования бинд-переменных функции в выражении
+      с арифметикой для типа NUMBER
+    code: |
+      declare
+        l_res number;
+        l_num number := 50;
+      begin
+        select (tc_testing.pkg_bind.global_func() * 2) + l_num into l_res
+        from dual;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2048
+          }
+        ]
+      }
+    comment: ''
+  - id: 62
+    caption: Проверка корректности использования бинд-переменных функции в CASE-выражении
+      для типа NUMBER
+    code: |
+      declare
+        l_res number;
+        l_num number := 500;
+      begin
+        select case when tc_testing.pkg_bind.global_func() > l_num then 1 else 0 end into l_res
+        from dual;
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 63
+    caption: Проверка корректности использования бинд-переменных объектного типа в
+      WHERE-условии для типа NUMBER
+    code: |-
+      declare
+       l_res number;
+       l_num number := 100;
+      begin
+       select 1 into l_res
+       from dual where tc_testing.obj_number_type_2(l_num).get_value() = l_num;
+       :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 64
+    caption: Проверка корректности использования бинд-переменных табличного типа с
+      агрегатной функцией для типа NUMBER
+    code: |
+      declare
+        l_res number;
+        l_num number := 10;
+        l_num1 number := 20;
+        l_num2 number := 30;
+      begin
+        select sum(column_value) into l_res
+        from table(tc_testing.tab_number_type(l_num, l_num1, l_num2));
+        :res := l_res;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 60
+          }
+        ]
+      }
+    comment: ''
+  - id: 65
+    caption: Проверка корректности использования бинд-переменных - функция объектного
+      типа с параметром
+    code: |
+      declare
+        v_obj tc_testing.obj_num_func_type := tc_testing.obj_num_func_type(5);
+        p_num number := 2;
+      begin
+        select v_obj.calc(p_num) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 66
+    caption: Проверка корректности использования бинд-переменных - XMLType как объектный
+      тип
+    code: |
+      declare
+        v_xml xmltype := xmltype('<root><value>100</value></root>');
+        v_num number;
+      begin
+        select extractvalue(v_xml, '/root/value') into v_num
+        from dual;
+        :res := v_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 100
+          }
+        ]
+      }
+    comment: ''
+  - id: 67
+    caption: Проверка корректности использования бинд-переменных - XMLType в select
+    code: |
+      declare
+        v_xml xmltype := xmltype('<root><id>3</id></root>');
+        v_num number;
+      begin
+        select to_number(extractvalue(v_xml, '/root/id'))
+        into v_num
+        from dual;
+        :res := v_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 68
+    caption: Проверка корректности использования бинд-переменных - XMLType в WHERE
+      условии
+    code: |
+      declare
+        v_xml xmltype := xmltype('<root><id>3</id></root>');
+        p_num number := 3;
+      begin
+        select 1 into:res
+        from dual
+        where to_number(extractvalue(v_xml, '/root/id')) = p_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 69
+    caption: Проверка корректности использования бинд-переменных - в подзапросах с
+      использованием оператора UNION
+    code: |
+      declare
+        p_num number := 5;
+      begin
+        select id into:res
+        from (
+          select id
+          from tc_testing.sample_types
+          where id < p_num
+          union
+          select id
+          from tc_testing.sample_types
+          where id > p_num
+        )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 70
+    caption: Проверка корректности использования бинд-переменных - аналитическая функция
+      ROW_NUMBER
+    code: |
+      declare
+        p_num number := 3;
+      begin
+        select id into:res
+        from (
+          select
+            id,
+            row_number() over (order by id) as rn
+          from tc_testing.sample_types
+          where id > p_num
+        )
+        where rn = 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 71
+    caption: Проверка корректности использования бинд-переменных - коррелированный
+      подзапрос
+    code: |-
+      declare
+       p_num number := 10;
+      begin
+       select id into :res
+       from tc_testing.sample_types s1
+       where exists (
+       select 1 from tc_testing.sample_types s2
+       where s2.id = s1.id and s2.type_number > p_num
+       ) and rownum = 1;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 72
+    caption: Проверка корректности использования бинд-переменных - вложенный объектный
+      тип
+    code: |
+      declare
+        v_outer tc_testing.outer_obj := tc_testing.outer_obj(100, tc_testing.inner_obj(50));
+        v_num number;
+      begin
+        select v_outer.get_inner_value() into v_num
+        from dual;
+        :res := v_num;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "number",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 50
+          }
+        ]
+      }
+    comment: ''
+  - id: 73
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - бинд переменная типа binary_float
+    code: |
+      declare
+        v_val binary_float := 3.0f;
+      begin
+        select v_val into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 74
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - константа бинд переменная типа binary_float
+    code: |
+      declare
+        v_val constant binary_float := 3.0f;
+      begin
+        select v_val into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 75
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная бинд переменная типа binary_float
+    code: |
+      declare
+        v_val binary_float := tc_testing.pkg_bind.pkg_binary_float;
+      begin
+        select v_val into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 3
+          }
+        ]
+      }
+    comment: ''
+  - id: 76
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа binary_float
+    code: |
+      declare
+        v_val binary_float := tc_testing.pkg_bind.c_pkg_binary_float;
+      begin
+        select v_val into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 77
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа binary_float в where сравнениях
+    code: |
+      declare
+        v_val binary_float := tc_testing.pkg_bind.pkg_binary_float;
+      begin
+        select 1 into:res
+        from dual
+        where v_val = 3.0f;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 78
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - пакетная константа бинд переменная типа binary_float в where between
+    code: |
+      declare
+        v_val binary_float := tc_testing.pkg_bind.pkg_binary_float;
+      begin
+        select 1 into:res
+        from dual
+        where v_val between 2.0f and 4.0f;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 79
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование поля объектного типа в select
+    code: |
+      declare
+        v_obj tc_testing.obj_binary_float := tc_testing.obj_binary_float(1, 5.5f);
+      begin
+        select v_obj.bf_value into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 5.5
+          }
+        ]
+      }
+    comment: ''
+  - id: 80
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование поля объектного типа в использование в where
+    code: |
+      declare
+        v_obj tc_testing.obj_binary_float := tc_testing.obj_binary_float(1, 5.5f);
+      begin
+        select 1 into:res
+        from dual
+        where v_obj.bf_value > 5.0f;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 81
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование конструктора в select
+    code: |
+      declare
+        v_obj tc_testing.obj_binary_float := tc_testing.obj_binary_float(1, 7.7f);
+      begin
+        select v_obj.bf_value into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 7.6999998
+          }
+        ]
+      }
+    comment: ''
+  - id: 82
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование конструктора в where
+    code: |
+      declare
+        v_obj tc_testing.obj_binary_float := tc_testing.obj_binary_float(1, 7.7f);
+      begin
+        select 1 into:res
+        from dual
+        where v_obj.bf_value = 7.7f;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 83
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование функции объектного типа
+    code: |
+      declare
+        v_obj tc_testing.obj_binary_float := tc_testing.obj_binary_float(1, 8.8f);
+      begin
+        select v_obj.get_bf() into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 8.8000002
+          }
+        ]
+      }
+    comment: ''
+  - id: 84
+    caption: Проверка корректности использования бинд-переменных - использование поля
+      объектного типа в использование элемента табличного типа использование элемента
+      VARRAY в SELECT
+    code: |
+      declare
+        v_varray tc_testing.varray_bf := tc_testing.varray_bf(1.1f, 2.2f, 3.3f);
+        v_table tc_testing.table_bf := tc_testing.table_bf(4.4f, 5.5f, 6.6f);
+      begin
+        select v_varray(1) into:res
+        from dual;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1.1
+          }
+        ]
+      }
+    comment: ''
+  - id: 85
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование элемента табличного типа Использование элемента TABLE в WHERE
+    code: |
+      declare
+        v_varray tc_testing.varray_bf := tc_testing.varray_bf(1.1f, 2.2f, 3.3f);
+        v_table tc_testing.table_bf := tc_testing.table_bf(4.4f, 5.5f, 6.6f);
+      begin
+        select 1 into:res
+        from dual
+        where v_table(1) = 4.4f;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 86
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в where с оператором = (сравнения)
+    code: |
+      declare
+        l_val binary_float := 0.0f;
+      begin
+        select type_binary_float into:res
+        from tc_testing.sample_types
+        where type_binary_float = l_val;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 87
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -- использование переменной binary_float в where с оператором > (больше)
+    code: |
+      declare
+        l_val binary_float := 4f;
+      begin
+        select type_binary_float into:res
+        from tc_testing.sample_types
+        where type_binary_float > l_val;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 340282350000000000000000000000000000000
+          }
+        ]
+      }
+    comment: ''
+  - id: 88
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в where с оператором between проверка
+      диапазона
+    code: |
+      declare
+        l_low binary_float := 2.0f;
+        l_high binary_float := 4.0f;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_float between l_low and l_high;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 89
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в where с оператором in проверка вхождения
+      binary_float в список значений в условии where
+    code: |
+      declare
+        l_val1 binary_float := 0.0f;
+        l_val2 binary_float := 3.0f;
+        l_val3 binary_float := 5.0f;
+        l_res number;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_float in (l_val1, l_val2, l_val3);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 90
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в where с is null
+    code: |
+      declare
+        l_val binary_float := null;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_float is not null;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 9
+          }
+        ]
+      }
+    comment: ''
+  - id: 91
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в select в арифметическом выражении
+    code: |
+      declare
+        l_val binary_float := 10.0f;
+      begin
+        select type_binary_float + l_val into:res
+        from tc_testing.sample_types
+        where id = 2;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 10.333333
+          }
+        ]
+      }
+    comment: ''
+  - id: 92
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в order by проверка сортировки по выражению
+      с binary_float
+    code: |
+      declare
+        l_offset binary_float := 6.5f;
+      begin
+        select type_binary_float into:res
+        from tc_testing.sample_types
+        order by type_binary_float + l_offset desc fetch first 1 row only;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ]
+      }
+    comment: ''
+  - id: 93
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в group by и having
+    code: |
+      declare
+        l_threshold binary_float := 2.5f;
+      begin
+        select count(*) into:res
+        from (
+          select type_binary_float
+          from tc_testing.sample_types
+          group by type_binary_float
+          having type_binary_float > l_threshold
+        );
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 94
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в case
+    code: |
+      declare
+        l_boundary binary_float := 3.0f;
+      begin
+        select case when type_binary_float < l_boundary then 'меньше' else 'не меньше' end into:res
+        from tc_testing.sample_types
+        where id = 3;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "меньше"
+          }
+        ]
+      }
+    comment: ''
+  - id: 95
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование константы binary_float в where
+    code: |
+      declare
+        l_boundary binary_float := 0.0f;
+      begin
+        select type_binary_float into:res
+        from tc_testing.sample_types
+        where type_binary_float = l_boundary;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 96
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование результата функции, возвращающей binary_float, в where
+    code: |
+      declare
+        l_boundary binary_float := tc_testing.get_float_val();
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where type_binary_float = l_boundary;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 97
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в подзапросе
+    code: |-
+      declare
+       l_val binary_float := 0.0f;
+      begin
+       select count(*) into :res from tc_testing.sample_types a
+       where exists
+       (select 1
+       from tc_testing.sample_types b
+       where b.id = a.id and b.type_binary_float = l_val);
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 98
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в join on
+    code: |
+      declare
+        l_val binary_float := 2.0f;
+      begin
+        select a.id into:res
+        from tc_testing.sample_types a
+        inner join tc_testing.sample_types b
+          on a.type_binary_float = b.type_binary_float and b.type_binary_float < l_val
+        where a.id = 5;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 5
+          }
+        ]
+      }
+    comment: ''
+  - id: 99
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в having
+    code: |
+      declare
+        v_bf binary_float := 3.0f;
+      begin
+        select 1 into:res
+        from dual
+        having count(*) < v_bf;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "binary_float",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 100
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в group by (через выражение)
+    code: |
+      declare
+        v_bf binary_float := 3.0f;
+      begin
+        select case when v_bf > 2.0f then 'A' else 'B' end
+        into:res
+        from dual
+        group by case when v_bf > 2.0f then 'A' else 'B' end;
+      end;
+    input: |-
+      {
+          "resultType": "binds",
+          "inputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "outputBinds": [
+            {
+              "name": "res",
+              "type": "varchar2",
+              "value": null
+            }
+          ],
+          "test": true
+        }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "A"
+          }
+        ]
+      }
+    comment: ''
+  - id: 101
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в order by
+    code: |
+      declare
+        v_bf binary_float := 3.0f;
+      begin
+        select 1 into:res
+        from dual
+        order by v_bf;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 102
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в в join on
+    code: |
+      declare
+        v_bf binary_float := 3.0f;
+      begin
+        select 1 into:res
+        from dual d1
+        inner join dual d2 on d1.dummy = d2.dummy and v_bf = 3.0f;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 103
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в подзапросе
+    code: |-
+      declare
+       v_bf binary_float := 3.0f;
+      begin
+       select 1 into :res
+       from dual
+       where exists (select 1 from dual where v_bf = 3.0f);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 104
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в is not null
+    code: |
+      declare
+        v_bf binary_float := 3.0f;
+      begin
+        select 1 into:res
+        from dual
+        where v_bf is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 105
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в скалярном подзапросе
+    code: |
+      declare
+        l_val binary_float := 2.0f;
+      begin
+        select (
+          select type_binary_float
+          from tc_testing.sample_types
+          where id = 3
+        ) + l_val into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": -340282347000000000000000000000000000000
+          }
+        ]
+      }
+    comment: ''
+  - id: 106
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача binary_float в функцию агрегации
+    code: |
+      declare
+        l_val binary_float := 100.0f;
+      begin
+        select max(type_binary_float + l_val) into:res
+        from tc_testing.sample_types;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 340282347000000000000000000000000000000
+          }
+        ]
+      }
+    comment: ''
+  - id: 107
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной binary_float в выражении decode
+    code: |
+      declare
+        l_val binary_float := 3.0f;
+      begin
+        select decode(type_binary_float, l_val, 'совпало', 'не совпало') into:res
+        from tc_testing.sample_types
+        where id = 3;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "не совпало"
+          }
+        ]
+      }
+    comment: ''
+  - id: 108
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование элемента табличного типа binary_float в where
+    code: |
+      declare
+        type t_tab is table of binary_float;
+        l_tab t_tab := t_tab(1.0f, 2.0f, 3.0f);
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_float = l_tab(2);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 109
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование поля объектного типа binary_float в where
+    code: |
+      declare
+        l_obj tc_testing.obj_float := tc_testing.obj_float(0f);
+      begin
+        select sample_types.type_binary_float into:res
+        from tc_testing.sample_types
+        where sample_types.type_binary_float = l_obj.val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 110
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в условие where is not null.
+    code: |
+      declare
+        l_bf binary_float := null;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_float is not null;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 9
+          }
+        ]
+      }
+    comment: ''
+  - id: 111
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование с пакетной функцией
+    code: |
+      declare
+        v_bf binary_float := 0.0f;
+      begin
+        select tc_testing.pkg_bind.pkg_func_number(type_binary_float) into:res
+        from tc_testing.sample_types
+        where id = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ]
+      }
+    comment: ''
+  - id: 112
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование переменной в функции, зависящей от поля
+    code: |
+      declare
+        v_bf binary_float := 0.0f;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_float < v_bf;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 113
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -использование в in
+    code: |
+      declare
+        v_bf binary_float := 0.0f;
+      begin
+        select 1 into:res
+        from tc_testing.sample_types
+        where type_binary_float in (v_bf, 10.5f, 20.5f);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 114
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в оператор group by. используется обычная
+      переменная.
+    code: |
+      declare
+        l_bf binary_float := 1.0;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        group by l_bf;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "numb",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "number",
+            "value": 19
+          }
+        ]
+      }
+    comment: ''
+  - id: 115
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в условие having.используется обычная
+      переменная.
+    code: |
+      declare
+        l_bf binary_float := 1.0;
+      begin
+        select max(type_binary_float) into:res
+        from tc_testing.sample_types
+        having max(type_binary_float) > l_bf;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 340282350000000000000000000000000000000
+          }
+        ]
+      }
+    comment: ''
+  - id: 116
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в join условие on/используется обычная
+      переменная.
+    code: |
+      declare
+        l_bf binary_float := 0.0;
+      begin
+        select a.id into:res
+        from tc_testing.sample_types a
+        inner join tc_testing.sample_types b on a.type_binary_float = b.type_binary_float and a.type_binary_float = l_bf;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 117
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в подзапрос в where. используется обычная
+      переменная.
+    code: |
+      declare
+        l_bf binary_float := 0.0;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where type_binary_float = (
+          select l_bf
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 118
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в подзапрос в from. используется обычная
+      переменная.
+    code: |
+      declare
+        l_bf binary_float := 1.0;
+      begin
+        select d into:res
+        from (
+          select l_bf as d
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 119
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передача переменной типа binary_float в подзапрос с оператором in. используется
+      обычная переменная.
+    code: |
+      declare
+        l_bf binary_float := 0.0;
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where type_binary_float in (
+          select l_bf
+          from dual
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 120
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - XMLType в select
+    code: |
+      declare
+        v_xml xmltype := xmltype('<row><val>9.99e+05</val></row>');
+        v_num binary_float;
+      begin
+        select extractvalue(v_xml, '/row/val')
+        into v_num
+        from dual;
+        :res := v_num;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 999000
+          }
+        ]
+      }
+    comment: ''
+  - id: 121
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - LIKE с преобразованием binary_float в строку
+    code: |
+      declare
+        v_pattern varchar2(10) := '3%';
+        l_bf binary_float := 3.14f;
+      begin
+        select 1 into:res
+        from dual
+        where to_char(l_bf) like v_pattern;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 122
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - Использование переменной коллекции
+    code: |
+      declare
+        v_table tc_testing.table_bf := tc_testing.table_bf(1.0f, 2.0f, 3.0f);
+      begin
+        select column_value
+        into:res
+        from table(v_table)
+        where column_value = 1.0f;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 123
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - Использование в подзапросе
+    code: |
+      declare
+        v_table tc_testing.t_bf_table_schema := tc_testing.t_bf_table_schema(1.5f, 2.5f, 3.5f);
+        v_result binary_float;
+      begin
+        select max(column_value)
+        into v_result
+        from (
+          select column_value
+          from table(v_table)
+          where column_value > 2.0f
+        );
+        :res := v_result;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_float",
+            "value": 3.5
+          }
+        ]
+      }
+    comment: ''
+  - id: 124
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      типа binary_double в select из dual
+    code: |
+      declare
+        l_var binary_double := 123.456;
+      begin
+        select l_var into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 123.456
+          }
+        ]
+      }
+    comment: ''
+  - id: 125
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи константы типа binary_double в select из dual
+    code: |
+      declare
+        c_const constant binary_double := 789.012;
+      begin
+        select c_const into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 789.012
+          }
+        ]
+      }
+    comment: ''
+  - id: 126
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи пакетной переменной типа binary_double в select из dual
+    code: |
+      declare
+        l_var binary_double := tc_testing.pkg_bind.pkg_binary_double;
+      begin
+        select l_var into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 555.777
+          }
+        ]
+      }
+    comment: ''
+  - id: 127
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи пакетной константы типа binary_double в select из dual
+    code: |
+      declare
+        l_var binary_double := tc_testing.pkg_bind.c_pkg_binary_double;
+      begin
+        select l_var into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 999.888
+          }
+        ]
+      }
+    comment: ''
+  - id: 128
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи binary_double в where условии
+    code: |
+      declare
+        l_val binary_double := 3;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_double = l_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 129
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи binary_double в подзапросе
+    code: |
+      declare
+        l_val binary_double := 2;
+      begin
+        select (
+          select type_binary_double
+          from tc_testing.sample_types
+          where id = l_val
+        ) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0.3333333333333333
+          }
+        ]
+      }
+    comment: ''
+  - id: 130
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи binary_double в функции abs
+    code: |
+      declare
+        l_val binary_double := -15.5;
+      begin
+        select abs(l_val) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 15.5
+          }
+        ]
+      }
+    comment: ''
+  - id: 131
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в case выражении
+    code: |
+      declare
+        l_val binary_double := 10;
+      begin
+        select case when l_val > 5 then l_val * 2 else l_val end into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 20
+          }
+        ]
+      }
+    comment: ''
+  - id: 132
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в выражении сложения
+    code: |
+      declare
+        l_val binary_double := 7.5;
+      begin
+        select l_val + 2.5 into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 10
+          }
+        ]
+      }
+    comment: ''
+  - id: 133
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - передачи binary_double в round функции
+    code: |
+      declare
+        l_val binary_double := 3.14159;
+      begin
+        select round(l_val, 2) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 3.14
+          }
+        ]
+      }
+    comment: ''
+  - id: 134
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в coalesce
+    code: |
+      declare
+        l_val binary_double := null;
+      begin
+        select coalesce(l_val, 100.5) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 100.5
+          }
+        ]
+      }
+    comment: ''
+  - id: 135
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в decode
+    code: |
+      declare
+        l_val binary_double := 2;
+      begin
+        select decode(l_val, 1, 'one', 2, 'twoother') into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "twoother"
+          }
+        ]
+      }
+    comment: ''
+  - id: 136
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в nvl
+    code: |
+      declare
+        l_val binary_double := null;
+      begin
+        select nvl(l_val, 99.9) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 99.9
+          }
+        ]
+      }
+    comment: ''
+  - id: 137
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в power
+    code: |
+      declare
+        l_val binary_double := 3;
+      begin
+        select power(l_val, 2) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 9
+          }
+        ]
+      }
+    comment: ''
+  - id: 138
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в sqrt
+    code: |
+      declare
+        l_val binary_double := 16;
+      begin
+        select sqrt(l_val) into:res
+        from dual;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 4
+          }
+        ]
+      }
+    comment: ''
+  - id: 139
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в групповой функции max
+    code: |
+      declare
+        l_val binary_double := 0.5;
+      begin
+        select max(type_binary_double - l_val) into:res
+        from tc_testing.sample_types;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 1.7976931348623157E+308
+          }
+        ]
+      }
+    comment: ''
+  - id: 140
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в групповой функции count
+    code: |
+      declare
+        l_val binary_double := 3;
+      begin
+        select count(*) into:res
+        from tc_testing.sample_types
+        where type_binary_double > l_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 1
+          }
+        ]
+      }
+    comment: ''
+  - id: 141
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -передачи binary_double в аналитической функции row_number
+    code: |
+      declare
+        l_val binary_double := 0;
+      begin
+        select max(rn) into:res
+        from (
+          select row_number() over (order by type_binary_double + l_val) as rn
+          from tc_testing.sample_types
+        );
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 19
+          }
+        ]
+      }
+    comment: ''
+  - id: 142
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование локальной переменной в where (равенство) Проверка сравнения
+      binary_double через = в where.
+    code: |
+      declare
+        l_val binary_double := 0.0d;
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double = l_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 143
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      -использование пакетной переменной в where (больше)Проверка сравнения binary_double
+      через > в where.
+    code: |
+      declare
+        l_val binary_double := tc_testing.pkg_bind.pkg_binary_double_2;
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double = l_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 144
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных - использование локальной переменной в where (in) Проверка оператора
+      in с binary_double.
+    code: |
+      declare
+        l_val binary_double := 0.0d;
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double in (l_val);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 145
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных - использование локальной переменной в where (between)
+    code: |
+      declare
+        l_low binary_double := 0.0d;
+        l_high binary_double := 1.0d;
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where
+          type_binary_double between l_low and l_high
+          and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 2.2250738585072014E-308
+          }
+        ]
+      }
+    comment: ''
+  - id: 146
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных - использование локальной переменной в where (is not null)Проверка
+      is not null с binary_double.
+    code: |
+      declare
+        l_val binary_double := null;
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double is not null and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 1.7976931348623157E+308
+          }
+        ]
+      }
+    comment: ''
+  - id: 147
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных - использование локальной переменной в group by Проверка использования
+      binary_double в group by (тривиальный случай).
+    code: |
+      declare
+        l_dummy binary_double := 1.0d;
+      begin
+        select max(type_binary_double) into:res
+        from tc_testing.sample_types
+        group by l_dummy;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 1.7976931348623157E+308
+          }
+        ]
+      }
+    comment: ''
+  - id: 148
+    caption: Проверка корректности использования бинд-переменных в базовых типах данных
+      - использование в подзапросе Проверка использования binary_double переменной
+      в скалярном подзапросе.
+    code: |
+      declare
+        l_val binary_double := 0.0d;
+      begin
+        select type_binary_double into:res
+        from
+          tc_testing.sample_types
+        where type_binary_double = (
+          select l_val
+          from dual
+        )
+        and rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 149
+    caption: 'Проверка корректности использования binary_double бинд-переменных в
+      базовых типах данных - Объектный тип: поле объектного типа'
+    code: |
+      declare
+        l_obj tc_testing.t_obj_schema := tc_testing.t_obj_schema(0.0d);
+      begin
+        select sample_types.type_binary_double into:res
+        from tc_testing.sample_types
+        where sample_types.type_binary_double = l_obj.bd_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 150
+    caption: 'Проверка корректности использования binary_double бинд-переменных в
+      базовых типах данных -Табличный тип: использование в FROM'
+    code: |
+      declare
+        l_tab tc_testing.t_bd_tab_schema := tc_testing.t_bd_tab_schema(1.0d, 2.0d, 3.0d);
+        l_result binary_double;
+      begin
+        select column_value
+        into l_result
+        from table(l_tab.get_values())
+        where column_value = 2.0d;
+        :res := l_result;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 151
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных -Использование в HAVING
+    code: |
+      declare
+        l_val binary_double := 0.0d;
+      begin
+        select max(type_binary_double) into:res
+        from tc_testing.sample_types
+        where rownum = 1
+        group by type_binary_double
+        having count(*) > l_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 1.7976931348623157E+308
+          }
+        ]
+      }
+    comment: ''
+  - id: 152
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных -Использование в ORDER BY
+    code: |
+      declare
+        l_dummy binary_double := 1.0d;
+      begin
+        select type_binary_double into:res
+        from (
+          select type_binary_double
+          from tc_testing.sample_types
+          order by type_binary_double + l_dummy
+        )
+        where rownum = 1;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": -1.7976931348623157E+308
+          }
+        ]
+      }
+    comment: ''
+  - id: 153
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных использование в case (в select)
+    code: |
+      declare
+        l_val binary_double := 2.0d;
+      begin
+        select case when type_binary_double = l_val then 'равно' else 'не равно' end into:res
+        from tc_testing.sample_types
+        where id = 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "varchar2",
+            "value": "не равно"
+          }
+        ]
+      }
+    comment: ''
+  - id: 154
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных использование в join (on условие)
+    code: |
+      declare
+        l_val binary_double := 0.0d;
+      begin
+        select t1.type_binary_double into:res
+        from tc_testing.sample_types t1
+        inner join tc_testing.sample_types t2
+          on
+            t1.type_binary_double = t2.type_binary_double
+            and t2.type_binary_double = l_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 155
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных использование в join (в select второй таблицы)
+    code: |
+      declare
+        l_val binary_double := 0.0d;
+      begin
+        with t2 as (
+          select l_val as bd_val
+          from dual
+        )
+      select t1.type_binary_double into:res
+        from tc_testing.sample_types t1
+        inner join t2 on t1.type_binary_double = t2.bd_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 156
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных использование локальной константы в where.
+    code: |
+      declare
+        c_val constant binary_double := 0.0d;
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double = c_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 157
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных использование элемента табличного типа (varray) в where Проверка
+      использования элемента varray binary_double в where.
+    code: |
+      declare
+        type t_bd_tab is table of binary_double;
+        l_tab t_bd_tab := t_bd_tab(1.0d, 0.0d, 3.0d);
+      begin
+        select id into:res
+        from tc_testing.sample_types
+        where type_binary_double = l_tab(2);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 7
+          }
+        ]
+      }
+    comment: ''
+  - id: 158
+    caption: Проверка корректности использования binary_double бинд-переменных в базовых
+      типах данных использование результата глобальной функции в where
+    code: |
+      declare
+        c_val binary_double := tc_testing.fn_global_bd();
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double = c_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 159
+    caption: Проверка корректности использование binary_double бинд-переменных в базовых
+      типах данных использование результата пакетной функции в where
+    code: |
+      declare
+        c_val binary_double := tc_testing.pkg_bind.fn_global_bd();
+      begin
+        select type_binary_double into:res
+        from tc_testing.sample_types
+        where type_binary_double = c_val;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 160
+    caption: Проверка корректности использование binary_double табличного типа в from
+      (table() функция)
+    code: |
+      declare
+        l_tab tc_testing.bd_tab_type := tc_testing.bd_tab_type(1.0d, 2.0d, 3.0d);
+      begin
+        select column_value into:res
+        from table(l_tab)
+        where column_value = 2.0d;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 2
+          }
+        ]
+      }
+    comment: ''
+  - id: 161
+    caption: Проверка корректности использования binary_double в подзапросе exists
+    code: |-
+      declare
+       l_val binary_double := 0.0d;
+      begin
+       select type_binary_double into :res from tc_testing.sample_types a where exists (select 1 from dual where a.type_binary_double = l_val);
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 0
+          }
+        ]
+      }
+    comment: ''
+  - id: 162
+    caption: Проверка корректности использования использование binary_double в арифметических
+      операциях в select
+    code: |
+      declare
+        l_val binary_double := 5.0d;
+      begin
+        select type_binary_double * l_val into:res
+        from tc_testing.sample_types
+        where id = 2;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 1.6666666666666665
+          }
+        ]
+      }
+    comment: ''
+  - id: 163
+    caption: Проверка корректности использования бинд-переменных binary_double в базовых
+      типах данных - XMLType в select
+    code: |
+      declare
+        v_xml xmltype := xmltype('<row><val>1.23456789E+010</val></row>');
+        v_num binary_double;
+      begin
+        select extractvalue(v_xml, '/row/val')
+        into v_num
+        from dual;
+        :res := v_num;
+      end;
+    input: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "test": true
+      }
+    result: |-
+      {
+        "resultType": "binds",
+        "inputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": null
+          }
+        ],
+        "outputBinds": [
+          {
+            "name": "res",
+            "type": "binary_double",
+            "value": 12345678900
+          }
+        ]
+      }
+    comment: ''
