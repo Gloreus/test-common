@@ -6,14 +6,20 @@ import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.treegrid.TreeGrid;
+import com.vaadin.flow.data.provider.hierarchy.HierarchicalDataProvider;
+import com.vaadin.flow.data.provider.hierarchy.TreeData;
+import com.vaadin.flow.data.provider.hierarchy.TreeDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.antlr.v4.runtime.tree.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import ru.sovcombank.rbs.TestStoreProperties;
@@ -39,7 +45,8 @@ import java.util.Locale;
 class TestSetView extends VerticalLayout {
 
     private final TestStoreProperties testStoreProperties;
-    private final ComboBox<Path> fileComboBox = new ComboBox<>();
+
+    private final TreeGrid<Path> fileTree;
     private final ViewLogPanel logPanel = new ViewLogPanel();
     private final Button createBtn;
     @Autowired
@@ -47,17 +54,27 @@ class TestSetView extends VerticalLayout {
     private Path currentPath;
     private Path rootPath;
 
+    private TreeData<Path> treeData = new TreeData<>();
+    private final TreeDataProvider<Path> treeDataProvider = new TreeDataProvider<>(treeData, HierarchicalDataProvider.HierarchyFormat.FLATTENED);
+
     TestSetView(@NonNull TestStoreProperties testStoreProperties) {
         this.testStoreProperties = testStoreProperties;
         currentPath = null;
         rootPath = testStoreProperties.getOraTestsFullPath();
-        initFileComboBox();
+        HorizontalLayout fileLayout = new HorizontalLayout();
+        fileTree = createFileTree();
+        fileLayout.add(fileTree);
+        TextArea fileInfo = new TextArea("Подробнее");
+        fileLayout.add(fileInfo);
+        fileLayout.setWidthFull();
+        fileLayout.setFlexGrow(1, fileInfo, fileTree);
+
         createBtn = new Button("Выполнить выбранные");
         createBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         var toolbar = new VerticalLayout();
         add(new ViewTitle("Тесты из файла"));
 
-        toolbar.add(fileComboBox);
+        toolbar.add(fileLayout);
         toolbar.setWrap(true);
         toolbar.setWidthFull();
         add(toolbar);
@@ -69,104 +86,52 @@ class TestSetView extends VerticalLayout {
         add(mainForm);
         add(logPanel);
         setFlexGrow(1, logPanel);
-        try {
-            reloadYamls(rootPath);
+    }
+
+    private TreeGrid<Path> createFileTree() {
+        TreeGrid<Path> ft = new TreeGrid<>();
+        ft.setMinHeight("10em");
+        ft.setMinWidth("35em");
+        ft.setDataProvider(treeDataProvider);
+        ft.addHierarchyColumn(path -> path.getFileName().toString()).setHeader("Файл");
+        ft.setEmptyStateText("Не нашлось ни одного теста");
+
+        treeData.clear();
+        treeData.addRootItems(rootPath);
+        loadDir(rootPath);
+        treeDataProvider.refreshAll();
+        return ft;
+    }
+
+    private void loadDir(@NonNull Path dir) {
+        writeInfo(dir.toString());
+        // Подкаталоги
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, Files::isDirectory )) {
+            for (Path entry : stream) {
+                treeData.addItem(dir, entry);
+                loadDir(entry);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
 
-    private void initFileComboBox() {
-        fileComboBox.setPlaceholder("Набор тестов");
-        fileComboBox.setMinWidth("8em");
-        fileComboBox.setWidthFull();
-        fileComboBox.setAllowCustomValue(false);
-        fileComboBox.addValueChangeListener(this::onProfileSelected);
-        fileComboBox.setFocusSelectedItem(true);
-        fileComboBox.setItemLabelGenerator(item -> {
-            Path p = rootPath.relativize(item);
-            return "Тесты:" + p.toString();
-        });
+        // Файлы
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.yml")) {
+            for (Path entry : stream) {
+                treeData.addItem(dir, entry);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void reloadYamls(@NonNull Path dir) throws IOException {
-        writeInfo(dir.toString());
-        List<Path> result = new ArrayList<>();
-
-        if (!rootPath.equals(dir)) {
-            Path prev = dir.relativize(currentPath);
-            result.add(prev);
-        }
-        result.add(dir);
-
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-            for (Path entry : stream) {
-                if (Files.isDirectory(entry)) {
-                    result.add(entry);
-                } else {
-                    String s = entry.toString().toLowerCase(Locale.getDefault());
-                    if (s.endsWith(".yml")) {
-                        result.add(entry);
-                    }
-                }
-            }
-        }
         currentPath = dir;
-        fileComboBox.setItems(result);
-        fileComboBox.setValue(dir);
-    }
-
-    private ComponentRenderer<TestCaseDetailsFormLayout, TestCase> createTestCaseDetailsRenderer(ObjectMapper objectMapper) {
-        return new ComponentRenderer<>(() -> new TestCaseDetailsFormLayout(objectMapper),
-                TestCaseDetailsFormLayout::setTestCase);
-    }
-
-    private void onProfileSelected(HasValue.ValueChangeEvent<Path> event) {
-        Path selected = event.getValue();
-        if (selected == null) {
-            writeInfo("Профиль не выбран");
-        } else {
-            if (!selected.equals(currentPath)) {
-                writeInfo(selected.toString());
-                if (Files.isDirectory(selected)) {
-                    try {
-                        reloadYamls(selected);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        }
-        currentPath = selected;
     }
 
     private void writeInfo(String s) {
         logPanel.writeLog(s);
         log.debug(s);
     }
-
-    private static class TestCaseDetailsFormLayout extends VerticalLayout {
-        private final TextArea jsonTextArea = new TextArea();
-        private final ObjectMapper mapper;
-
-        public TestCaseDetailsFormLayout(@NonNull ObjectMapper mapper) {
-            this.mapper = mapper;
-            setWrap(true);
-            jsonTextArea.setReadOnly(true);
-            jsonTextArea.setWidthFull();
-            add(jsonTextArea);
-            setWidthFull();
-        }
-
-        public void setTestCase(TestCase testCase) {
-            try {
-                jsonTextArea.setValue(mapper.writeValueAsString(testCase));
-            } catch (JsonProcessingException e) {
-                log.error(e.getMessage());
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-
 }
