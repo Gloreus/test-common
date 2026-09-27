@@ -23,6 +23,8 @@ import ru.sovcombank.rbs.YamlConfig;
 import ru.sovcombank.rbs.caseentity.TestDataYamlRepository;
 import ru.sqbt.plsqltests.base.ui.ViewLogPanel;
 import ru.sqbt.plsqltests.base.ui.ViewTitle;
+import ru.sqbt.plsqltests.manager.model.TestStories;
+import ru.sqbt.plsqltests.manager.model.TestStoryReader;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -42,6 +44,9 @@ class TestSetView extends VerticalLayout {
     private final Button createBtn;
     @Autowired
     private TestDataYamlRepository repository;
+    @Autowired
+    TestStoryReader testStoryReader;
+
     private Path currentPath;
     private Path rootPath;
 
@@ -113,7 +118,12 @@ class TestSetView extends VerticalLayout {
     }
 
     private String getTestSetInfo(Path p) {
-        return p.getFileName().toString();
+        try {
+            TestStories ts = testStoryReader.readYam(p);
+            return ts.getCaption();
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
 
     private void loadDir(@NonNull Path dir) {
@@ -136,10 +146,6 @@ class TestSetView extends VerticalLayout {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private void reloadYamls(@NonNull Path dir) throws IOException {
-        currentPath = dir;
     }
 
     private void writeInfo(String s) {
