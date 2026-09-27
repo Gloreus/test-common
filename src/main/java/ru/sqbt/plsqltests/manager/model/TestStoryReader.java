@@ -27,7 +27,7 @@ public class TestStoryReader {
         try (InputStream stream =  Files.newInputStream(pathToYml)) {
             return mapper.readValue(stream, TestStories.class);
         } catch (IOException e) {
-            log.error("Не смог прочитать тесты из " + pathToYml.toString());
+            log.error("Не смог прочитать тесты из {}, {}" , pathToYml.toString(), e.getMessage());
             throw new IOException("Не смог прочитать тесты из " + pathToYml.toString());
         }
     }
