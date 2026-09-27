@@ -1,18 +1,14 @@
 package ru.sqbt.plsqltests.manager.ui;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridMultiSelectionModel;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
@@ -21,10 +17,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Import;
 import ru.sovcombank.rbs.TestStoreProperties;
-import ru.sovcombank.rbs.YamlConfig;
-import ru.sovcombank.rbs.caseentity.TestCase;
 import ru.sovcombank.rbs.caseentity.TestDataYamlRepository;
 import ru.sovcombank.rbs.caseentity.TestProfile;
 import ru.sqbt.plsqltests.base.ui.ViewTitle;
@@ -39,7 +32,7 @@ import java.util.List;
 @Slf4j
 @Route(value = "")
 @PageTitle("Профиль")
-@Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Профили тестирования")
+// @Menu(order = 0, icon = "icons/clipboard-check.svg", title = "Профили тестирования")
 
 class ProfilesView extends VerticalLayout {
     private final ObjectMapper objectMapper;
@@ -49,14 +42,14 @@ class ProfilesView extends VerticalLayout {
 
     private final ComboBox<Path> profilesComboBox;
     private final MultiSelectListBox<String> casesListBox;
-    private final CaseGridView caseGrid;
+    private final CaseGrid caseGrid;
     private final TextArea logTextArea;
     private final Button createBtn;
 
     ProfilesView(TestStoreProperties testStoreProperties,  @NonNull @Qualifier("YmlMapper") ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.testStoreProperties = testStoreProperties;
-        caseGrid = new CaseGridView(objectMapper);
+        caseGrid = new CaseGrid(objectMapper);
         profilesComboBox = new ComboBox<>();
         profilesComboBox.setPlaceholder("Профиль тестирования");
         profilesComboBox.setMinWidth("8em");

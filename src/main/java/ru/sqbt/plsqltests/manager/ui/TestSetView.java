@@ -1,11 +1,8 @@
 package ru.sqbt.plsqltests.manager.ui;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -13,18 +10,16 @@ import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.data.provider.hierarchy.HierarchicalDataProvider;
 import com.vaadin.flow.data.provider.hierarchy.TreeData;
 import com.vaadin.flow.data.provider.hierarchy.TreeDataProvider;
-import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.data.selection.SelectionEvent;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.tree.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import ru.sovcombank.rbs.TestStoreProperties;
 import ru.sovcombank.rbs.YamlConfig;
-import ru.sovcombank.rbs.caseentity.TestCase;
 import ru.sovcombank.rbs.caseentity.TestDataYamlRepository;
 import ru.sqbt.plsqltests.base.ui.ViewLogPanel;
 import ru.sqbt.plsqltests.base.ui.ViewTitle;
@@ -33,9 +28,6 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @Route(value = "testset")
@@ -43,7 +35,6 @@ import java.util.Locale;
 @Menu(order = 1, icon = "icons/clipboard-check.svg", title = "Набор тестов")
 @Import(YamlConfig.class)
 class TestSetView extends VerticalLayout {
-
     private final TestStoreProperties testStoreProperties;
 
     private final TreeGrid<Path> fileTree;
@@ -56,6 +47,9 @@ class TestSetView extends VerticalLayout {
 
     private TreeData<Path> treeData = new TreeData<>();
     private final TreeDataProvider<Path> treeDataProvider = new TreeDataProvider<>(treeData, HierarchicalDataProvider.HierarchyFormat.FLATTENED);
+    private final TextArea fileInfo = new TextArea("Подробнее");
+
+    private static final String DEFAULT_INFO_TEXT = "Выберите файл с тестами для работы";
 
     TestSetView(@NonNull TestStoreProperties testStoreProperties) {
         this.testStoreProperties = testStoreProperties;
@@ -64,7 +58,8 @@ class TestSetView extends VerticalLayout {
         HorizontalLayout fileLayout = new HorizontalLayout();
         fileTree = createFileTree();
         fileLayout.add(fileTree);
-        TextArea fileInfo = new TextArea("Подробнее");
+
+
         fileLayout.add(fileInfo);
         fileLayout.setWidthFull();
         fileLayout.setFlexGrow(1, fileInfo, fileTree);
@@ -100,13 +95,31 @@ class TestSetView extends VerticalLayout {
         treeData.addRootItems(rootPath);
         loadDir(rootPath);
         treeDataProvider.refreshAll();
+        ft.addSelectionListener(this::onPathSelectionChanged);
         return ft;
+    }
+
+    private void onPathSelectionChanged(SelectionEvent<Grid<Path>, Path> event) {
+       if (event.getFirstSelectedItem().isEmpty()) {
+           fileInfo.setValue(DEFAULT_INFO_TEXT);
+       } else {
+           Path p = event.getFirstSelectedItem().get();
+           if (Files.isDirectory(p)) {
+               fileInfo.setValue(String.format("Тесты для раздела %1s", p.getFileName().toString()));
+           } else {
+               fileInfo.setValue(String.format("Тесты для раздела %1s", getTestSetInfo(p)));
+           }
+       }
+    }
+
+    private String getTestSetInfo(Path p) {
+        return p.getFileName().toString();
     }
 
     private void loadDir(@NonNull Path dir) {
         writeInfo(dir.toString());
         // Подкаталоги
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, Files::isDirectory )) {
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, Files::isDirectory)) {
             for (Path entry : stream) {
                 treeData.addItem(dir, entry);
                 loadDir(entry);
@@ -123,7 +136,6 @@ class TestSetView extends VerticalLayout {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void reloadYamls(@NonNull Path dir) throws IOException {

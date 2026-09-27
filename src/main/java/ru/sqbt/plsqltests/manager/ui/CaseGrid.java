@@ -4,16 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridMultiSelectionModel;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import jakarta.annotation.PostConstruct;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
@@ -25,11 +22,11 @@ import java.util.List;
 @Import(YamlConfig.class)
 @Component
 @Slf4j
-public class CaseGridView extends Composite<VerticalLayout> {
+public class CaseGrid extends Composite<VerticalLayout> {
     private final Grid<TestCase> caseGrid = new Grid<>(TestCase.class, false);
     private final ObjectMapper objectMapper;
 
-    public CaseGridView(@Qualifier("YmlMapper") ObjectMapper objectMapper) {
+    public CaseGrid(@Qualifier("YmlMapper") ObjectMapper objectMapper) {
 
         this.objectMapper = objectMapper;
         caseGrid.setSizeFull();
