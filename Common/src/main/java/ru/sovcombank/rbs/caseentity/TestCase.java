@@ -14,7 +14,7 @@ public class TestCase {
     /// Ожидаемые результаты, все должны выполниться для успешного теста
     private List<ExpectationData> expectations;
 
-    TestCase() {
+    public TestCase() {
         expectations = new ArrayList<>(0);
     }
 }

@@ -20,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import ru.sovcombank.rbs.TestStoreProperties;
 import ru.sovcombank.rbs.YamlConfig;
+import ru.sovcombank.rbs.caseentity.TestCase;
 import ru.sovcombank.rbs.caseentity.TestDataYamlRepository;
+import ru.sovcombank.rbs.core.DbParam;
 import ru.sqbt.plsqltests.base.ui.ViewLogPanel;
 import ru.sqbt.plsqltests.base.ui.ViewTitle;
 import ru.sqbt.plsqltests.manager.model.TestStories;
@@ -30,6 +32,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @Slf4j
 @Route(value = "testset")
@@ -37,6 +40,8 @@ import java.nio.file.Path;
 @Menu(order = 1, icon = "icons/clipboard-check.svg", title = "Набор тестов")
 @Import(YamlConfig.class)
 class TestSetView extends VerticalLayout {
+    private static final String DEFAULT_INFO_TEXT = "Выберите файл с тестами для работы";
+
     private final TestStoreProperties testStoreProperties;
 
     private final TreeGrid<Path> fileTree;
@@ -53,8 +58,7 @@ class TestSetView extends VerticalLayout {
     private TreeData<Path> treeData = new TreeData<>();
     private final TreeDataProvider<Path> treeDataProvider = new TreeDataProvider<>(treeData, HierarchicalDataProvider.HierarchyFormat.FLATTENED);
     private final TextArea fileInfo = new TextArea("Подробнее");
-
-    private static final String DEFAULT_INFO_TEXT = "Выберите файл с тестами для работы";
+    private final TestCaseForm testCaseForm = new TestCaseForm();
 
     TestSetView(@NonNull TestStoreProperties testStoreProperties) {
         this.testStoreProperties = testStoreProperties;
@@ -63,7 +67,6 @@ class TestSetView extends VerticalLayout {
         HorizontalLayout fileLayout = new HorizontalLayout();
         fileTree = createFileTree();
         fileLayout.add(fileTree);
-
 
         fileLayout.add(fileInfo);
         fileLayout.setWidthFull();
@@ -82,6 +85,9 @@ class TestSetView extends VerticalLayout {
 
         VerticalLayout mainForm = new VerticalLayout();
         mainForm.setSizeFull();
+        testCaseForm.getContent().setSizeFull();
+        mainForm.add(testCaseForm);
+
         mainForm.add(createBtn);
         add(mainForm);
         add(logPanel);
@@ -120,7 +126,9 @@ class TestSetView extends VerticalLayout {
     private String getTestSetInfo(Path p) {
         try {
             TestStories ts = testStoryReader.readYam(p);
-            return ts.getCaption();
+            List<TestCase> caseList = testStoryReader.buldFromTestStries(ts);
+            testCaseForm.setTestCase(caseList.getFirst());
+            return ts.getCaption() + "[" +caseList.size() + "]";
         } catch (IOException e) {
             return e.getMessage();
         }

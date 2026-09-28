@@ -75,7 +75,6 @@ public class TestStoreConverter {
                 testCase.getExpectations().add(expectation);
             }
         }
-
         return testCase;
     }
 
