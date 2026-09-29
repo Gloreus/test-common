@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.sovcombank.rbs.caseentity.TestCase;
@@ -42,7 +41,7 @@ public class TestStoryReader {
         }
     }
 
-    public List<TestCase> buldFromTestStries(TestStories testStories) {
+    public List<TestCase> buildFromTestStories(TestStories testStories) {
         List<TestCase> result = new ArrayList<>(30);
         testStories.getCases().forEach(testStoryCase -> {
             TestCase testCase = new TestCase();
@@ -72,6 +71,7 @@ public class TestStoryReader {
                 testCaseData.setParams(params);
                 testCase.setTestCaseData(testCaseData);
                 result.add(testCase);
+                // todo: Загружать Expectations
             }
         });
         return result;

@@ -3,6 +3,7 @@ package ru.sqbt.plsqltests.manager.ui;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -14,6 +15,7 @@ import com.vaadin.flow.data.selection.SelectionEvent;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.PostConstruct;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,10 @@ import ru.sovcombank.rbs.TestStoreProperties;
 import ru.sovcombank.rbs.YamlConfig;
 import ru.sovcombank.rbs.caseentity.TestCase;
 import ru.sovcombank.rbs.caseentity.TestDataYamlRepository;
-import ru.sovcombank.rbs.core.DbParam;
 import ru.sqbt.plsqltests.base.ui.ViewLogPanel;
 import ru.sqbt.plsqltests.base.ui.ViewTitle;
 import ru.sqbt.plsqltests.manager.model.TestStories;
+import ru.sqbt.plsqltests.manager.model.TestStoryNode;
 import ru.sqbt.plsqltests.manager.model.TestStoryReader;
 
 import java.io.IOException;
@@ -44,25 +46,21 @@ class TestSetView extends VerticalLayout {
 
     private final TestStoreProperties testStoreProperties;
 
-    private final TreeGrid<Path> fileTree;
     private final ViewLogPanel logPanel = new ViewLogPanel();
     private final Button createBtn;
-    @Autowired
-    private TestDataYamlRepository repository;
-    @Autowired
-    TestStoryReader testStoryReader;
-
-    private Path currentPath;
-    private Path rootPath;
-
-    private TreeData<Path> treeData = new TreeData<>();
-    private final TreeDataProvider<Path> treeDataProvider = new TreeDataProvider<>(treeData, HierarchicalDataProvider.HierarchyFormat.FLATTENED);
+    private final TreeGrid<TestStoryNode> fileTree;
     private final TextArea fileInfo = new TextArea("Подробнее");
     private final TestCaseForm testCaseForm = new TestCaseForm();
+    @Autowired
+    TestStoryReader testStoryReader;
+    @Autowired
+    private TestDataYamlRepository repository;
+    private Path rootPath;
+    private TreeData<TestStoryNode> treeData = new TreeData<>();
+    private final TreeDataProvider<TestStoryNode> treeDataProvider = new TreeDataProvider<>(treeData, HierarchicalDataProvider.HierarchyFormat.FLATTENED);
 
     TestSetView(@NonNull TestStoreProperties testStoreProperties) {
         this.testStoreProperties = testStoreProperties;
-        currentPath = null;
         rootPath = testStoreProperties.getOraTestsFullPath();
         HorizontalLayout fileLayout = new HorizontalLayout();
         fileTree = createFileTree();
@@ -94,62 +92,68 @@ class TestSetView extends VerticalLayout {
         setFlexGrow(1, logPanel);
     }
 
-    private TreeGrid<Path> createFileTree() {
-        TreeGrid<Path> ft = new TreeGrid<>();
-        ft.setMinHeight("10em");
+    private TreeGrid<TestStoryNode> createFileTree() {
+        TreeGrid<TestStoryNode> ft = new TreeGrid<>();
+        ft.getElement().getStyle().set("BackgroundColor", "--lumo-base-color");
+        ft.setMinHeight("4em");
         ft.setMinWidth("35em");
         ft.setDataProvider(treeDataProvider);
-        ft.addHierarchyColumn(path -> path.getFileName().toString()).setHeader("Файл");
+        ft.addThemeVariants(GridVariant.NO_BORDER, GridVariant.LUMO_COMPACT);
+        ft.addHierarchyColumn(TestStoryNode::getName).
+                setHeader("Наборы тестов");
+        ft.addColumn(TestStoryNode::getCaption);
         ft.setEmptyStateText("Не нашлось ни одного теста");
 
-        treeData.clear();
-        treeData.addRootItems(rootPath);
-        loadDir(rootPath);
-        treeDataProvider.refreshAll();
         ft.addSelectionListener(this::onPathSelectionChanged);
         return ft;
     }
 
-    private void onPathSelectionChanged(SelectionEvent<Grid<Path>, Path> event) {
-       if (event.getFirstSelectedItem().isEmpty()) {
-           fileInfo.setValue(DEFAULT_INFO_TEXT);
-       } else {
-           Path p = event.getFirstSelectedItem().get();
-           if (Files.isDirectory(p)) {
-               fileInfo.setValue(String.format("Тесты для раздела %1s", p.getFileName().toString()));
-           } else {
-               fileInfo.setValue(String.format("Тесты для раздела %1s", getTestSetInfo(p)));
-           }
-       }
+    @PostConstruct
+    private void Init() {
+        TestStoryNode node = new TestStoryNode(rootPath);
+        treeData.addRootItems(node);
+        loadDir(node);
+        treeDataProvider.refreshAll();
     }
 
-    private String getTestSetInfo(Path p) {
-        try {
-            TestStories ts = testStoryReader.readYam(p);
-            List<TestCase> caseList = testStoryReader.buldFromTestStries(ts);
-            testCaseForm.setTestCase(caseList.getFirst());
-            return ts.getCaption() + "[" +caseList.size() + "]";
-        } catch (IOException e) {
-            return e.getMessage();
+    private void onPathSelectionChanged(SelectionEvent<Grid<TestStoryNode>, TestStoryNode> event) {
+        if (event.getFirstSelectedItem().isEmpty()) {
+            fileInfo.setValue(DEFAULT_INFO_TEXT);
+        } else {
+            TestStoryNode node = event.getFirstSelectedItem().get();
+            fileInfo.setValue("Тесты " + node.getCaption());
+            node.getTestStories().ifPresentOrElse(ts -> {
+                        List<TestCase> caseList = testStoryReader.buildFromTestStories(ts);
+                        testCaseForm.setTestCase(caseList.getFirst());
+                    },
+                    () -> {
+                        testCaseForm.clear();
+                    });
         }
     }
 
-    private void loadDir(@NonNull Path dir) {
-        writeInfo(dir.toString());
+    private void loadDir(TestStoryNode node) {
+        writeInfo(node.getCaption());
         // Подкаталоги
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, Files::isDirectory)) {
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(node.getPath(), Files::isDirectory)) {
             for (Path entry : stream) {
-                treeData.addItem(dir, entry);
-                loadDir(entry);
+                TestStoryNode item = new TestStoryNode(entry);
+                treeData.addItem(node, item);
+                loadDir(item);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         // Файлы
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.yml")) {
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(node.getPath(), "*.yml")) {
             for (Path entry : stream) {
-                treeData.addItem(dir, entry);
+                try {
+                    TestStories ts = testStoryReader.readYam(entry);
+                    treeData.addItem(node, new TestStoryNode(entry, ts));
+                } catch (IOException e) {
+                    log.info(entry.toString() + " не корректный файл тестов");
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
