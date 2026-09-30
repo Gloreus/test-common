@@ -4,8 +4,12 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.sidenav.SideNavVariant;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 import com.vaadin.flow.data.provider.hierarchy.HierarchicalDataProvider;
@@ -44,31 +48,29 @@ import java.util.List;
 class TestSetView extends VerticalLayout {
     private static final String DEFAULT_INFO_TEXT = "Выберите файл с тестами для работы";
 
-    private final TestStoreProperties testStoreProperties;
-
     private final ViewLogPanel logPanel = new ViewLogPanel();
     private final Button createBtn;
-    private final TreeGrid<TestStoryNode> fileTree;
+
+    private final SideNav sideNavTestTree = new SideNav();
     private final TextArea fileInfo = new TextArea("Подробнее");
     private final TestCaseForm testCaseForm = new TestCaseForm();
     @Autowired
-    TestStoryReader testStoryReader;
-    @Autowired
-    private TestDataYamlRepository repository;
+    private TestStoryReader testStoryReader;
+
+
     private Path rootPath;
-    private TreeData<TestStoryNode> treeData = new TreeData<>();
-    private final TreeDataProvider<TestStoryNode> treeDataProvider = new TreeDataProvider<>(treeData, HierarchicalDataProvider.HierarchyFormat.FLATTENED);
 
     TestSetView(@NonNull TestStoreProperties testStoreProperties) {
-        this.testStoreProperties = testStoreProperties;
+
         rootPath = testStoreProperties.getOraTestsFullPath();
         HorizontalLayout fileLayout = new HorizontalLayout();
-        fileTree = createFileTree();
-        fileLayout.add(fileTree);
 
+        fileLayout.add(sideNavTestTree);
+        fileInfo.setWidthFull();
         fileLayout.add(fileInfo);
         fileLayout.setWidthFull();
-        fileLayout.setFlexGrow(1, fileInfo, fileTree);
+        sideNavTestTree.setMinWidth("20em");
+
 
         createBtn = new Button("Выполнить выбранные");
         createBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
@@ -90,75 +92,40 @@ class TestSetView extends VerticalLayout {
         add(mainForm);
         add(logPanel);
         setFlexGrow(1, logPanel);
+
     }
 
-    private TreeGrid<TestStoryNode> createFileTree() {
-        TreeGrid<TestStoryNode> ft = new TreeGrid<>();
-        ft.getElement().getStyle().set("BackgroundColor", "--lumo-base-color");
-        ft.setMinHeight("4em");
-        ft.setMinWidth("35em");
-        ft.setDataProvider(treeDataProvider);
-        ft.addThemeVariants(GridVariant.NO_BORDER, GridVariant.LUMO_COMPACT);
-        ft.addHierarchyColumn(TestStoryNode::getName).
-                setHeader("Наборы тестов");
-        ft.addColumn(TestStoryNode::getCaption);
-        ft.setEmptyStateText("Не нашлось ни одного теста");
+    private void addStoryTree(SideNavItem root, TestStoryNode node) {
+        SideNavItem item;
+        if (node.isFolder()) {
+             item = new SideNavItem(node.getName());
+             item.setPrefixComponent(VaadinIcon.FOLDER.create());
+             item.setExpanded(false);
+        } else {
+            item = new SideNavItem(node.getName(), node.getName() ,VaadinIcon.DASHBOARD.create());
+        }
 
-        ft.addSelectionListener(this::onPathSelectionChanged);
-        return ft;
+        root.addItem(item);
+
+        for (TestStoryNode child : node.getChildren()) {
+            addStoryTree(item, child); // рекурсия = вложенные пункты меню
+        }
+    }
+
+    private void loadTets() {
+        TestStoryNode rootNode = testStoryReader.getTree();
+        SideNavItem rootItem = new SideNavItem("Тесты");
+        addStoryTree(rootItem, rootNode);
+        sideNavTestTree.addItem(rootItem);
     }
 
     @PostConstruct
     private void Init() {
-        TestStoryNode node = new TestStoryNode(rootPath);
-        treeData.addRootItems(node);
-        loadDir(node);
-        treeDataProvider.refreshAll();
+        loadTets();
     }
 
-    private void onPathSelectionChanged(SelectionEvent<Grid<TestStoryNode>, TestStoryNode> event) {
-        if (event.getFirstSelectedItem().isEmpty()) {
-            fileInfo.setValue(DEFAULT_INFO_TEXT);
-        } else {
-            TestStoryNode node = event.getFirstSelectedItem().get();
-            fileInfo.setValue("Тесты " + node.getCaption());
-            node.getTestStories().ifPresentOrElse(ts -> {
-                        List<TestCase> caseList = testStoryReader.buildFromTestStories(ts);
-                        testCaseForm.setTestCase(caseList.getFirst());
-                    },
-                    () -> {
-                        testCaseForm.clear();
-                    });
-        }
-    }
 
-    private void loadDir(TestStoryNode node) {
-        writeInfo(node.getCaption());
-        // Подкаталоги
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(node.getPath(), Files::isDirectory)) {
-            for (Path entry : stream) {
-                TestStoryNode item = new TestStoryNode(entry);
-                treeData.addItem(node, item);
-                loadDir(item);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        // Файлы
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(node.getPath(), "*.yml")) {
-            for (Path entry : stream) {
-                try {
-                    TestStories ts = testStoryReader.readYam(entry);
-                    treeData.addItem(node, new TestStoryNode(entry, ts));
-                } catch (IOException e) {
-                    log.info(entry.toString() + " не корректный файл тестов");
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private void writeInfo(String s) {
         logPanel.writeLog(s);

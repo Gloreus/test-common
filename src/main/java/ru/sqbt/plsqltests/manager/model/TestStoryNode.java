@@ -8,23 +8,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.sovcombank.rbs.caseentity.TestCase;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+///  Узел дерева тестов
 public class TestStoryNode {
+    @Getter
+    private final boolean isFolder;
     /// Файл с набором тестов
     @NonNull
     @Getter
+    /// путь к файлу с тестами
     private final Path path;
     @Getter
     private Optional<TestStories> testStories;
+    @Getter
+    /// вложенные узлы
+    private final List<TestStoryNode> children = new ArrayList<>();
+
+    public void addChild(TestStoryNode child) {
+        children.add(child);
+    }
 
     public TestStoryNode(@NonNull Path filePath, TestStories testStories) {
+        this.isFolder = false;
         this.path = filePath;
         this.testStories = Optional.ofNullable(testStories);
     }
 
     public TestStoryNode(@NonNull Path dirPath) {
+        this.isFolder = true;
         this.path = dirPath;
         this.testStories = Optional.empty();
     }
