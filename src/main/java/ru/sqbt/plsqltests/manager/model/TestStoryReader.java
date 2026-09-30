@@ -19,8 +19,7 @@ import java.io.UncheckedIOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -31,6 +30,7 @@ public class TestStoryReader {
     private final TestStoreProperties testStoreProperties;
 
     private volatile TestStoryNode cachedRoot; // Null, если ничего не грузили
+    private volatile Map<String, TestStories> flatIndex = new Hashtable<>();
 
     public TestStoryReader(@NonNull @Qualifier("YmlCaseMapper") ObjectMapper mapper, @Qualifier("ParamsJsonMapper") JsonMapper jsonMapper, TestStoreProperties testStoreProperties) {
         this.mapper = mapper;
@@ -103,6 +103,7 @@ public class TestStoryReader {
     // Принудительная перестройка — например, по кнопке «Обновить».
     public synchronized void invalidate() {
         cachedRoot = null;
+        flatIndex.clear();
     }
 
     private void fill(TestStoryNode node) {
@@ -119,11 +120,17 @@ public class TestStoryReader {
         try (DirectoryStream<Path> files = Files.newDirectoryStream(node.getPath(), "*.{yml,YML}")) {
             for (Path p : files) {
                 try {
-                    node.addChild(new TestStoryNode(p, readYam(p)));
+                    TestStoryNode child = new TestStoryNode(p, readYam(p));
+                    node.addChild(child);
+                    flatIndex.put(child.getName(), child.getTestStories().orElseThrow());
                 } catch (IOException e) {
                     log.info("{} не корректный файл тестов", p);
                 }
             }
         } catch (IOException e) { throw new UncheckedIOException(e); }
+    }
+
+    public Optional<TestStories> getStoriesByCode(String id) {
+        return Optional.ofNullable(flatIndex.get(id));
     }
 }
