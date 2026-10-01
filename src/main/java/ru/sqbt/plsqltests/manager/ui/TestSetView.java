@@ -4,9 +4,12 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayoutVariant;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.*;
 import jakarta.annotation.PostConstruct;
@@ -28,6 +31,7 @@ import ru.sqbt.plsqltests.manager.model.TestStoryReader;
 @Import(YamlConfig.class)
 class TestSetView extends VerticalLayout implements BeforeEnterObserver {
     private static final String DEFAULT_INFO_TEXT = "Выберите файл с тестами для работы";
+    private final TestStoryReader testStoryReader;
 
     private final ViewLogPanel logPanel = new ViewLogPanel();
     private final Button createBtn;
@@ -35,24 +39,27 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
     private final SideNav sideNavTestTree = new SideNav();
     private final TextArea fileInfo = new TextArea("Подробнее");
     private final TestCaseForm testCaseForm = new TestCaseForm();
-    @Autowired
-    private TestStoryReader testStoryReader;
+    private final CaseGridView caseGridView = new CaseGridView();
 
     private String currentTest;
 
-    TestSetView(@NonNull TestStoreProperties testStoreProperties) {
-        HorizontalLayout fileLayout = new HorizontalLayout();
+    TestSetView(TestStoryReader testStoryReader) {
+        this.testStoryReader = testStoryReader;
+        Scroller scroller = new Scroller(Scroller.ScrollDirection.BOTH);
+        scroller.addThemeName("overflow-indicators");
+        scroller.setMinWidth("20em");
+        scroller.setContent(sideNavTestTree);
 
-        fileLayout.add(sideNavTestTree);
-        fileInfo.setWidthFull();
-        fileLayout.add(fileInfo);
+        SplitLayout fileLayout = new SplitLayout();
+        fileLayout.setThemeVariant(SplitLayoutVariant.SMALL, true);
+        fileLayout.addToPrimary(scroller);
+        fileLayout.setMaxHeight("30em");
+
+        fileLayout.addToSecondary(caseGridView);
         fileLayout.setWidthFull();
-
-        sideNavTestTree.setMinWidth("20em");
         sideNavTestTree.getStyle().set("margin", "var(--vaadin-gap-s)");
         sideNavTestTree.addClassNames("aura-surface");
         sideNavTestTree.getStyle().set("--aura-surface-level", "2");
-
 
         createBtn = new Button("Выполнить выбранные");
         createBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
@@ -101,6 +108,7 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
     private void loadTets() {
         TestStoryNode rootNode = testStoryReader.getTree();
         SideNavItem rootItem = new SideNavItem("Тесты");
+        rootItem.setExpanded(true);
         addStoryTree(rootItem, rootNode);
         sideNavTestTree.addItem(rootItem);
     }
@@ -122,8 +130,9 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
                 value -> {
                     currentTest = value;
                     testStoryReader.getStoriesByCode(currentTest).ifPresentOrElse(
-                            ts -> fileInfo.setValue(ts.getCases().toString()
-                            ),
+                            ts -> {
+                                caseGridView.setItems(testStoryReader.buildFromTestStories(ts), ts.getCaption());
+                            },
                             () -> fileInfo.setValue("")
                     );
                 },

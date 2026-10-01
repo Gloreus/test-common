@@ -18,12 +18,12 @@ public class TestStoryNode {
     /// Файл с набором тестов
     @NonNull
     @Getter
-    /// путь к файлу с тестами
+    /// Путь к файлу с тестами
     private final Path path;
     @Getter
     private Optional<TestStories> testStories;
     @Getter
-    /// вложенные узлы
+    /// Вложенные узлы
     private final List<TestStoryNode> children = new ArrayList<>();
 
     public void addChild(TestStoryNode child) {

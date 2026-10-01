@@ -27,17 +27,20 @@ import java.util.List;
 @Slf4j
 public class CaseGridView extends Composite<VerticalLayout> {
     private final Grid<TestCase> caseGrid = new Grid<>(TestCase.class, false);
-    private final ObjectMapper objectMapper;
+   // private final ObjectMapper objectMapper;
 
-    public CaseGridView(@Qualifier("YmlMapper") ObjectMapper objectMapper) {
+    public CaseGridView(/* @Qualifier("YmlMapper") ObjectMapper objectMapper */) {
 
-        this.objectMapper = objectMapper;
+        getContent().setPadding(false);
+        getContent().setMargin(false);
         caseGrid.setSizeFull();
-        caseGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        caseGrid.setSelectionMode(Grid.SelectionMode.MULTI);
 
         caseGrid.addColumn(testCase -> testCase.getTestCaseData().getDescription())
                 .setKey("testcase")
+                .setTooltipGenerator(testCase -> testCase.getTestCaseData().getDescription())
                 .setFlexGrow(1)
+                .setAutoWidth(false)
                 .setHeader("Набор тестов");
         caseGrid.addComponentColumn(item -> {
                     Icon icon = VaadinIcon.CHEVRON_DOWN.create();
@@ -65,30 +68,28 @@ public class CaseGridView extends Composite<VerticalLayout> {
     }
 
     private ComponentRenderer<TestCaseDetailsFormLayout, TestCase> createTestCaseDetailsRenderer() {
-        return new ComponentRenderer<>(() -> new TestCaseDetailsFormLayout(objectMapper),
+        return new ComponentRenderer<>(() -> new TestCaseDetailsFormLayout(),
                 TestCaseDetailsFormLayout::setTestCase);
     }
 
     private static class TestCaseDetailsFormLayout extends VerticalLayout {
-        private final TextArea jsonTextArea = new TextArea();
-        private final ObjectMapper mapper;
+        private final TextArea codeTextArea = new TextArea();
 
-        public TestCaseDetailsFormLayout(@NonNull ObjectMapper mapper) {
-            this.mapper = mapper;
+
+        public TestCaseDetailsFormLayout() {
+            codeTextArea.setSizeFull();
+            codeTextArea.getElement().getStyle().set("padding", "0");
+            codeTextArea.getElement().getStyle().set("--aura-font-family", "monospace");
+            codeTextArea.setReadOnly(true);
+            add(codeTextArea);
+
             setWrap(true);
-            jsonTextArea.setReadOnly(true);
-            jsonTextArea.setWidthFull();
-            add(jsonTextArea);
             setWidthFull();
         }
 
         public void setTestCase(TestCase testCase) {
-            log.info(testCase.toString());
-            try {
-                jsonTextArea.setValue(mapper.writeValueAsString(testCase));
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+            log.debug(testCase.toString());
+            codeTextArea.setValue(testCase.getTestCaseData().getBlockSql());
         }
     }
 }
