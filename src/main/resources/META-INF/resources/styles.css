@@ -33,4 +33,11 @@ vaadin-side-nav {
 
 .case-grid {
     text-overflow: clip;
+    margin-bottom: 4px;
+}
+
+.case-grid-info-text {
+    color: var(--lumo-secondary-text-color);
+    margin: 0;
+    font-size: var(--lumo-font-size-s);
 }

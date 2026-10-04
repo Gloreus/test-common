@@ -1,8 +1,12 @@
 package ru.sqbt.plsqltests.manager.ui;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -35,7 +39,7 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
     private final TestStoryReader testStoryReader;
 
     private final ViewLogPanel logPanel = new ViewLogPanel();
-    private final Button createBtn;
+    private final Button createBtn =new Button("Выполнить выбранные");;
 
     private final SideNav sideNavTestTree = new SideNav();
     private final TextArea fileInfo = new TextArea("Подробнее");
@@ -53,15 +57,15 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
         SplitLayout fileLayout = new SplitLayout();
         fileLayout.setThemeVariant(SplitLayoutVariant.SMALL, true);
         fileLayout.addToPrimary(scroller);
+        caseGridView.addSelectionListener(event -> {
+           createBtn.setEnabled(event.getSource().getSelectedItems().size() > 0);
+        });
 
         fileLayout.addToSecondary(caseGridView);
         fileLayout.setWidthFull();
 
         sideNavTestTree.addClassNames("file-tree-side-nav");
 
-
-        createBtn = new Button("Выполнить выбранные");
-        createBtn.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         setSizeFull();
 
         VerticalLayout mainForm = new VerticalLayout();
@@ -69,11 +73,32 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
         mainForm.setMaxHeight("80%");
         fileLayout.setSizeFull();
         mainForm.add(fileLayout);
-        mainForm.add(createBtn);
+        mainForm.add(createToolBar());
+
         add(mainForm);
         add(logPanel);
+
         setFlexGrow(1, logPanel);
         setFlexGrow(7, mainForm);
+    }
+
+    private Component createToolBar() {
+        HorizontalLayout layout = new HorizontalLayout();
+        layout.addClassName("testview-tool-bar");
+        layout.setMargin(false);
+        layout.setPadding(false);
+        layout.setSpacing(true);
+        layout.setWidthFull();
+
+        createBtn.addThemeVariants(ButtonVariant.LUMO_SMALL,ButtonVariant.LUMO_PRIMARY);
+        createBtn.setEnabled(false);
+        createBtn.setIcon(LumoIcon.PLAY.create());
+        createBtn.addClickListener(event -> {
+            String msg = String.format("Будет выполнено %d тестов", caseGridView.getSelectedItems().size());
+            Notification notification = Notification.show(msg, 2000, Notification.Position.BOTTOM_END);
+        });
+        layout.addToEnd (createBtn);
+        return layout;
     }
 
     private void addStoryTree(SideNavItem root, TestStoryNode node) {
@@ -115,7 +140,6 @@ class TestSetView extends VerticalLayout implements BeforeEnterObserver {
         logPanel.writeLog(s);
         log.debug(s);
     }
-
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {

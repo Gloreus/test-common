@@ -1,16 +1,12 @@
 package ru.sqbt.plsqltests.manager.model;
 
-
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.sovcombank.rbs.caseentity.TestCase;
-
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 ///  Узел дерева тестов
 public class TestStoryNode {
     @Getter
