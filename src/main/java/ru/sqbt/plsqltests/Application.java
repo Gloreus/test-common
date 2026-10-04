@@ -1,6 +1,7 @@
 package ru.sqbt.plsqltests;
 
 import com.vaadin.flow.theme.aura.Aura;
+import com.vaadin.flow.theme.lumo.Lumo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,7 +15,8 @@ import org.springframework.context.annotation.Import;
 import tools.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
-@StyleSheet(Aura.STYLESHEET)
+// @StyleSheet(Aura.STYLESHEET)
+@StyleSheet(Lumo.STYLESHEET)
 @StyleSheet("styles.css") // Your custom styles
 @Push
 @ComponentScan(basePackages = {
